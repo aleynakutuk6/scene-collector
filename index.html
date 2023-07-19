@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Canvas Drawing App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-storage.js"></script>
+
+    <div id="button-container">
+      <button id="deleteBtn">Delete Canvas</button>
+      <button id="saveBtn" style ="display:none;">Save Drawing</button>
+
+      <div id="objectNameContainer">
+        <h2 id="objectName"></h2>
+      </div>
+
+      <button id="uploadBtn"   style ="display:none;">Upload to Firebase Storage</button>
+      <button id="nextBtn">Next Object</button>
+    </div>
+
+    
+
+    <div id="canvas-container">
+      <canvas id="canvas" ></canvas>
+    </div>
+
+    <div id="modal" class="modal">
+      <div class="modal-content">
+        <h3>Enter User Information</h3>
+        <input type="text" id="nameInput" placeholder="Enter your name" />
+        <div>
+          <label>
+            <input type="radio" name="tool" id="penInput" value="pen" checked />
+            Pen
+          </label>
+          <label>
+            <input type="radio" name="tool" id="mouseInput" value="mouse" />
+            Mouse
+          </label>
+        </div>
+        <button id="submitBtn">Submit</button>
+      </div>
+    </div>
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-analytics.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.24.0/firebase-storage.js"></script>
+
+    <script src="app.js"></script>
+  </body>
+</html>
