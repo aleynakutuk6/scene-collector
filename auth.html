@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="MTurk " />
+    <meta name="author" content="" />
+    <title>IUI Laboratory - Sketch Data Collection App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-storage.js"></script>
+
+    <div class="row">
+      <div class="column-left"></div>
+
+      <div class="column-middle">
+        <div id="modal" class="modal">
+          <div class="modal-content">
+            <h3>Enter User Information</h3>
+            <input type="text" id="nameInput" placeholder="Enter your name" />
+            <div>
+              <label>
+                <input
+                  type="radio"
+                  name="tool"
+                  id="penInput"
+                  value="pen"
+                  checked
+                />
+                Pen
+              </label>
+              <label>
+                <input type="radio" name="tool" id="mouseInput" value="mouse" />
+                Mouse
+              </label>
+            </div>
+            <button id="submitBtn">Submit</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="column-right"></div>
+    </div>
+
+    <script>
+      const modal = document.getElementById("modal");
+      /* FIREBASE */
+
+      // define firebase config
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      // Your web app's Firebase configuration
+      // Your web app's Firebase configuration
+      
+      const firebaseConfig = {
+        apiKey: "AIzaSyCAZOblzgyVbrGCRbGO_mskKSQAV1-PUhs",
+        authDomain: "scene-dataset.firebaseapp.com",
+        databaseURL: "https://scene-dataset-default-rtdb.firebaseio.com",
+        projectId: "scene-dataset",
+        storageBucket: "scene-dataset.appspot.com",
+        messagingSenderId: "613884392238",
+        appId: "1:613884392238:web:60996e315f709dbc0e80bf"
+      };
+
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+
+      // get firebase database
+      let database = firebase.database();
+      let usersRefInDatabase = database.ref("penMousePostData/");
+
+      // Submit button event listener
+      document
+        .getElementById("submitBtn")
+        .addEventListener("click", function () {
+          username = nameInput.value;
+          tool = penInput.checked ? penInput.value : mouseInput.value;
+
+          // Create a new object to store user information
+          const userInfo = {
+            username: username,
+            tool: tool,
+          };
+          let full_data = JSON.parse(localStorage.getItem("full_data"));
+          let submit_content = { "user_info": userInfo, "drawings": full_data };
+
+          // send data to server iff user draw something
+          // WARNING: existence of utterings are not checked here they might be "no answer" !!!
+
+          usersRefInDatabase.push(submit_content);
+        
+            window.location.href = "./end.html";
+          /*
+          // Uncomment this section if you want to save the data to Firebase Storage
+
+          let database = firebase.storage();
+
+          const jsonData = JSON.stringify(submit_content);
+          const blob = new Blob([jsonData], { type: "application/json" });
+          const fileName = username + "_" + tool + "_drawing.json"; //
+
+          // Create a storage reference with the desired filename
+          const storageRef = firebase.storage().ref().child(fileName);
+
+          // Upload the JSON file to Firebase Storage
+          const uploadTask = storageRef.put(blob);
+
+          // Track the upload progress
+          uploadTask.on(
+            "state_changed",
+            function (snapshot) {
+              // Observe the upload progress (optional)
+              const progress =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+              console.log("Upload progress: " + progress + "%");
+            },
+            function (error) {
+              // Handle unsuccessful uploads
+              console.error("Error uploading file:", error);
+            },
+            function () {
+              // Handle successful upload
+              console.log("File uploaded successfully!");
+            }
+            
+          );*/
+        });
+
+      // Show the modal dialog
+      function showModal() {
+        modal.style.display = "flex";
+        modal.style.justifyContent = "center";
+        modal.style.alignItems = "center";
+        modal.style.height = "100vh";
+      }
+
+    </script>
+  </body>
+</html>

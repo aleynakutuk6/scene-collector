@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="MTurk " />
+    <meta name="author" content="" />
+    <title>IUI Laboratory - Sketch Data Collection App</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+      <!-- The core Firebase JS SDK is always required and must be listed first -->
+      <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-storage.js"></script>
+  
+ 
+    <div class="row">
+
+      <div class="column-left">
+        <h2 id="logo-title" style = "text-align: center;"></h2>
+        <h3 id="drawing-mode" style = "text-align: center;">Please draw a scene and explain it to the instructor verbally. 
+          You may draw additional objects which is not mentioned in the scene if you think it helps you to explain the scene.
+          Imagine that the instructor does not know about the scene description, only see your drawing canvas.</h3>
+      </div>
+
+      <div class="column-middle">
+        <div id="objectNameContainer">
+          <h2 id="objectName"></h2>
+        </div>
+
+        <div id="canvas-wrapper" style="display:block">
+          <canvas id="canvas"
+            >Your browser does not support canvas. Please upgrade it!</canvas>
+        </div>
+        <div id="element-container">
+
+          <button href="#" type="button" class = "btn" id="modeButton">Seçim yap</button>
+          <button type="button" href="#" class="btn" id="deleteStrokeButton" onclick="deleteObjects()">
+            Seçileni Sil
+          </button>
+          <button type="button" href="#" class="btn" id="conclusionButton" onclick="nextSketch()">
+            Sonraki 
+          </button>
+        </div>
+        <br>
+       
+        
+      </div>
+      
+
+      <div class="column-right">
+        <div id="sketch-predictions">
+        </div>
+      </div>
+    </div>
+
+    <!--https://cdnjs.com/libraries/fabric.js-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
+
+   
+    <script src="app.js"></script>
+
+  </body>
+</html>
