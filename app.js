@@ -1,10 +1,24 @@
 const sceneDescriptions = [
-    "A woman is holding teddy bear in her arms and she has glasses on her face. There is table on the background and lots of pencil and stuffs on it.",
-    "There are bus, truck and bicycles on the road with lots of streetlights. A person is also wearing helmet and we can see a flag behind him. Bus is riding towards to the bridge and a dog is passed next to the person.",
-    "In a room, there is a bed with fluffy pillows, a huge table, and a chair. The painting hangs on the wall. Kid walks in to the room carrying vegetables in his hand.",
+    "In a living room, a person sits comfortably on a plush chair, while a table nearby holds a collection of items. A cute teddy bear rests on the bed, surrounded by a couple of colorful pillows.",
     "In the kitchen, there is a kid sitting in the chair and waiting for a pizza. Her mom is cooking and there are some people standing around. They are helping to prepare for the dinner. The kitchen is huge and busy.",
-    "A person wearing a shirt, tie and skirt and is standing and holding a bag in his hand. there is a table and bench on the background. There are a lot of buildings and they have many windows and door. Sun is shining and trees are huge."
-];
+    "There are bus, truck and bicycles on the road with lots of streetlights. A person is also wearing helmet and we can see a flag behind him. Bus is riding towards to the bridge and a dog is passed next to the person."
+    ];
+    
+    // "In a room, a young girl sits by a desk, her focused gaze fixed on the task at hand with a pencil in her hand. A telephone rests nearby. Kid walks into the room carrying vegetables in his hand."
+    // "In a room, there is a bed with fluffy pillows, a huge table, and a chair. The painting hangs on the wall. Kid walks into the room carrying vegetables in his hand.",
+   //  "In the kitchen, there is a kid sitting in the chair and waiting for a pizza. Her mom is cooking and there are some people standing around. They are helping to prepare for the dinner. The kitchen is huge and busy.",
+   // "A person wearing a shirt, tie and skirt and is standing and holding a bag in his hand. There is a table and bench on the background. There are a lot of buildings and they have many windows and door. Sun is shining and trees are huge."
+
+// code for some security constrains of chrome 
+[{
+    "origin": [
+        "*"
+    ],
+    "method": [
+        "GET"
+    ],
+    "maxAgeSeconds": 3600
+}]
 
 const objectNameElement = document.getElementById("objectName");
 let currentObjectIndex = 0;
@@ -14,7 +28,6 @@ let name = "";
 let tool = "";
 
 objectNameElement.textContent = currentObjectClass;
-
 
 
 var canvas = this.__canvas = new fabric.Canvas('canvas', {
@@ -27,7 +40,7 @@ let brush = canvas.freeDrawingBrush;
 
 var shadow = new fabric.Shadow({
     color: "red",
-    blur: 8,
+    blur: 4,
 
 });
 
@@ -76,7 +89,7 @@ let drawingModeEl = $('modeButton');
 brush.color = 'black';
 
 //Set size conditions
-brush.width = 8;
+brush.width = 3;
 
 //2.Make brush work
 drawingModeEl.onclick = function () {
@@ -85,8 +98,8 @@ drawingModeEl.onclick = function () {
 
     if (canvas.isDrawingMode) {
 
-        drawingModeEl.innerHTML = 'Seçim Yap';
-        document.getElementById("drawing-mode").innerHTML = "Çizim Yapıyorsunuz";
+        drawingModeEl.innerHTML = 'Select stroke';
+        document.getElementById("drawing-mode").innerHTML = "Drawing mode";
 
     }
     else {
@@ -103,8 +116,8 @@ drawingModeEl.onclick = function () {
 
         });
 
-        drawingModeEl.innerHTML = 'Çizim Yap';
-        document.getElementById("drawing-mode").innerHTML = "Seçim Yapıyorsunuz";
+        drawingModeEl.innerHTML = 'Draw';
+        document.getElementById("drawing-mode").innerHTML = "Stroke selection mode";
 
     }
 };
@@ -278,14 +291,14 @@ function handleCancel(evt) {
 function deleteObjects() {
     if (canvas.isDrawingMode) {
         canvas.isDrawingMode = !canvas.isDrawingMode;
-        drawingModeEl.innerHTML = 'Çizim Yap';
-        document.getElementById("drawing-mode").innerHTML = "Seçim Yapıyorsunuz";
+        drawingModeEl.innerHTML = 'Draw';
+        document.getElementById("drawing-mode").innerHTML = "Stroke selection mode";
 
-        alert("Lütfen silmek istediğiniz kısımları seçip sil butonuna basınız.");
+        alert("Please select a stroke and click to delete button.");
     } else if (canvas.getActiveObjects().length == 0) {
-        alert("Lütfen silmek istediğiniz kısımları seçip daha sonra sil butonuna basınız.");
-        drawingModeEl.innerHTML = 'Seçim Yap';
-        document.getElementById("drawing-mode").innerHTML = "Çizim Yapıyorsunuz";
+        alert("Please select a stroke and click to delete button.");
+        drawingModeEl.innerHTML = 'Select stroke';
+        document.getElementById("drawing-mode").innerHTML = "Drawing mode";
 
     }
 
@@ -302,8 +315,8 @@ function deleteObjects() {
 
     });
 
-    drawingModeEl.innerHTML = 'Çizim Yap';
-    document.getElementById("drawing-mode").innerHTML = "Seçim Yapıyorsunuz";
+    drawingModeEl.innerHTML = 'Draw';
+    document.getElementById("drawing-mode").innerHTML = "Stroke selection mode";
 
     let activeObjects = canvas.getActiveObjects();
     // console.log("ACTIVE OBJECT COUNT IS ", canvas.getActiveObjects().length);
@@ -331,7 +344,7 @@ function getSelectedStrokes() {
     if (active_strokes.length > 0) {
         return active_strokes;
     } else {
-        window.alert("Lütfen daha uzun kalem darbeleri kullanarak çizim yapınız.");
+        window.alert("Please draw something.");
         return "small_strokes";
     }
 }
@@ -352,7 +365,7 @@ function getDrawing() {
     if (active_strokes.length > 0) {
         return active_strokes;
     } else {
-        window.alert("Lütfen daha uzun kalem darbeleri kullanarak çizim yapınız.");
+        window.alert("Please draw something.");
         return "small_strokes";
     }
 }
@@ -376,25 +389,31 @@ function nextSketch() {
         };
         full_data.push(temp_data);
 
+        // Show the next object to draw
+        currentObjectIndex++;
+        if (currentObjectIndex >= sceneDescriptions.length) {
+           window.location.href = "./auth.html";
+           localStorage.setItem("num_cases", sceneDescriptions.length);
+           localStorage.setItem("full_data", JSON.stringify(full_data));
+           var json = canvas.toJSON();
+           localStorage.setItem(currentObjectIndex.toString(), JSON.stringify(json));
+            
+
+        } else { //  "full_data": full_data
+            // Show the next object to draw
+            currentObjectClass = sceneDescriptions[currentObjectIndex];
+            objectNameElement.textContent = currentObjectClass;
+            var json = canvas.toJSON();
+            localStorage.setItem(currentObjectIndex.toString(), JSON.stringify(json));
+            
+        }
+
         // Clear the canvas and the drawing variables for the next sketch
         drawing = [];
         stroke = []; //should contain 2 array in it
         xCords = [];
         yCords = [];
         clearCanvas();
-
-        // Show the next object to draw
-        currentObjectIndex++;
-        if (currentObjectIndex >= sceneDescriptions.length) {
-            localStorage.setItem("full_data", JSON.stringify(full_data));
-            window.location.href = "./auth.html";
-
-        } else {
-            // Show the next object to draw
-            currentObjectClass = sceneDescriptions[currentObjectIndex];
-            console.log(currentObjectClass);
-            objectNameElement.textContent = currentObjectClass;
-        }
     }
 
 
@@ -404,7 +423,7 @@ function clearCanvas() {
     let activeObjects = canvas.getObjects();
     // console.log("ACTIVE OBJECT COUNT IS ", canvas.getActiveObjects().length);
     for (let i = 0; i < activeObjects.length; i++) {
-        // console.log("active strtoke is ");
+        // console.log("active stroke is ");
         // console.log(activeObjects[i].vectorRepresentation);
         canvas.remove(activeObjects[i]);
 

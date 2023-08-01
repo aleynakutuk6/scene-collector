@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="MTurk " />
     <meta name="author" content="" />
-    <title>IUI Laboratory - Sketch Data Collection App</title>
+    <title>Data Collection App - Aleyna Kutuk</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -21,30 +21,28 @@
     <div class="row">
 
       <div class="column-left">
-        <h2 id="logo-title" style = "text-align: center;"></h2>
-        <h3 id="drawing-mode" style = "text-align: center;">Please draw a scene and explain it to the instructor verbally. 
-          You may draw additional objects which is not mentioned in the scene if you think it helps you to explain the scene.
-          Imagine that the instructor does not know about the scene description, only see your drawing canvas.</h3>
+        <h3 id="drawing-mode" style="font-size: 18px; text-align: center; top: 50%; position: relative; transform: translateY(-50%);"
+            >Please draw a scene and explain it to the instructor verbally.</h3>
       </div>
 
       <div class="column-middle">
         <div id="objectNameContainer">
-          <h2 id="objectName"></h2>
+          <h2 id="prefix" style="width: 1200px; height: 5px; font-size: 20px; text-align: center; display: inline;"><strong>Description: </strong></h2>
+          <h2 id="objectName" style="width: 1200px; height: 35px; font-size: 20px; text-align: center; display: inline;"></h2>
         </div>
 
-        <div id="canvas-wrapper" style="display:block">
+        <div id="canvas-wrapper" style="width: 1250px; height: 570px; position: relative; user-select: none;" style="display:block">
           <canvas id="canvas"
             >Your browser does not support canvas. Please upgrade it!</canvas>
         </div>
-        <div id="element-container">
+        <div id="element-container" style="width: 1250px; height: 570px;">
 
-          <button href="#" type="button" class = "btn" id="modeButton">Seçim yap</button>
-          <button type="button" href="#" class="btn" id="deleteStrokeButton" onclick="deleteObjects()">
-            Seçileni Sil
-          </button>
-          <button type="button" href="#" class="btn" id="conclusionButton" onclick="nextSketch()">
-            Sonraki 
-          </button>
+          <button href="#" type="button" class = "btn" id="modeButton" 
+                  style="width: 150px; height: 30px; font-size: 15px;">Select stroke</button>
+          <button href="#" type="button" class="btn" id="deleteStrokeButton"
+                  style="width: 110px; height: 30px; font-size: 15px;" onclick="deleteObjects()">Delete</button>
+          <button href="#" type="button" class="btn" id="conclusionButton"
+                  style="width: 110px; height: 30px; font-size: 15px;" onclick="nextSketch()">Next</button>
         </div>
         <br>
        

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="Generator" content="Microsoft Word 15 (filtered)" />
+    <title>Data Collection App - Aleyna Kutuk</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="row">
+        <div class="column-left"></div>
+
+        <div class="column-middle" style="font-family: 'Montserrat', sans-serif">
+            <h2
+              class="heading"
+              style="font-size: 24px; font-weight: 700; margin-bottom: 20px"
+            >
+              Welcome to the Labeling Part
+            </h2>
+            <h3
+              class="subheading"
+              style="font-size: 20px; font-weight: 400; margin-bottom: 10px"
+            >
+              In this part, you will select each sketch object appear in the scene and write their object categories.
+            </h3>
+            <h2
+              class="heading"
+              style="font-size: 22px; font-weight: 600; margin-bottom: 10px"
+            >
+              Instructions:
+            </h2>
+            <h3
+              class="subheading"
+              style="font-size: 20px; font-weight: 400; margin-bottom: 10px"
+            >
+            <ul>
+              <li>You will label sketch objects appear in the scene. </li>
+              <li>Write the corresponding object category in a box given on the right.</li>
+              <li>Click OK after each object labeling. </li>
+            </ul>
+            </h3>
+            <div
+              class="button-container"
+              style="display: flex; justify-content: flex-end"
+            >
+              <button id="submitBtn" class="btn" style="width: 80px; height: 30px; font-size: 15px;" onclick="showScene()">Next</button>
+            </div>
+          </div>
+
+      <div class="column-right"></div>
+    </div>
+
+    <script>
+        document
+          .getElementById("submitBtn")
+          .addEventListener("click", function () {
+            window.location.href = "label.html";
+          });
+      </script>
+  </body>
+</html>

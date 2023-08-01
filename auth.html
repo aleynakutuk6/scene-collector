@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="MTurk " />
     <meta name="author" content="" />
-    <title>IUI Laboratory - Sketch Data Collection App</title>
+    <title>Data Collection App - Aleyna Kutuk</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -73,7 +73,7 @@
 
       // get firebase database
       let database = firebase.database();
-      let usersRefInDatabase = database.ref("penMousePostData/");
+      let usersRefInDatabase = database.ref("sceneData/");
 
       // Submit button event listener
       document
@@ -88,14 +88,14 @@
             tool: tool,
           };
           let full_data = JSON.parse(localStorage.getItem("full_data"));
-          let submit_content = { "user_info": userInfo, "drawings": full_data };
+          let submit_content = { "user_info": userInfo, "drawings": full_data};
 
           // send data to server iff user draw something
           // WARNING: existence of utterings are not checked here they might be "no answer" !!!
 
           usersRefInDatabase.push(submit_content);
         
-            window.location.href = "./end.html";
+            window.location.href = "./label_info.html";
           /*
           // Uncomment this section if you want to save the data to Firebase Storage
 
