@@ -25,7 +25,7 @@ body {
 
 #element-container {
   display: flex;
-  justify-content: right;
+  flex-direction: column;
 }
 
 .column-right {
@@ -33,6 +33,12 @@ body {
   width: 15%;
   height: 700px;
 
+}
+
+#categoryname {
+  text-align: center;
+  padding: 8px 8px 7px;
+  margin: 12px;
 }
 
 #prediction-wrapper {

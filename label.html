@@ -21,13 +21,6 @@
     <div class="row">
 
       <div class="column-left">
-        <div id="modal" class="modal">
-            <div class="modal-content">
-              <h3>Enter Category Information</h3>
-                  <input type="text" id="categoryname" placeholder="Write category here" />
-                  <button id="submitBtn" onclick="saveCategory()">Submit</button>
-            </div>
-        </div>
       </div>
 
       <div class="column-middle">
@@ -36,11 +29,17 @@
             >Your browser does not support canvas. Please upgrade it!</canvas>
         </div>
         <div id="element-container" style="width: 1250px; height: 570px;">
-
-          <button href="#" type="button" class = "btn" id="modeButton" 
-                  style="width: 150px; height: 30px; font-size: 15px;">Select stroke</button>
-          <button href="#" type="button" class="btn" id="conclusionButton"
-                  style="width: 110px; height: 30px; font-size: 15px;" onclick="nextSketch()">Next</button>
+          <div style="justify-content: left; display: flex;">
+             <h3>Enter Category Information: </h3>
+             <input type="text" id="categoryname" style="width: 130px; height: 20px;" placeholder="Write category here" />
+             <button id="submitBtn" class = "btn" style="width: 150px; height: 30px; font-size: 15px;" onclick="saveCategory()">Submit</button>
+             <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
+              <button href="#" type="button" class = "btn" id="modeButton" 
+                   style="width: 150px; height: 30px; font-size: 15px;">Select stroke</button>
+             <button href="#" type="button" class="btn" id="conclusionButton"
+                   style="width: 110px; height: 30px; font-size: 15px;" onclick="nextSketch()">Next</button>
+           </div>
+          </div>
         </div>
         <br>
        
@@ -53,7 +52,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
     
     <script>
-      const modal = document.getElementById("modal");
 
       const firebaseConfig = {
         apiKey: "AIzaSyCAZOblzgyVbrGCRbGO_mskKSQAV1-PUhs",
@@ -168,15 +166,6 @@
         }
 
       }
-
-      // Show the modal dialog
-      function showModal() {
-        modal.style.display = "flex";
-        modal.style.justifyContent = "center";
-        modal.style.alignItems = "center";
-        modal.style.height = "100vh";
-      }
-
     </script>
 
   </body>

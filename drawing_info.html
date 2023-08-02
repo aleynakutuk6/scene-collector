@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="MTurk " />
+    <meta name="author" content="" />
+    <title>Data Collection App - Aleyna Kutuk</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-storage.js"></script>
+
+    <div class="row">
+      <div class="column-left"></div>
+
+      <div class="column-middle" style="font-family: 'Montserrat', sans-serif">
+        <h2
+          class="heading"
+          style="font-size: 24px; font-weight: 700; margin-bottom: 20px"
+        >
+          Welcome to the Scene Sketch Dataset Collection Application
+        </h2>
+        <h3
+          class="subheading"
+          style="font-size: 20px; font-weight: 400; margin-bottom: 10px"
+        >
+          This is an example data collection application built for researchers
+          who need a sketch scene data collection interface.
+        </h3>
+        <h2
+          class="heading"
+          style="font-size: 22px; font-weight: 600; margin-bottom: 10px"
+        >
+          Instructions:
+        </h2>
+        <h3
+          class="subheading"
+          style="font-size: 20px; font-weight: 400; margin-bottom: 10px"
+        >
+        <ul>
+          <li>You will be given with a scene description and a drawing canvas on the next page. </li>
+          <li>You are asked to draw a scene by referring to the description.</li>
+          <li>While drawing the scene, explain it to the instructor verbally.</li>
+          <li>You may draw additional objects which is not mentioned in the description.</li>
+          <li>Imagine that the instructor does not know about the scene description, only can see your drawing canvas.</li>
+        </ul>
+        </h3>
+        <h2
+        class="heading"
+        style="font-size: 22px; font-weight: 600; margin-bottom: 10px"
+         >
+         Note:
+        </h2>
+        <h3
+          class="subheading"
+          style="font-size: 20px; font-weight: 400; margin-bottom: 10px"
+        >
+          Your scene drawings will be used in a research project by a graduate student.
+          If you agree to give a permission, you can click to the START button.
+        </h3>
+        <p> **This dataset will be used by M.Sc. student Aleyna Kutuk.</p>
+        <div
+          class="button-container"
+          style="display: flex; justify-content: flex-end"
+        >
+          <button id="submitBtn" class="btn" style="width: 80px; height: 30px; font-size: 15px;">START</button>
+        </div>
+      </div>
+
+      <div class="column-right"></div>
+    </div>
+
+    <script>
+      document
+        .getElementById("submitBtn")
+        .addEventListener("click", function () {
+          window.location.href = "app.html";
+        });
+      
+    </script>
+  </body>
+</html>

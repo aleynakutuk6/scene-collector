@@ -1,14 +1,4 @@
-const sceneDescriptions = [
-    "In a living room, a person sits comfortably on a plush chair, while a table nearby holds a collection of items. A cute teddy bear rests on the bed, surrounded by a couple of colorful pillows.",
-    "In the kitchen, there is a kid sitting in the chair and waiting for a pizza. Her mom is cooking and there are some people standing around. They are helping to prepare for the dinner. The kitchen is huge and busy.",
-    "There are bus, truck and bicycles on the road with lots of streetlights. A person is also wearing helmet and we can see a flag behind him. Bus is riding towards to the bridge and a dog is passed next to the person."
-    ];
-    
-    // "In a room, a young girl sits by a desk, her focused gaze fixed on the task at hand with a pencil in her hand. A telephone rests nearby. Kid walks into the room carrying vegetables in his hand."
-    // "In a room, there is a bed with fluffy pillows, a huge table, and a chair. The painting hangs on the wall. Kid walks into the room carrying vegetables in his hand.",
-   //  "In the kitchen, there is a kid sitting in the chair and waiting for a pizza. Her mom is cooking and there are some people standing around. They are helping to prepare for the dinner. The kitchen is huge and busy.",
-   // "A person wearing a shirt, tie and skirt and is standing and holding a bag in his hand. There is a table and bench on the background. There are a lot of buildings and they have many windows and door. Sun is shining and trees are huge."
-
+   
 // code for some security constrains of chrome 
 [{
     "origin": [
@@ -20,12 +10,11 @@ const sceneDescriptions = [
     "maxAgeSeconds": 3600
 }]
 
+let sceneDescriptions = localStorage.getItem("scene_descriptions");
+sceneDescriptions = sceneDescriptions.split("\n");
 const objectNameElement = document.getElementById("objectName");
 let currentObjectIndex = 0;
 let currentObjectClass = sceneDescriptions[currentObjectIndex];
-
-let name = "";
-let tool = "";
 
 objectNameElement.textContent = currentObjectClass;
 
