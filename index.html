@@ -3,17 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="MTurk " />
-    <meta name="author" content="" />
-    <title>Data Collection App - Aleyna Kutuk</title>
+    <meta name="description" content="Data Collection Web Application" />
+    <meta name="author" content="Aleyna Kutuk" />
+    <title>Scene Sketch Data Collector</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
@@ -26,24 +23,22 @@
       <div class="column-left"></div>
 
       <div class="column-middle" style="font-family: 'Montserrat', sans-serif">
-        <h2
-          class="heading"
-          style="font-size: 24px; font-weight: 700; margin-bottom: 20px"
-        >
+        <h1 class="heading">
           Select the scene descriptions txt file now!!
+        </h1>
+        <h2 class="subheading">
+          DO NOT click to NEXT button!! PLEASE WAIT FOR THE SETUP!!
         </h2>
-        <h3
-          class="subheading"
-          style="font-size: 20px; font-weight: 400; margin-bottom: 10px"
-        >
-          Please wait for the instructor!! She should arrange your setup :)
-        </h3>
-        <div
-          class="button-container"
-          style="display: flex; justify-content: flex-end"
-        >
-          <input type="file" name="inputFileToRead" id="inputFileToRead"/>
-          <button id="submitBtn" class="btn" style="width: 80px; height: 30px; font-size: 15px;">NEXT</button>
+        <h2 class="subheading"> 
+          File needs to be chosen by the instructor.
+        </h2>
+        <div id="element-container">
+          <div style="justify-content: left; display: flex;">
+            <input type="file" name="inputFileToRead" id="inputFileToRead"/>
+            <div class="button-container" style="display: flex; justify-content: right; margin-left: auto; margin-right: 0;">
+              <button id="submitBtn" class="btn" style="width: 80px; height: 30px; font-size: 15px;">NEXT</button>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -51,6 +46,8 @@
     </div>
 
     <script>
+      localStorage.setItem("scene_descriptions", null);
+
       document
         .getElementById("submitBtn")
         .addEventListener("click", function () {

@@ -3,9 +3,9 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="MTurk " />
-    <meta name="author" content="" />
-    <title>Data Collection App - Aleyna Kutuk</title>
+    <meta name="description" content="Data Collection Web Application" />
+    <meta name="author" content="Aleyna Kutuk" />
+    <title>Scene Sketch Data Collector</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -19,9 +19,7 @@
   
  
     <div class="row">
-
-      <div class="column-left">
-      </div>
+      <div class="column-left"></div>
 
       <div class="column-middle">
         <div id="canvas-wrapper" style="width: 1250px; height: 570px; position: relative; user-select: none;" style="display:block">
@@ -34,15 +32,13 @@
              <input type="text" id="categoryname" style="width: 130px; height: 20px;" placeholder="Write category here" />
              <button id="submitBtn" class = "btn" style="width: 150px; height: 30px; font-size: 15px;" onclick="saveCategory()">Submit</button>
              <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
-              <button href="#" type="button" class = "btn" id="modeButton" 
+                <button href="#" type="button" class = "btn" id="modeButton" 
                    style="width: 150px; height: 30px; font-size: 15px;">Select stroke</button>
-             <button href="#" type="button" class="btn" id="conclusionButton"
+                <button href="#" type="button" class="btn" id="conclusionButton"
                    style="width: 110px; height: 30px; font-size: 15px;" onclick="nextSketch()">Next</button>
-           </div>
+             </div>
           </div>
         </div>
-        <br>
-       
       </div>
 
       <div class="column-right"></div>
@@ -51,122 +47,7 @@
     <!--https://cdnjs.com/libraries/fabric.js-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
     
-    <script>
-
-      const firebaseConfig = {
-        apiKey: "AIzaSyCAZOblzgyVbrGCRbGO_mskKSQAV1-PUhs",
-        authDomain: "scene-dataset.firebaseapp.com",
-        databaseURL: "https://scene-dataset-default-rtdb.firebaseio.com",
-        projectId: "scene-dataset",
-        storageBucket: "scene-dataset.appspot.com",
-        messagingSenderId: "613884392238",
-        appId: "1:613884392238:web:60996e315f709dbc0e80bf"
-      };
-
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-
-      // get firebase database
-      let database = firebase.database();
-      let usersRefInDatabase = database.ref("sceneData/");
-      let drawingModeEl = document.getElementById("modeButton");
-
-      var canvas = this.__canvas = new fabric.Canvas('canvas', {
-        isDrawingMode: false });
-      
-      var ctx = canvas.getContext("2d");
-
-      var shadow = new fabric.Shadow({ color: "red", blur: 4});
-
-      let canvasDiv = document.getElementById("canvas-wrapper");
-      canvas.setWidth(canvasDiv.offsetWidth);
-      canvas.setHeight(canvasDiv.offsetHeight);
-
-      // add shadow to active strokes
-      canvas.selectionColor = 'rgba(0,255,0,0.3)';
-      canvas.selectionBorderColor = 'rgba(230, 126, 34, 1)';
-      canvas.selectionLineWidth = 1;
-      canvas.selectionShadow = shadow;
-
-      let currentObjIndex = 1;
-      let new_data = [];
-      let numScenes = localStorage.getItem("num_cases");
-      let scene = localStorage.getItem(currentObjIndex.toString());
-      let canvas_data = JSON.parse(scene); 
-      canvas.loadFromJSON(canvas_data, function() {
-        canvas.renderAll();
-      });
-
-      //Make each object nonresizable on canvas
-      canvas.forEachObject(function (o) { // make not selectable all the objects.
-            o.hasControls = false;
-            o.lockMovementX = true;
-            o.lockMovementY = true;
-            o.lockScalingX = true;
-            o.lockScalingY = true;
-            o.lockUniScaling = true;
-            //o.hasBorders = false;
-            // o.hasBorders = false;
-
-        });      
-      
-      function saveCategory(){
-
-          categoryname = categoryname.value;
-          let activeObjects = canvas.getActiveObjects();
-          let active_strokes = [];
-          let stroke_labels = [];
-          if (activeObjects.length > 0) {
-            for (let i = 0; i < activeObjects.length; i++) {
-              activeObjects[i].label = categoryname;
-              active_strokes.push(activeObjects[i].vectorRepresentation)
-              stroke_labels.push(activeObjects[i].label)
-              activeObjects[i].set("stroke", "green");
-              canvas.renderAll();
-
-              if (active_strokes != "small_strokes") {
-                const temp_data = {
-                  "labels": stroke_labels,
-                  "drawing": active_strokes
-                };
-                new_data.push(temp_data);
-                console.log(new_data);
-                localStorage.setItem("new_data", JSON.stringify(new_data));
-                }
-            }
-          }
-      }
-      
-      function nextSketch(){
-        
-        if (currentObjIndex < numScenes) {
-          currentObjIndex++;
-          let scene = localStorage.getItem(currentObjIndex.toString());
-          let canvas_data = JSON.parse(scene);
-          canvas.loadFromJSON(canvas_data, function() {
-            canvas.renderAll();
-           });
-          
-          //Make each object nonresizable on canvas
-          canvas.forEachObject(function (o) { // make not selectable all the objects.
-            o.hasControls = false;
-            o.lockMovementX = true;
-            o.lockMovementY = true;
-            o.lockScalingX = true;
-            o.lockScalingY = true;
-            o.lockUniScaling = true;
-            //o.hasBorders = false;
-            // o.hasBorders = false;
-
-        });  
-
-        }
-        else{
-          window.location.href = "./end.html";
-        }
-
-      }
-    </script>
+    <script src="label.js"></script>
 
   </body>
 </html>

@@ -9,6 +9,18 @@ body {
   display: flex;
 }
 
+.heading {
+  font-size: 22px; 
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.subheading {
+  font-size: 16px; 
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
 .column-left {
   width: 15%;
   height: 700px;
@@ -36,6 +48,12 @@ body {
 }
 
 #categoryname {
+  text-align: center;
+  padding: 8px 8px 7px;
+  margin: 12px;
+}
+
+#username {
   text-align: center;
   padding: 8px 8px 7px;
   margin: 12px;
@@ -81,7 +99,6 @@ chatbot-button:active {
   position: relative;
   top: 4px;
 }
-/* Clear floats after the columns */
 
 #canvas-wrapper {
   min-height: 80%;
