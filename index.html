@@ -22,19 +22,18 @@
     <div class="row">
       <div class="column-left"></div>
 
-      <div class="column-middle" style="font-family: 'Montserrat', sans-serif">
+      <div class="column-middle">
         <h1 class="heading">
           Select the scene descriptions txt file now!!
         </h1>
-        <h2 class="subheading">
-          DO NOT click to NEXT button!! PLEASE WAIT FOR THE SETUP!!
-        </h2>
-        <h2 class="subheading"> 
-          File needs to be chosen by the instructor.
-        </h2>
+          <p>DO NOT click to NEXT button!! PLEASE WAIT FOR THE SETUP!!</p>
         <div id="element-container">
-          <div style="justify-content: left; display: flex;">
-            <input type="file" name="inputFileToRead" id="inputFileToRead"/>
+            <a> Scene descriptions:  </a> <br>
+            <input type="file" name="inputFileToRead" id="inputFileToRead"/> <br>
+            <a> Object classes:  </a> <br>
+            <div style="justify-content: left; display: flex;">
+            
+            <input type="file" name="classesFile" id="classesFile"/>
             <div class="button-container" style="display: flex; justify-content: right; margin-left: auto; margin-right: 0;">
               <button id="submitBtn" class="btn" style="width: 80px; height: 30px; font-size: 15px;">NEXT</button>
             </div>
@@ -60,7 +59,15 @@
         fr.readAsText(this.files[0]);
         fr.onload = function () {
           localStorage.setItem("scene_descriptions", fr.result);
-          console.log(fr.result);
+        };  
+      });
+
+      document.getElementById("classesFile")
+      .addEventListener("change", function () {
+        var fr = new FileReader();
+        fr.readAsText(this.files[0]);
+        fr.onload = function () {
+          localStorage.setItem("obj_classes", fr.result);
         };  
       });
 

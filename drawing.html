@@ -20,34 +20,32 @@
  
     <div class="row">
 
-      <div class="column-left">
-        <h3 id="drawing-mode" style="font-size: 18px; text-align: center; top: 50%; position: relative; transform: translateY(-50%);"
-            >Please draw a scene and explain it to the instructor verbally.</h3>
-      </div>
+      <div class="column-left"></div>
 
       <div class="column-middle">
         <div id="objectNameContainer">
           <h2 id="prefix" style="width: 1200px; height: 5px; font-size: 20px; text-align: center; display: inline;"><strong>Description: </strong></h2>
           <h2 id="objectName" style="width: 1200px; height: 35px; font-size: 20px; text-align: center; display: inline;"></h2>
+          <p id="seconds"></p>
         </div>
 
         <div id="canvas-wrapper" style="width: 1250px; height: 570px; position: relative; user-select: none;" style="display:block">
           <canvas id="canvas"
             >Your browser does not support canvas. Please upgrade it!</canvas>
         </div>
+
         <div id="element-container" style="width: 1250px; height: 570px;">
             <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
               <button href="#" type="button" class = "btn" id="modeButton" style="width: 150px; height: 30px; font-size: 15px;">Select stroke</button>
               <button id="submitBtn" class = "btn" style="width: 150px; height: 30px; font-size: 15px;" onclick="deleteObjects()">Delete</button>
               <button id="submitBtn" class = "btn" style="width: 150px; height: 30px; font-size: 15px;" onclick="nextSketch()">Next</button>
             </div>
-      </div>
-      
-
-      <div class="column-right">
-        <div id="sketch-predictions">
         </div>
+
       </div>
+
+      <div class="column-right"></div>
+      
     </div>
 
     <!--https://cdnjs.com/libraries/fabric.js-->

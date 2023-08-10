@@ -7,6 +7,7 @@
     <meta name="author" content="Aleyna Kutuk" />
     <title>Scene Sketch Data Collector</title>
     <link rel="stylesheet" href="style.css" />
+
   </head>
 
   <body>
@@ -26,27 +27,85 @@
           <canvas id="canvas"
             >Your browser does not support canvas. Please upgrade it!</canvas>
         </div>
+        
+
         <div id="element-container" style="width: 1250px; height: 570px;">
-          <div style="justify-content: left; display: flex;">
-             <h3>Enter Category Information: </h3>
-             <input type="text" id="categoryname" style="width: 130px; height: 20px;" placeholder="Write category here" />
-             <button id="submitBtn" class = "btn" style="width: 150px; height: 30px; font-size: 15px;" onclick="saveCategory()">Submit</button>
-             <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
-                <button href="#" type="button" class = "btn" id="modeButton" 
-                   style="width: 150px; height: 30px; font-size: 15px;">Select stroke</button>
-                <button href="#" type="button" class="btn" id="conclusionButton"
-                   style="width: 110px; height: 30px; font-size: 15px;" onclick="nextSketch()">Next</button>
-             </div>
+          <div style="justify-content: left; display: flex;"> 
+            <div style="justify-content: center; display: block;">
+              <button id="toggle" class="btn" style="width: 220px; height: 30px; font-size: 15px;">Search Category</button>
+              <div id="dropdown_wrapper" style="display: block;">
+                <input type="text" id="categoryname" placeholder="Search category ...">
+                <div id="dropdown"></div>
+              </div>
+            </div>
+            <button id="submitBtn" class = "btn" style="width: 150px; height: 30px; font-size: 15px;" onclick="saveCategory()">Submit</button>
+            <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
+              <button href="#" type="button" class="btn" id="conclusionButton"
+                  style="width: 110px; height: 30px; font-size: 15px;" onclick="nextSketch()">Next</button>
+            </div>
           </div>
         </div>
       </div>
 
       <div class="column-right"></div>
     </div>
-
-    <!--https://cdnjs.com/libraries/fabric.js-->
+    </script>
+    
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
     
+    <script>
+    
+    let obj_classes = localStorage.getItem("obj_classes");
+    obj_classes = obj_classes.split("\n");
+    
+    function filterDropDown(button, dropdown, input, dropdown_wrapper, items) {
+    //create dropdown items from list of items
+    for (let i=0; i<items.length; i++) {
+        let dropdown_item = document.createElement('a');
+        dropdown_item.setAttribute('href', '#'+items[i]);
+        dropdown_item.setAttribute('class', 'dropdown-item');
+        dropdown_item.innerHTML = items[i];
+        dropdown_item.addEventListener('click', function () {
+          input.value = dropdown_item.innerHTML;
+        });
+        dropdown.appendChild(dropdown_item);
+    }
+    //hide the dropdown list
+    dropdown_wrapper.style.display = 'none';
+
+    //make the button toggle the display of dropdown
+    button.addEventListener('click', function () {
+        if (dropdown_wrapper.style.display == 'none')
+             dropdown_wrapper.style.display = 'block';
+        else
+            dropdown_wrapper.style.display = 'none';
+    });
+
+    input.addEventListener('input', function () {
+        let dropdown_items = dropdown.querySelectorAll('.dropdown-item');
+        
+        if (!dropdown_items)
+            return false;
+        for (let i=0; i<dropdown_items.length; i++) {
+            if (dropdown_items[i].innerHTML.toUpperCase().includes(input.value.toUpperCase()))
+                dropdown_items[i].style.display = 'block';
+            else
+                dropdown_items[i].style.display = 'none';
+        }
+    });
+
+
+  }
+  
+  filterDropDown(
+    document.getElementById('toggle'),
+    document.getElementById('dropdown'),
+    document.getElementById('categoryname'),
+    document.getElementById('dropdown_wrapper'),
+    obj_classes
+    )
+
+    </script>
     <script src="label.js"></script>
 
   </body>

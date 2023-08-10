@@ -25,7 +25,7 @@
     <div class="row">
       <div class="column-left"></div>
 
-      <div class="column-middle" style="font-family: 'Montserrat', sans-serif">
+      <div class="column-middle">
         <h1
           class="heading"
         >
@@ -49,29 +49,24 @@
           <li>You may draw additional objects which is not mentioned in the description.</li>
           <li>Imagine that the instructor does not know about the scene description, only can see your drawing canvas.</li>
         </ul>
-        <h2
-        class="heading"
-         >
-         Note:
-        </h2>
-        <h3
-          class="subheading"
-        >
-          Your scene drawings will be used in a research project by a graduate student.
-          If you agree to give a permission, you can write your name and surname then click to the START button.
-        </h3>
-        <p> **This dataset will be used by M.Sc. student Aleyna Kutuk.</p>
 
         <div id="element-container" style="margin-bottom: 20px;">
           <div style="justify-content: left; display: flex;">
-             <h3>Enter User Information: </h3>
-             <input type="text" id="username" style="width: 130px; height: 20px;" placeholder="Write your name here" />
-             <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
-              <button href="#" type="button" class = "btn" id="submitBtn" 
-                   style="width: 150px; height: 30px; font-size: 15px;">START</button>
-             </div>
+             <label for="email" style="display: block; text-align: center; margin-right: 10px; align-self: auto;"><strong>E-mail address: </strong></label>
+             <input type="email" name="email" id="email" style="width: auto; height: 30px;" placeholder="Write your email" />
           </div>
         </div>
+
+        <div>
+          <label for="agreement">
+            <input type="checkbox" name="agreement" id="agreement">I give permission for my drawings to be used by a scientific research project conducted by M.Sc. student Aleyna Kutuk.
+          </label>
+        </div>
+
+        <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
+          <button href="#" type="button" class = "btn" id="submitBtn" 
+               style="width: 150px; height: 30px; font-size: 15px;">START</button>
+         </div>
 
       </div>
 
@@ -79,31 +74,16 @@
     </div>
 
     <script>
-    
-      const firebaseConfig = {
-        apiKey: "AIzaSyCAZOblzgyVbrGCRbGO_mskKSQAV1-PUhs",
-        authDomain: "scene-dataset.firebaseapp.com",
-        databaseURL: "https://scene-dataset-default-rtdb.firebaseio.com",
-        projectId: "scene-dataset",
-        storageBucket: "scene-dataset.appspot.com",
-        messagingSenderId: "613884392238",
-        appId: "1:613884392238:web:60996e315f709dbc0e80bf"
-      };
-
-      // Initialize Firebase
-      firebase.initializeApp(firebaseConfig);
-
-      // get firebase database
-      let database = firebase.database();
-      let usersRefInDatabase = database.ref("sceneData/");
 
       document
         .getElementById("submitBtn")
         .addEventListener("click", function () {
           
-          username = username.value;
+          email = email.value;
+          agreement = agreement.checked ? true : false;
 
-          localStorage.setItem("user_name", username);
+          localStorage.setItem("email", email);
+          localStorage.setItem("agreement", agreement);
 
           window.location.href = "./drawing.html";
         });

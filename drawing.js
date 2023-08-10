@@ -25,7 +25,7 @@ var canvas = this.__canvas = new fabric.Canvas('canvas', {
 var ctx = canvas.getContext("2d");
 let brush = canvas.freeDrawingBrush;
 
-var shadow = new fabric.Shadow({ color: "red", blur: 4});
+var shadow = new fabric.Shadow({ color: "red", blur: 8});
 
 
 let canvasDiv = document.getElementById("canvas-wrapper");
@@ -58,18 +58,15 @@ var drawing = [];
 var stroke = []; //should contain 3 array in it
 var xCords = [];
 var yCords = [];
-
-var sketches = []; //array of sketch objects
-let full_data = []; //array of sketch and classname dictionaries
+let times = [];
 
 //Element retrieval
 let $ = function (id) { return document.getElementById(id) };
 let drawingModeEl = $('modeButton');
 
 brush.color = 'black';
-brush.width = 3;
+brush.width = 4;
 
-//2.Make brush work
 drawingModeEl.onclick = function () {
     //canvas.getActiveObjects()[canvas.getActiveObjects]
     canvas.isDrawingMode = !canvas.isDrawingMode;
@@ -77,7 +74,6 @@ drawingModeEl.onclick = function () {
     if (canvas.isDrawingMode) {
 
         drawingModeEl.innerHTML = 'Select stroke';
-        document.getElementById("drawing-mode").innerHTML = "Drawing mode";
 
     }
     else {
@@ -95,7 +91,6 @@ drawingModeEl.onclick = function () {
         });
 
         drawingModeEl.innerHTML = 'Draw';
-        document.getElementById("drawing-mode").innerHTML = "Stroke selection mode";
 
     }
 };
@@ -128,14 +123,16 @@ function getPointerHandler(evt) {
     var point = null;
     if (mDown & canvas.isDrawingMode) {
         point = canvas.getPointer(evt);
+        currDate = Date.now();
+        elapsedMilliseconds = currDate - startDate;
 
         xCords.push(point.x);
         yCords.push(point.y);
+        times.push(elapsedMilliseconds);
 
         stroke[0] = xCords;
         stroke[1] = yCords;
-
-        //stroke[2] = times;
+        stroke[2] = times;
 
 
     }
@@ -149,6 +146,7 @@ function getPointerHandler(evt) {
         stroke = [];
         xCords = [];
         yCords = [];
+        times = [];
 
     }
 
@@ -170,7 +168,6 @@ function startup() {
     el.addEventListener('touchmove', handleMove);
     el.addEventListener('touchend', handleEnd);
     el.addEventListener('touchcancel', handleCancel);
-    // console.log('Initialized.');
 }
 window.addEventListener("DOMContentLoaded", startup);
 
@@ -210,13 +207,16 @@ function handleMove(evt) {
     let point = null;
     if (pDown & canvas.isDrawingMode) {
         point = canvas.getPointer(evt);
+        currDate = Date.now();
+        elapsedMilliseconds = currDate - startDate;
 
         xCords.push(point.x);
         yCords.push(point.y);
-        //cloneXcords = [...xCords]; // Since we don not get time values properly fullfill the third array with zeros.
-        //times = cloneXcords.fill(-1);
+        times.push(elapsedMilliseconds);
+
         stroke[0] = xCords;
         stroke[1] = yCords;
+        stroke[2] = times;
     }
 }
 
@@ -257,6 +257,7 @@ function handleEnd(evt) {
         stroke = [];
         xCords = [];
         yCords = [];
+        times = [];
     }
 }
 
@@ -268,17 +269,13 @@ function handleCancel(evt) {
 
 // this function is called from HTML file it trigers when the button is cliked. 
 function deleteObjects() {
+
     if (canvas.isDrawingMode) {
         canvas.isDrawingMode = !canvas.isDrawingMode;
         drawingModeEl.innerHTML = 'Draw';
-        document.getElementById("drawing-mode").innerHTML = "Stroke selection mode";
-
         alert("Please select a stroke and click to delete button.");
     } else if (canvas.getActiveObjects().length == 0) {
         alert("Please select a stroke and click to delete button.");
-        drawingModeEl.innerHTML = 'Select stroke';
-        document.getElementById("drawing-mode").innerHTML = "Drawing mode";
-
     }
 
     //Make each object nonresizable on canvas
@@ -295,13 +292,10 @@ function deleteObjects() {
     });
 
     drawingModeEl.innerHTML = 'Draw';
-    document.getElementById("drawing-mode").innerHTML = "Stroke selection mode";
 
     let activeObjects = canvas.getActiveObjects();
     // console.log("ACTIVE OBJECT COUNT IS ", canvas.getActiveObjects().length);
     for (let i = 0; i < activeObjects.length; i++) {
-        // console.log("active strtoke is ");
-        // console.log(activeObjects[i].vectorRepresentation);
         canvas.remove(activeObjects[i]);
 
     }
@@ -336,6 +330,7 @@ function getDrawing() {
     if (activeObjects.length > 0) {
         for (let i = 0; i < activeObjects.length; i++) {
             active_strokes.push(activeObjects[i].vectorRepresentation)
+
         }
 
     }
@@ -348,47 +343,42 @@ function getDrawing() {
     }
 }
 
-
-
 /*
     This function is called when user clicks on "Next" button
 */
 function nextSketch() {
-    //make yardım sendDrawingToServeral button unclickable until model returns a prediction
-
-    // get selected strokes
+    
     let drawing = getDrawing();
+
     if (drawing != "small_strokes") {
 
         // Record the current drawing and its category
-        const temp_data = {
+        const full_data = {
             "class": currentObjectClass,
             "drawing": drawing
         };
-        full_data.push(temp_data);
 
-        // Show the next object to draw
+        // Show the next scene to draw
         currentObjectIndex++;
-        if (currentObjectIndex >= sceneDescriptions.length) {
-           window.location.href = "./label_info.html";
-           localStorage.setItem("num_cases", sceneDescriptions.length);
-           localStorage.setItem("full_data", JSON.stringify(full_data));
-           var json = canvas.toJSON();
-           localStorage.setItem(currentObjectIndex.toString(), JSON.stringify(json));
-            
-
-        } else { //  "full_data": full_data
-            // Show the next object to draw
-            currentObjectClass = sceneDescriptions[currentObjectIndex];
-            objectNameElement.textContent = currentObjectClass;
+        if (currentObjectIndex == sceneDescriptions.length) {
+            localStorage.setItem("num_cases", sceneDescriptions.length);
+            localStorage.setItem("full_data", JSON.stringify(full_data));
             var json = canvas.toJSON();
             localStorage.setItem(currentObjectIndex.toString(), JSON.stringify(json));
-            
+            window.location.href = "./label_info.html";
+        } 
+        else {
+            currentObjectClass = sceneDescriptions[currentObjectIndex];
+            objectNameElement.textContent =  currentObjectClass;
+            var json = canvas.toJSON();
+            localStorage.setItem(currentObjectIndex.toString(), JSON.stringify(json));
+            timeLeft = TIME_LIMIT_PER_WORD;
+            startDate = Date.now();
         }
 
         // Clear the canvas and the drawing variables for the next sketch
         drawing = [];
-        stroke = []; //should contain 2 array in it
+        stroke = [];
         xCords = [];
         yCords = [];
         clearCanvas();
@@ -410,36 +400,49 @@ function clearCanvas() {
 }
 
 
+const TIME_LIMIT_PER_WORD = 120; // in seconds
+const TOTAL_GAME_TIME = TIME_LIMIT_PER_WORD * sceneDescriptions.length;
+let timeLeft = TIME_LIMIT_PER_WORD // in seconds
+let startDate, currDate, endDate;
+let timerID;
 
+let elapsedMilliseconds=0;
+startDate = Date.now();
 
+function timer() {
 
-// A func that is needed for sketchformer strokes
-// Some strokes are upsamples in case they have length of less than 20
-function upSampleStrokeVector(vectorRepresentation) {
-    let upsampledVector = [[], []];
-    // console.log(vectorRepresentation);
-    let x_vector = vectorRepresentation[0];
-    let y_vector = vectorRepresentation[1];
-    for (let i = 0; i < (x_vector.length) - 1; i++) {
-        let newPointX1 = x_vector[i] + ((x_vector[i + 1] - x_vector[i]) / 3);
-        let newPointY1 = y_vector[i] + ((y_vector[i + 1] - y_vector[i]) / 3);
+    timerID = setInterval(function () {
 
-        let newPointX2 = x_vector[i] + (2 * ((x_vector[i + 1] - x_vector[i]) / 3));
-        let newPointY2 = y_vector[i] + (2 * ((y_vector[i + 1] - y_vector[i]) / 3));
+        timeLeft--;
 
+        var minutes = Math.floor((timeLeft / 60));
+        var seconds = Math.floor((timeLeft % 60));
 
-        upsampledVector[0].push(x_vector[i]);
-        upsampledVector[1].push(y_vector[i]);
+        if (minutes < 1) {
+            if (seconds < 10) {
+                document.getElementById("seconds").innerHTML = "00:" + "0" + seconds;
+            }
+            else{
+                document.getElementById("seconds").innerHTML = "00:" + seconds;
+            }
+        }
+        else{
+            if (seconds < 10) {
+                document.getElementById("seconds").innerHTML = "0" + minutes + ":0" + seconds;
+            }
+            else{
+                document.getElementById("seconds").innerHTML = "0" + minutes + ":" + seconds;
+            }
+        }
+        
+        if (timeLeft === 0) {
 
-        upsampledVector[0].push(newPointX1);
-        upsampledVector[1].push(newPointY1);
-
-        upsampledVector[0].push(newPointX2);
-        upsampledVector[1].push(newPointY2);
-    }
-    upsampledVector[0].push(x_vector[(x_vector.length) - 1]);
-    upsampledVector[1].push(y_vector[(y_vector.length) - 1]);
-
-    return upsampledVector;
+            document.getElementById("seconds").innerHTML = "EXPIRED";
+            nextSketch();
+            timeLeft = TIME_LIMIT_PER_WORD;
+        }
+   
+    }, 1000);
 }
 
+timer();

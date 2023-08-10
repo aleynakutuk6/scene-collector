@@ -15,6 +15,9 @@ firebase.initializeApp(firebaseConfig);
 let database = firebase.database();
 let usersRefInDatabase = database.ref("sceneData/");
 
+let email = localStorage.getItem("email");
+let agreement = localStorage.getItem("agreement");
+
 var canvas = this.__canvas = new fabric.Canvas('canvas', {isDrawingMode: false });
 var ctx = canvas.getContext("2d");
 var mouse = false;
@@ -24,21 +27,22 @@ let canvasDiv = document.getElementById("canvas-wrapper");
 canvas.setWidth(canvasDiv.offsetWidth);
 canvas.setHeight(canvasDiv.offsetHeight);
 
-//Element retrieval
 let $ = function (id) { return document.getElementById(id) };
-let drawingModeEl = $('modeButton');
 
 // add shadow to active strokes
 canvas.selectionColor = 'rgba(0,255,0,0.3)';
 canvas.selectionBorderColor = 'rgba(230, 126, 34, 1)';
 canvas.selectionLineWidth = 1;
 canvas.selectionShadow = shadow;
+canvas.selectionKey = "ctrlKey";
 
 let currentObjIndex = 1;
-let new_data = [];
 let numScenes = localStorage.getItem("num_cases");
 let scene = localStorage.getItem(currentObjIndex.toString());
-let canvas_data = JSON.parse(scene); 
+let full_data = JSON.parse(localStorage.getItem("full_data"));
+let canvas_data = JSON.parse(scene);
+let user_data = [];
+
 canvas.loadFromJSON(canvas_data, function() {
     canvas.renderAll();
   });
@@ -148,60 +152,68 @@ function handleCancel(evt) {
   
 function saveCategory(){
 
-  categoryname = categoryname.value;
+  let categoryname = $('categoryname');
   let activeObjects = canvas.getActiveObjects();
   let active_strokes = [];
-  let stroke_labels = [];
-      
-  for (let i = 0; i < activeObjects.length; i++) {
-      activeObjects[i].label = categoryname;
-      active_strokes.push(activeObjects[i].vectorRepresentation);
-      stroke_labels.push(activeObjects[i].label);
+  let drawing = [];
 
-      console.log(active_strokes);
-      console.log(stroke_labels);
+  for (let i = 0; i < activeObjects.length; i++) {
+      
+      vec = full_data["drawing"][i]
+      active_strokes.push(vec);
       
       activeObjects[i].set("stroke", "green");
+      activeObjects[i].set("strokeWidth", 4);
+
       canvas.renderAll();
 
       if (active_strokes != "small_strokes") {
-        const temp_data = {
-              "labels": stroke_labels,
-              "drawing": active_strokes
-        };
-        new_data.push(temp_data);
-        console.log(new_data);
-        localStorage.setItem("new_data", JSON.stringify(new_data));
-    }
+        drawing.push(active_strokes);
+      }
   } 
+
+  const new_data = {
+      "labels": categoryname.value,
+      "drawing": drawing
+  };
+  
+  user_data.push(new_data);
+
 }
   
 function nextSketch(){
-    
-    if (currentObjIndex < numScenes) {
-      currentObjIndex++;
-      let scene = localStorage.getItem(currentObjIndex.toString());
-      let canvas_data = JSON.parse(scene);
-      canvas.loadFromJSON(canvas_data, function() {
-        canvas.renderAll();
-       });
-      
-      //Make each object nonresizable on canvas
-      canvas.forEachObject(function (o) { // make not selectable all the objects.
-        o.hasControls = false;
-        o.lockMovementX = true;
-        o.lockMovementY = true;
-        o.lockScalingX = true;
-        o.lockScalingY = true;
-        o.lockUniScaling = true;
-        //o.hasBorders = false;
-        // o.hasBorders = false;
 
-    });  
-
-    }
-    else{
-      window.location.href = "./end.html";
-    }
-
+  if (currentObjIndex > numScenes) {
+    window.location.href = "./end.html";
   }
+
+  
+  let submit_content = { "user_email": email, "agreement": agreement, "scene_info": user_data };
+  user_data = [];
+  
+  usersRefInDatabase.push(submit_content, (error) => {
+    if (error) {
+      window.alert("Error while pushing data to the firebase.");
+    } else {
+      console.log("Data sent successfully!");
+    }
+      
+  });
+
+  currentObjIndex++;
+  let scene = localStorage.getItem(currentObjIndex.toString());
+  let canvas_data = JSON.parse(scene);
+  canvas.loadFromJSON(canvas_data, function() {
+    canvas.renderAll();
+  });
+      
+    //Make each object nonresizable on canvas
+  canvas.forEachObject(function (o) { // make not selectable all the objects.
+      o.hasControls = false;
+      o.lockMovementX = true;
+      o.lockMovementY = true;
+      o.lockScalingX = true;
+      o.lockScalingY = true;
+      o.lockUniScaling = true; });  
+
+}
