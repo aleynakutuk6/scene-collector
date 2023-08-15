@@ -27,32 +27,34 @@
 
       <div class="column-middle">
         <h1
-          class="heading"
+          class="heading" style="font-size: 20pt;"
         >
           Welcome to the Scene Sketch Dataset Collection Application
         </h1>
         <h2
-          class="subheading"
+          class="subheading" style="font-size: 16pt;"
         >
           This is an example data collection application built for researchers
           who need a sketch scene data collection interface.
         </h2>
         <h1
-          class="heading"
+          class="heading" style="font-size: 16pt;"
         >
           Instructions:
         </h1>
-        <ul>
+        <ul style="font-size: 14pt;">
           <li>You will be given with a scene description and a drawing canvas on the next page. </li>
           <li>You are asked to draw a scene by referring to the description.</li>
+          <li>In the UI, you should first click to SELECT STROKE button and then select the stroke and click DELETE button to remove the selected stroke.</li>
+          <li>You should click to DRAW button to continue drawing, if SELECT STROKE mode is on.</li>
           <li>While drawing the scene, explain it to the instructor verbally.</li>
           <li>You may draw additional objects which is not mentioned in the description.</li>
           <li>Imagine that the instructor does not know about the scene description, only can see your drawing canvas.</li>
         </ul>
 
         <div id="element-container" style="margin-bottom: 20px;">
-          <div style="justify-content: left; display: flex;">
-             <label for="email" style="display: block; text-align: center; margin-right: 10px; align-self: auto;"><strong>E-mail address: </strong></label>
+          <div style="justify-content: left; display: flex; font-size: 14pt;">
+             <label for="email" style="display: block; text-align: center; margin-right: 10px; align-self: auto;" ><strong>E-mail address: </strong></label>
              <input type="email" name="email" id="email" style="width: auto; height: 30px;" placeholder="Write your email" />
           </div>
         </div>
@@ -85,7 +87,7 @@
           localStorage.setItem("email", email);
           localStorage.setItem("agreement", agreement);
 
-          window.location.href = "./drawing.html";
+          window.location.href = "./check_drawing.html";
         });
       
     </script>

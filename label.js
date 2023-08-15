@@ -43,6 +43,10 @@ let full_data = JSON.parse(localStorage.getItem("full_data"));
 let canvas_data = JSON.parse(scene);
 let user_data = [];
 
+let sceneDescriptions = localStorage.getItem("scene_descriptions");
+sceneDescriptions = sceneDescriptions.split("\n");
+let currentSceneIndex = 0;
+
 canvas.loadFromJSON(canvas_data, function() {
     canvas.renderAll();
   });
@@ -182,14 +186,11 @@ function saveCategory(){
 }
   
 function nextSketch(){
-
-  if (currentObjIndex > numScenes) {
-    window.location.href = "./end.html";
-  }
-
   
-  let submit_content = { "user_email": email, "agreement": agreement, "scene_info": user_data };
+  let currentScene = sceneDescriptions[currentSceneIndex];
+  let submit_content = { "user_email": email, "agreement": agreement, "scene_info": user_data, "scene_description": currentScene};
   user_data = [];
+  console.log(submit_content);
   
   usersRefInDatabase.push(submit_content, (error) => {
     if (error) {
@@ -201,6 +202,12 @@ function nextSketch(){
   });
 
   currentObjIndex++;
+  currentSceneIndex++;
+
+  if (currentObjIndex > numScenes) {
+    window.location.href = "./end.html";
+  }
+  
   let scene = localStorage.getItem(currentObjIndex.toString());
   let canvas_data = JSON.parse(scene);
   canvas.loadFromJSON(canvas_data, function() {

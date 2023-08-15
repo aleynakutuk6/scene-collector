@@ -16,20 +16,20 @@
         <div class="column-left"></div>
 
         <div class="column-middle" style="font-family: 'Montserrat', sans-serif">
-            <h1 class="heading"> Welcome to the Labeling Part</h1>
+            <h1 class="heading" style="font-size: 20pt;"> Welcome to the Labeling Part</h1>
             <h2
-              class="subheading"
+              class="subheading" style="font-size: 16pt;"
             >
               In this part, you will select each sketch object appear in the scene and write their object categories.
             </h2>
             <h2 class="heading">Instructions: </h2>
-            <ul>
-              <li>You will be asked to label each sketch object that appear in the given scene. </li>
-              <li>Write the correct category name in a text box for every single object.</li>
-              <li>Once you write the category name, click to SUBMIT button.</li>
-              <li>Labelled strokes will turn into GREEN color.</li>
+            <ul style="font-size: 14pt;">
+              <li>You will be asked to label each sketch object that appear in the given scene.</li>
+              <li>Click to SEARCH CATEGORY button to find the correct object category.</li>
+              <li>Click to SUBMIT button if you find the correct category name.</li>
+              <li>Labelled object strokes become GREEN.</li>
               <li>You can label objects in any order you want. </li>
-              <li>Make sure that the scene becomes full of GREEN objects :) </li>
+              <li>When the scene becomes all GREEN, you can continue with the next scene.</li>
             </ul>
             <div
               class="button-container"
@@ -46,7 +46,7 @@
         document
           .getElementById("submitBtn")
           .addEventListener("click", function () {
-            window.location.href = "label.html";
+            window.location.href = "check_label.html";
           });
       </script>
   </body>
