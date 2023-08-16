@@ -20,7 +20,18 @@
   
  
     <div class="row">
-      <div class="column-left"></div>
+      <div class="column-left">
+
+        <div style="justify-content: center; display: block;">
+          <div id="dropdown_wrapper" style="display: block;">
+            <input type="text" id="categoryname" placeholder="Search category ...">
+            <div id="dropdown"></div>
+            <button id="submitBtn" class = "btn" style="width: 150px; height: 30px; font-size: 15px;" onclick="saveCategory()">Submit</button>
+          </div>
+        </div>
+
+
+      </div>
 
       <div class="column-middle">
         <div id="canvas-wrapper" style="width: 1250px; height: 570px; position: relative; user-select: none;" style="display:block">
@@ -30,20 +41,10 @@
         
 
         <div id="element-container" style="width: 1250px; height: 570px;">
-          <div style="justify-content: left; display: flex;"> 
-            <div style="justify-content: center; display: block;">
-              <button id="toggle" class="btn" style="width: 220px; height: 30px; font-size: 15px;">Search Category</button>
-              <div id="dropdown_wrapper" style="display: block;">
-                <input type="text" id="categoryname" placeholder="Search category ...">
-                <div id="dropdown"></div>
-              </div>
-            </div>
-            <button id="submitBtn" class = "btn" style="width: 150px; height: 30px; font-size: 15px;" onclick="saveCategory()">Submit</button>
             <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
-              <button href="#" type="button" class="btn" id="conclusionButton"
-                  style="width: 110px; height: 30px; font-size: 15px;" onclick="nextSketch()">Next</button>
+            <button href="#" type="button" class="btn" id="conclusionButton"
+                style="width: 110px; height: 30px; font-size: 15px;" onclick="nextSketch()">Next</button>
             </div>
-          </div>
         </div>
       </div>
 
@@ -58,7 +59,7 @@
     let obj_classes = localStorage.getItem("obj_classes");
     obj_classes = obj_classes.split("\n");
     
-    function filterDropDown(button, dropdown, input, dropdown_wrapper, items) {
+    function filterDropDown(dropdown, input, dropdown_wrapper, items) {
     //create dropdown items from list of items
     for (let i=0; i<items.length; i++) {
         let dropdown_item = document.createElement('a');
@@ -70,16 +71,6 @@
         });
         dropdown.appendChild(dropdown_item);
     }
-    //hide the dropdown list
-    dropdown_wrapper.style.display = 'none';
-
-    //make the button toggle the display of dropdown
-    button.addEventListener('click', function () {
-        if (dropdown_wrapper.style.display == 'none')
-             dropdown_wrapper.style.display = 'block';
-        else
-            dropdown_wrapper.style.display = 'none';
-    });
 
     input.addEventListener('input', function () {
         let dropdown_items = dropdown.querySelectorAll('.dropdown-item');
@@ -98,7 +89,6 @@
   }
   
   filterDropDown(
-    document.getElementById('toggle'),
     document.getElementById('dropdown'),
     document.getElementById('categoryname'),
     document.getElementById('dropdown_wrapper'),

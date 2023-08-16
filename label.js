@@ -58,6 +58,7 @@ canvas.forEachObject(function (o) { // make not selectable all the objects.
     o.lockScalingX = true;
     o.lockScalingY = true;
     o.lockUniScaling = true;
+    o.perPixelTargetFind = true; 
     //o.hasBorders = false;
     // o.hasBorders = false;
 
@@ -187,40 +188,51 @@ function saveCategory(){
   
 function nextSketch(){
   
-  let currentScene = sceneDescriptions[currentSceneIndex];
-  let submit_content = { "user_email": email, "agreement": agreement, "scene_info": user_data, "scene_description": currentScene};
-  user_data = [];
-  console.log(submit_content);
-  
-  usersRefInDatabase.push(submit_content, (error) => {
-    if (error) {
-      window.alert("Error while pushing data to the firebase.");
-    } else {
-      console.log("Data sent successfully!");
+  canvas.getObjects().forEach(function (o) {
+
+    if (o.get("stroke") != "green"){
+      window.alert("Please label every object that appear in the given scene.");
     }
-      
-  });
+    else{
 
-  currentObjIndex++;
-  currentSceneIndex++;
-
-  if (currentObjIndex > numScenes) {
-    window.location.href = "./end.html";
-  }
+      let currentScene = sceneDescriptions[currentSceneIndex];
+      let submit_content = { "user_email": email, "agreement": agreement, "scene_info": user_data, "scene_description": currentScene};
+      user_data = [];
   
-  let scene = localStorage.getItem(currentObjIndex.toString());
-  let canvas_data = JSON.parse(scene);
-  canvas.loadFromJSON(canvas_data, function() {
-    canvas.renderAll();
-  });
+      usersRefInDatabase.push(submit_content, (error) => {
+       if (error) {
+         window.alert("Error while pushing data to the firebase.");
+       } else {
+         console.log("Data sent successfully!");
+       }
       
-    //Make each object nonresizable on canvas
-  canvas.forEachObject(function (o) { // make not selectable all the objects.
-      o.hasControls = false;
-      o.lockMovementX = true;
-      o.lockMovementY = true;
-      o.lockScalingX = true;
-      o.lockScalingY = true;
-      o.lockUniScaling = true; });  
+      });
+
+      currentObjIndex++;
+      currentSceneIndex++;
+
+      if (currentObjIndex > numScenes) {
+        window.location.href = "./end.html";
+      }
+  
+      let scene = localStorage.getItem(currentObjIndex.toString());
+      let canvas_data = JSON.parse(scene);
+      canvas.loadFromJSON(canvas_data, function() {
+         canvas.renderAll();
+      });
+      
+      //Make each object nonresizable on canvas
+      canvas.forEachObject(function (o) { // make not selectable all the objects.
+         o.hasControls = false;
+         o.lockMovementX = true;
+         o.lockMovementY = true;
+         o.lockScalingX = true;
+         o.lockScalingY = true;
+         o.lockUniScaling = true; 
+         o.perPixelTargetFind = true; });  
+
+      }
+      });
+  
 
 }

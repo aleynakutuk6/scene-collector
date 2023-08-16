@@ -85,8 +85,7 @@ drawingModeEl.onclick = function () {
             o.lockScalingX = true;
             o.lockScalingY = true;
             o.lockUniScaling = true;
-            //o.hasBorders = false;
-            // o.hasBorders = false;
+            o.perPixelTargetFind = true;
 
         });
 
@@ -286,8 +285,7 @@ function deleteObjects() {
         o.lockScalingX = true;
         o.lockScalingY = true;
         o.lockUniScaling = true;
-        //o.hasBorders = false;
-        // o.hasBorders = false;
+        o.perPixelTargetFind = true;
 
     });
 
