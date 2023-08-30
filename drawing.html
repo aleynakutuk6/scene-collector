@@ -23,12 +23,18 @@
       <div class="column-left"></div>
 
       <div class="column-middle">
-        <div id="objectNameContainer">
-          <h2 id="prefix" style="width: 1200px; height: 5px; font-size: 20px; text-align: center; display: inline;"><strong>Description: </strong></h2>
-          <h2 id="objectName" style="width: 1200px; height: 35px; font-size: 20px; text-align: center; display: inline;"></h2>
+        <button class = "btn" style="width: 200px; height: 50px; font-size: 15px;" onclick="showDescription()">Show Description</button>
+        <div>
+          <div id="ShowDescription">
+            <h2 id="objectName" style="font-size: 20px; display: inline;"></h2>
+          </div>
+        </div>
+        
+
+        <div id="timer">
           <p id="seconds"></p>
         </div>
-
+        
         <div id="canvas-wrapper" style="width: 1250px; height: 570px; position: relative; user-select: none;" style="display:block">
           <canvas id="canvas"
             >Your browser does not support canvas. Please upgrade it!</canvas>
@@ -50,6 +56,18 @@
 
     <!--https://cdnjs.com/libraries/fabric.js-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>    
+
+    <script>
+      function showDescription() {
+        var x = document.getElementById("ShowDescription");
+        if (x.style.display === "none") {
+          x.style.display = "block";
+        } else {
+          x.style.display = "none";
+        }
+      }
+
+    </script>
     <script src="drawing.js"></script>
 
   </body>

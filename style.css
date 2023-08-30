@@ -31,7 +31,7 @@ body {
 }
 
 .column-middle {
-  width: 70%;
+  width: 100%;
   height: 700px;
 }
 
@@ -236,4 +236,9 @@ img {
   text-transform: uppercase;
   font-weight: bold;
 }
-/**charbot animation */
+
+#p {
+  text-align: center;
+  font-size: 60px;
+  margin-top: 0px;
+}

@@ -10,7 +10,10 @@
   </head>
 
   <body>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
@@ -20,57 +23,75 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-storage.js"></script>
 
     <div class="row">
+
       <div class="column-left"></div>
 
       <div class="column-middle">
-        <h1 class="heading">
-          Select the scene descriptions txt file now!!
+        <h1
+          class="heading" style="font-size: 20pt;"
+        >
+          Welcome to the Scene Sketch Dataset Collection Application
         </h1>
-          <p>DO NOT click to NEXT button!! PLEASE WAIT FOR THE SETUP!!</p>
-        <div id="element-container">
-            <a> Scene descriptions:  </a> <br>
-            <input type="file" name="inputFileToRead" id="inputFileToRead"/> <br>
-            <a> Object classes:  </a> <br>
-            <div style="justify-content: left; display: flex;">
-            
-            <input type="file" name="classesFile" id="classesFile"/>
-            <div class="button-container" style="display: flex; justify-content: right; margin-left: auto; margin-right: 0;">
-              <button id="submitBtn" class="btn" style="width: 80px; height: 30px; font-size: 15px;">NEXT</button>
-            </div>
+        <h2
+          class="subheading" style="font-size: 16pt;"
+        >
+          This is an example data collection application built for researchers
+          who need a sketch scene data collection interface.
+        </h2>
+        <h1
+          class="heading" style="font-size: 16pt;"
+        >
+          Instructions:
+        </h1>
+        <ul style="font-size: 14pt;">
+          <li>You will be given with a scene description and a drawing canvas on the next page. </li>
+          <li>You are asked to draw a scene by referring to the description.</li>
+          <li>In the UI, you should first click to SELECT STROKE button and then select the stroke and click DELETE button to remove the selected stroke.</li>
+          <li>You should click to DRAW button to continue drawing, if SELECT STROKE mode is on.</li>
+          <li>While drawing the scene, explain it to the instructor verbally.</li>
+          <li>You may draw additional objects which is not mentioned in the description.</li>
+          <li>Imagine that the instructor does not know about the scene description, only can see your drawing canvas.</li>
+        </ul>
+
+        <div id="element-container" style="margin-bottom: 20px;">
+          <div style="justify-content: left; display: flex; font-size: 14pt;">
+             <label for="email" style="display: block; text-align: center; margin-right: 10px; align-self: auto;" ><strong>E-mail address: </strong></label>
+             <input type="email" name="email" id="email" style="width: auto; height: 30px;" placeholder="Write your email" />
           </div>
         </div>
+
+        <div>
+          <label for="agreement">
+            <input type="checkbox" name="agreement" id="agreement">I give permission for my drawings to be used by a scientific research project conducted by M.Sc. student Aleyna Kutuk.
+          </label>
+        </div>
+
+        <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
+          <button href="#" type="button" class = "btn" id="submitBtn" 
+               style="width: 150px; height: 30px; font-size: 15px;">START</button>
+         </div>
+
       </div>
 
       <div class="column-right"></div>
+
     </div>
 
     <script>
-      localStorage.setItem("scene_descriptions", null);
 
       document
         .getElementById("submitBtn")
         .addEventListener("click", function () {
-          window.location.href = "drawing_info.html";
+          
+          email = email.value;
+          agreement = agreement.checked ? true : false;
+
+          localStorage.setItem("email", email);
+          localStorage.setItem("agreement", agreement);
+
+          window.location.href = "./check_drawing.html";
         });
-
-      document.getElementById("inputFileToRead")
-      .addEventListener("change", function () {
-        var fr = new FileReader();
-        fr.readAsText(this.files[0]);
-        fr.onload = function () {
-          localStorage.setItem("scene_descriptions", fr.result);
-        };  
-      });
-
-      document.getElementById("classesFile")
-      .addEventListener("change", function () {
-        var fr = new FileReader();
-        fr.readAsText(this.files[0]);
-        fr.onload = function () {
-          localStorage.setItem("obj_classes", fr.result);
-        };  
-      });
-
+      
     </script>
   </body>
 </html>

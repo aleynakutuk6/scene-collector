@@ -10,8 +10,12 @@
     "maxAgeSeconds": 3600
 }]
 
-let sceneDescriptions = localStorage.getItem("scene_descriptions");
-sceneDescriptions = sceneDescriptions.split("\n");
+const sceneDescriptions = [
+    "In a living room, a person sits comfortably on a chair, while a table nearby holds a collection of items. A cute teddy bear rests on the bed, surrounded by a couple of colorful pillows.",
+    "A person wearing a shirt, tie and skirt and is standing and holding a bag in his hand. There is a table and bench on the background. There are a lot of buildings and they have many windows and door. Sun is shining and trees are huge."
+];
+
+localStorage.setItem("scene_descriptions", JSON.stringify(sceneDescriptions));
 const objectNameElement = document.getElementById("objectName");
 let currentObjectIndex = 0;
 let currentObjectClass = sceneDescriptions[currentObjectIndex];
@@ -22,7 +26,7 @@ var canvas = this.__canvas = new fabric.Canvas('canvas', {
 
 });
 
-var ctx = canvas.getContext("2d");
+var ctx = canvas.getContext("2d", { willReadFrequently: true });
 let brush = canvas.freeDrawingBrush;
 
 var shadow = new fabric.Shadow({ color: "red", blur: 8});
@@ -398,7 +402,7 @@ function clearCanvas() {
 }
 
 
-const TIME_LIMIT_PER_WORD = 120; // in seconds
+const TIME_LIMIT_PER_WORD = 180; // in seconds
 const TOTAL_GAME_TIME = TIME_LIMIT_PER_WORD * sceneDescriptions.length;
 let timeLeft = TIME_LIMIT_PER_WORD // in seconds
 let startDate, currDate, endDate;

@@ -19,7 +19,6 @@ let email = localStorage.getItem("email");
 let agreement = localStorage.getItem("agreement");
 
 var canvas = this.__canvas = new fabric.Canvas('canvas', {isDrawingMode: false });
-var ctx = canvas.getContext("2d");
 var mouse = false;
 var shadow = new fabric.Shadow({ color: "red", blur: 4});
 
@@ -43,8 +42,7 @@ let full_data = JSON.parse(localStorage.getItem("full_data"));
 let canvas_data = JSON.parse(scene);
 let user_data = [];
 
-let sceneDescriptions = localStorage.getItem("scene_descriptions");
-sceneDescriptions = sceneDescriptions.split("\n");
+let sceneDescriptions = JSON.parse(localStorage.getItem("scene_descriptions"));
 let currentSceneIndex = 0;
 
 canvas.loadFromJSON(canvas_data, function() {
@@ -188,9 +186,17 @@ function saveCategory(){
   
 function nextSketch(){
   
-  canvas.getObjects().forEach(function (o) {
+  let objs = canvas.getObjects();
+  let nonlabelled = 0;
 
-    if (o.get("stroke") != "green"){
+  for (let i = 0; i < objs.length; i++) {
+      if (objs[i].get("stroke") != "green"){
+        nonlabelled += 1;
+      }
+
+  }
+
+    if (nonlabelled > 0){
       window.alert("Please label every object that appear in the given scene.");
     }
     else{
@@ -210,6 +216,9 @@ function nextSketch(){
 
       currentObjIndex++;
       currentSceneIndex++;
+
+      console.log(currentObjIndex);
+      console.log(numScenes);
 
       if (currentObjIndex > numScenes) {
         window.location.href = "./end.html";
@@ -232,7 +241,6 @@ function nextSketch(){
          o.perPixelTargetFind = true; });  
 
       }
-      });
   
 
 }
