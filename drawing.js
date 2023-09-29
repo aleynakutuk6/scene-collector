@@ -77,7 +77,7 @@ drawingModeEl.onclick = function () {
 
     if (canvas.isDrawingMode) {
 
-        drawingModeEl.innerHTML = 'Select stroke';
+        drawingModeEl.innerHTML = '<img src= "lasso.png">';
 
     }
     else {
@@ -93,7 +93,7 @@ drawingModeEl.onclick = function () {
 
         });
 
-        drawingModeEl.innerHTML = 'Draw';
+        drawingModeEl.innerHTML ='<img src= "pencil.png">';
 
     }
 };
@@ -145,7 +145,7 @@ function getPointerHandler(evt) {
         // get stroke stroke object and attach drawing to it
         // This way we can send only part of canvas for prediction
         canvas.getObjects()[canvas.getObjects().length - 1].vectorRepresentation = stroke;
-        ;
+
         stroke = [];
         xCords = [];
         yCords = [];
@@ -275,7 +275,7 @@ function deleteObjects() {
 
     if (canvas.isDrawingMode) {
         canvas.isDrawingMode = !canvas.isDrawingMode;
-        drawingModeEl.innerHTML = 'Draw';
+        drawingModeEl.innerHTML = '<img src= "pencil.png">';
         alert("Please select a stroke and click to delete button.");
     } else if (canvas.getActiveObjects().length == 0) {
         alert("Please select a stroke and click to delete button.");
@@ -293,34 +293,13 @@ function deleteObjects() {
 
     });
 
-    drawingModeEl.innerHTML = 'Draw';
+    drawingModeEl.innerHTML = '<img src= "pencil.png">';
 
     let activeObjects = canvas.getActiveObjects();
     // console.log("ACTIVE OBJECT COUNT IS ", canvas.getActiveObjects().length);
     for (let i = 0; i < activeObjects.length; i++) {
         canvas.remove(activeObjects[i]);
 
-    }
-}
-
-function getSelectedStrokes() {
-    let activeObjects = canvas.getActiveObjects();
-    let active_strokes = [];
-
-    if (activeObjects.length > 0) {
-        for (let i = 0; i < activeObjects.length; i++) {
-            //// console.log("stroke uzunluğu",activeObjects[i].vectorRepresentation[0].length);
-            active_strokes.push(activeObjects[i].vectorRepresentation)
-
-        }
-
-    }
-
-    if (active_strokes.length > 0) {
-        return active_strokes;
-    } else {
-        window.alert("Please draw something.");
-        return "small_strokes";
     }
 }
 
@@ -331,15 +310,15 @@ function getDrawing() {
 
     if (activeObjects.length > 0) {
         for (let i = 0; i < activeObjects.length; i++) {
-            active_strokes.push(activeObjects[i].vectorRepresentation)
+            active_strokes.push(activeObjects[i].vectorRepresentation);
 
+            activeObjects[i].set({
+                vectorRepresentation: activeObjects[i].vectorRepresentation
+            });
         }
-
-    }
-
-    if (active_strokes.length > 0) {
         return active_strokes;
-    } else {
+    }
+    else {
         window.alert("Please draw something.");
         return "small_strokes";
     }
@@ -365,14 +344,16 @@ function nextSketch() {
         if (currentObjectIndex == sceneDescriptions.length) {
             localStorage.setItem("num_cases", sceneDescriptions.length);
             localStorage.setItem("full_data", JSON.stringify(full_data));
-            var json = canvas.toJSON();
+            const customKeys = ['vectorRepresentation'];
+            var json = canvas.toJSON(customKeys);
             localStorage.setItem(currentObjectIndex.toString(), JSON.stringify(json));
             window.location.href = "./label_info.html";
         } 
         else {
             currentObjectClass = sceneDescriptions[currentObjectIndex];
-            objectNameElement.textContent =  currentObjectClass;
-            var json = canvas.toJSON();
+            objectNameElement.textContent = currentObjectClass;
+            const customKeys = ['vectorRepresentation'];
+            var json = canvas.toJSON(customKeys);
             localStorage.setItem(currentObjectIndex.toString(), JSON.stringify(json));
             timeLeft = TIME_LIMIT_PER_WORD;
             startDate = Date.now();

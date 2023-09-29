@@ -1,8 +1,9 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Sedgwick+Ave&display=swap");
 body {
-  background-color: var(--background);
-  font-family: "Times New Roman", serif;
+  background-color: #C1DFF0;
+  font-family: "Arial", sans-serif;
   font-size: 16px;
+  color: #000000;
 }
 
 .row {
@@ -20,7 +21,52 @@ body {
   font-weight: 400;
   margin-bottom: 10px;
 }
+.checkbox-container {
+  display: inline-block;
+  position: relative;
+  padding-left: 30px;
+  margin-right: 15px;
+  cursor: pointer;
+}
 
+/* Hide the default checkbox input */
+.checkbox-container input {
+  display: none;
+}
+
+/* Style the custom checkbox */
+.custom-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #fff;
+  border: 2px solid #3498db;
+  border-radius: 3px;
+}
+
+/* Style the custom checkmark (hidden by default) */
+.custom-checkbox:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the custom checkmark when the checkbox is checked */
+.checkbox-container input:checked + .custom-checkbox:after {
+  display: block;
+  content: "\2713"; /* Checkmark character */
+  font-size: 16px;
+  top: 2px;
+  left: 5px;
+  color: #3498db;
+}
+
+/* Style the label text */
+.checkbox-label {
+  font-size: 16px;
+}
 .column-left {
   width: 15%;
   height: 700px;
@@ -61,7 +107,7 @@ body {
   position: relative;
   width: auto;
   display: inline-block;
-  color: #ecf0f1;
+  color: #ffffff;
   text-decoration: none;
   border-radius: 5px;
   border: solid 1px #f39c12;
@@ -97,7 +143,7 @@ chatbot-button:active {
   position: relative;
   width: auto;
   display: inline-block;
-  color: #ecf0f1;
+  color: #ffffff;
   text-decoration: none;
   border-radius: 5px;
   border: solid 1px #f39c12;
@@ -192,10 +238,10 @@ img {
   text-transform: uppercase;
   font-size: 15pt;
   font-weight: bold;
-  box-shadow: 0px 6px 0px #d35400;
+  box-shadow: 0px 5px 0px #d35400;
   cursor: pointer;
   overflow-y: scroll;
-  max-height: 100px;
+  max-height: 490px;
 }
 
 .dropdown-item {
@@ -219,14 +265,13 @@ img {
 }
 
 #categoryname {
-
+  max-width: 100px;
   margin-bottom: 0px; 
-  position: relative;
-  background-color: #ecf0f1;
+  background-color: #ffffff;
   font-size: 12px;
   position: relative;
   width: auto;
-  color: black;
+  color: rgb(0, 0, 0);
   text-decoration: none;
   border-radius: 5px;
   border: solid 1px #f39c12;

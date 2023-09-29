@@ -30,20 +30,20 @@
           </div>
         </div>
         
-
-        <div id="timer">
+        
+        <div id="timer" style="background-color: midnightblue; color: white; font-size: 30px; text-align: center;">
           <p id="seconds"></p>
         </div>
         
-        <div id="canvas-wrapper" style="width: 1250px; height: 570px; position: relative; user-select: none;" style="display:block">
+        <div id="canvas-wrapper" style="width: device-width; height: 570px; position: relative; user-select: none; background-color: white;" style="display:block">
           <canvas id="canvas"
             >Your browser does not support canvas. Please upgrade it!</canvas>
         </div>
 
-        <div id="element-container" style="width: 1250px; height: 570px;">
-            <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
-              <button href="#" type="button" class = "btn" id="modeButton" style="width: 150px; height: 30px; font-size: 15px;">Select stroke</button>
-              <button id="submitBtn" class = "btn" style="width: 150px; height: 30px; font-size: 15px;" onclick="deleteObjects()">Delete</button>
+        <div id="element-container" style="width: device-width px; height: 570px;">
+            <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0; ">
+              <button href="#" type="button" class = "btn" id="modeButton" style="width: 70px; height: 70px; font-size: 15px;"><img src="lasso.png" alt="Image"></button>
+              <button id="submitBtn" class = "btn" style="width: 70px; height: 70px; font-size: 15px;" onclick="deleteObjects()"><img src="eraser.png" alt="Image"></button>
               <button id="submitBtn" class = "btn" style="width: 150px; height: 30px; font-size: 15px;" onclick="nextSketch()">Next</button>
             </div>
         </div>

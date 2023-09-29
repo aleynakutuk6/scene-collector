@@ -35,15 +35,47 @@ canvas.selectionLineWidth = 1;
 canvas.selectionShadow = shadow;
 canvas.selectionKey = "ctrlKey";
 
-let currentObjIndex = 1;
 let numScenes = localStorage.getItem("num_cases");
-let scene = localStorage.getItem(currentObjIndex.toString());
 let full_data = JSON.parse(localStorage.getItem("full_data"));
-let canvas_data = JSON.parse(scene);
 let user_data = [];
-
-let sceneDescriptions = JSON.parse(localStorage.getItem("scene_descriptions"));
+let color_palette = {}; 
 let currentSceneIndex = 0;
+let currentObjIndex = 1;
+let sceneDescriptions = JSON.parse(localStorage.getItem("scene_descriptions"));
+let scene = localStorage.getItem(currentObjIndex.toString());
+let canvas_data = JSON.parse(scene);
+
+function getRandomArbitrary(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function componentToHex(c) {
+  var hex = c.toString(16);
+  return hex.length == 1 ? "0" + hex : hex;
+}
+
+function rgbToHex(r, g, b) {
+  return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
+
+const hex2rgb = (hex) => {
+  const r = parseInt(hex.slice(1, 3), 16);
+  const g = parseInt(hex.slice(3, 5), 16);
+  const b = parseInt(hex.slice(5, 7), 16);
+  
+  return [r, g, b];
+}
+
+for (let i = 0; i < obj_classes.length; i++) {
+  let hexcolor = rgbToHex(getRandomInt(80,255), getRandomInt(80,255), getRandomInt(80,255));
+  color_palette[obj_classes[i]] = hexcolor;
+}
 
 canvas.loadFromJSON(canvas_data, function() {
     canvas.renderAll();
@@ -102,8 +134,6 @@ window.addEventListener("DOMContentLoaded", startup);
 
 function handleStart(evt) {
   evt.preventDefault();
-  // console.log('touchstart.');
-  // console.log("START touch coordinates are ", canvas.getPointer(evt));
   canvas.renderAll();
   pDown = true;
 
@@ -152,32 +182,40 @@ function handleCancel(evt) {
   // console.log('touchcancel.');
 
 }      
-  
+
+function getSelectedStrokes(stroke_color) {
+  let activeObjects = canvas.getActiveObjects();
+  let active_strokes = [];
+
+  if (activeObjects.length > 0) {
+      for (let i = 0; i < activeObjects.length; i++) {
+
+          activeObjects[i].set("stroke", stroke_color);
+          activeObjects[i].set("strokeWidth", 4);
+
+          var vec = activeObjects[i].get('vectorRepresentation');
+          active_strokes.push(vec);
+          //vec = full_data["drawing"][i];
+          //active_strokes.push(vec);
+
+      }
+      canvas.renderAll();
+      return active_strokes;
+  }
+  else {
+      window.alert("Please draw something.");
+      return "small_strokes";
+  }
+}
+
 function saveCategory(){
 
   let categoryname = $('categoryname');
-  let activeObjects = canvas.getActiveObjects();
-  let active_strokes = [];
-  let drawing = [];
-
-  for (let i = 0; i < activeObjects.length; i++) {
-      
-      vec = full_data["drawing"][i]
-      active_strokes.push(vec);
-      
-      activeObjects[i].set("stroke", "green");
-      activeObjects[i].set("strokeWidth", 4);
-
-      canvas.renderAll();
-
-      if (active_strokes != "small_strokes") {
-        drawing.push(active_strokes);
-      }
-  } 
+  let active_strokes = getSelectedStrokes(color_palette[categoryname.value]);
 
   const new_data = {
       "labels": categoryname.value,
-      "drawing": drawing
+      "drawing": active_strokes
   };
   
   user_data.push(new_data);
@@ -187,19 +225,18 @@ function saveCategory(){
 function nextSketch(){
   
   let objs = canvas.getObjects();
-  let nonlabelled = 0;
-
+  let labelled = 0;
   for (let i = 0; i < objs.length; i++) {
-      if (objs[i].get("stroke") != "green"){
-        nonlabelled += 1;
+      let rgb_color = hex2rgb(objs[i].get("stroke"));
+      if (rgb_color[0] >= 80 && rgb_color[1] >= 80 && rgb_color[2] >= 80){
+         labelled += 1;
       }
-
   }
-
-    if (nonlabelled > 0){
+  console.log("labeld", labelled);
+  if (labelled != objs.length){
       window.alert("Please label every object that appear in the given scene.");
-    }
-    else{
+  }
+  else{
 
       let currentScene = sceneDescriptions[currentSceneIndex];
       let submit_content = { "user_email": email, "agreement": agreement, "scene_info": user_data, "scene_description": currentScene};
@@ -217,30 +254,32 @@ function nextSketch(){
       currentObjIndex++;
       currentSceneIndex++;
 
-      console.log(currentObjIndex);
-      console.log(numScenes);
-
       if (currentObjIndex > numScenes) {
         window.location.href = "./end.html";
       }
-  
-      let scene = localStorage.getItem(currentObjIndex.toString());
-      let canvas_data = JSON.parse(scene);
-      canvas.loadFromJSON(canvas_data, function() {
-         canvas.renderAll();
-      });
-      
-      //Make each object nonresizable on canvas
-      canvas.forEachObject(function (o) { // make not selectable all the objects.
-         o.hasControls = false;
-         o.lockMovementX = true;
-         o.lockMovementY = true;
-         o.lockScalingX = true;
-         o.lockScalingY = true;
-         o.lockUniScaling = true; 
-         o.perPixelTargetFind = true; });  
+      else{
 
-      }
-  
+        let scene = localStorage.getItem(currentObjIndex.toString());
+        let canvas_data = JSON.parse(scene);
+        canvas.loadFromJSON(canvas_data, function() {
+           canvas.renderAll();
+        });
+
+        //Make each object nonresizable on canvas
+        canvas.forEachObject(function (o) { // make not selectable all the objects.
+           o.hasControls = false;
+           o.lockMovementX = true;
+           o.lockMovementY = true;
+           o.lockScalingX = true;
+           o.lockScalingY = true;
+           o.lockUniScaling = true; 
+           o.perPixelTargetFind = true; });  
+
+
+        }
+      
+      
+
+  }
 
 }
