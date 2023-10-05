@@ -8,7 +8,6 @@
     <title>Scene Sketch Data Collector</title>
     <link rel="stylesheet" href="style.css" />
   </head>
-
   <body>
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap"
@@ -22,28 +21,26 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-storage.js"></script>
 
-    <div class="row">
+    <div class="row" style="display: flex;
+    align-items: center;
+    justify-content: center; ">
 
-      <div class="column-left"></div>
+      
 
       <div class="column-middle">
         <h1
-          class="heading" style="font-size: 20pt;"
+          class="heading" style="font-size: 20pt; text-align: center;"
         >
           Welcome to the Scene Sketch Dataset Collection Application
         </h1>
-        <h2
-          class="subheading" style="font-size: 16pt;"
-        >
-          This is an example data collection application built for researchers
-          who need a sketch scene data collection interface.
-        </h2>
+
+        <br>
         <h1
           class="heading" style="font-size: 16pt;"
         >
           Instructions:
         </h1>
-        <ul style="font-size: 14pt; font-family: Arial;">
+        <ul style="font-size: 14pt; justify-content: center;">
           <li>You will be given with a scene description and a drawing canvas on the next page. </li>
           <li>You are asked to draw a scene by referring to the description.</li>
           <li>In the UI, you should first click to SELECT STROKE button and then select the stroke and click DELETE button to remove the selected stroke.</li>
@@ -54,10 +51,7 @@
         </ul>
 
         <div id="element-container" style="margin-bottom: 20px;">
-          <div style="justify-content: left; display: flex; font-size: 14pt;">
-             <label for="email" style="display: block; text-align: center; margin-right: 10px; align-self: auto;" ><strong>E-mail address: </strong></label>
-             <input type="email" name="email" id="email" style="width: auto; height: 30px;" placeholder="Write your email" />
-          </div>
+          
         </div>
 
         <div>
@@ -67,15 +61,14 @@
             <span class="checkbox-label">I give permission for my drawings to be used by a scientific research project conducted by M.Sc. student Aleyna Kutuk.</span>
           </label>
         </div>
-
-        <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
+<br>
+        <div style="justify-content: center; display: flex; margin-left: auto; margin-right: 0;">
           <button href="#" type="button" class = "btn" id="submitBtn" 
                style="width: 150px; height: 30px; font-size: 15px;">START</button>
          </div>
 
       </div>
 
-      <div class="column-right"></div>
 
     </div>
 
@@ -84,11 +77,8 @@
       document
         .getElementById("submitBtn")
         .addEventListener("click", function () {
-          
-          email = email.value;
+        
           agreement = agreement.checked ? true : false;
-
-          localStorage.setItem("email", email);
           localStorage.setItem("agreement", agreement);
 
           window.location.href = "./check_drawing.html";

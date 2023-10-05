@@ -26,6 +26,76 @@ var canvas = this.__canvas = new fabric.Canvas('canvas', {
 
 });
 
+
+
+
+
+function CustomAlert() {
+    this.alert = function (message, title) {
+      // Clear any existing pop-up elements
+      clearExistingDialog();
+  
+      let dialogoverlay = document.createElement('div');
+      dialogoverlay.id = 'dialogoverlay';
+      document.body.appendChild(dialogoverlay);
+  
+      let dialogbox = document.createElement('div');
+      dialogbox.id = 'dialogbox';
+      dialogbox.className = 'slit-in-vertical';
+      document.body.appendChild(dialogbox);
+  
+      let dialogboxhead = document.createElement('div');
+      dialogboxhead.id = 'dialogboxhead';
+      dialogbox.appendChild(dialogboxhead);
+  
+      let dialogboxbody = document.createElement('div');
+      dialogboxbody.id = 'dialogboxbody';
+      dialogbox.appendChild(dialogboxbody);
+  
+      let dialogboxfoot = document.createElement('div');
+      dialogboxfoot.id = 'dialogboxfoot';
+      dialogbox.appendChild(dialogboxfoot);
+  
+      let winH = window.innerHeight;
+      dialogoverlay.style.height = winH + "px";
+  
+      dialogbox.style.top = "100px";
+  
+      dialogoverlay.style.display = "block";
+      dialogbox.style.display = "block";
+  
+      dialogboxhead.style.display = 'block';
+  
+      if (typeof title === 'undefined') {
+        dialogboxhead.style.display = 'none';
+      } else {
+        dialogboxhead.innerHTML = '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> ' + title;
+      }
+      dialogboxbody.innerHTML = message;
+      dialogboxfoot.innerHTML = '<button class="pure-material-button-contained active" onclick="customAlert.ok()">OK</button>';
+    }
+  
+    this.ok = function () {
+      clearExistingDialog();
+    }
+  
+    function clearExistingDialog() {
+      let dialogoverlay = document.getElementById('dialogoverlay');
+      let dialogbox = document.getElementById('dialogbox');
+      if (dialogoverlay) {
+        dialogoverlay.parentNode.removeChild(dialogoverlay);
+      }
+      if (dialogbox) {
+        dialogbox.parentNode.removeChild(dialogbox);
+      }
+    }
+  }
+  
+  let customAlert = new CustomAlert();
+  
+  
+  
+
 var ctx = canvas.getContext("2d", { willReadFrequently: true });
 let brush = canvas.freeDrawingBrush;
 
@@ -77,7 +147,7 @@ drawingModeEl.onclick = function () {
 
     if (canvas.isDrawingMode) {
 
-        drawingModeEl.innerHTML = '<img src= "lasso.png">';
+        drawingModeEl.innerHTML = '<img src= "eraser.png">';
 
     }
     else {
@@ -98,6 +168,20 @@ drawingModeEl.onclick = function () {
     }
 };
 
+canvas.on('mouse:down', function (options) {
+    mDown = true;
+    if (!canvas.isDrawingMode) {
+    deleteObjects();
+    }
+});
+canvas.on('mouse:up', function (options) {
+    mDown = false;
+    if (!canvas.isDrawingMode) {
+        deleteObjects();
+        }
+});
+
+/*
 // Mouse move and coordinates when it is down(drawing)
 canvas.on('mouse:down', function (options) {
     mDown = true;
@@ -121,7 +205,7 @@ canvas.on('mouse:up', function (options) {
         });
     }
 });
-
+*/
 function getPointerHandler(evt) {
     var point = null;
     if (mDown & canvas.isDrawingMode) {
@@ -273,14 +357,6 @@ function handleCancel(evt) {
 // this function is called from HTML file it trigers when the button is cliked. 
 function deleteObjects() {
 
-    if (canvas.isDrawingMode) {
-        canvas.isDrawingMode = !canvas.isDrawingMode;
-        drawingModeEl.innerHTML = '<img src= "pencil.png">';
-        alert("Please select a stroke and click to delete button.");
-    } else if (canvas.getActiveObjects().length == 0) {
-        alert("Please select a stroke and click to delete button.");
-    }
-
     //Make each object nonresizable on canvas
     canvas.forEachObject(function (o) { // make not selectable all the objects other than image we provide.
         o.hasControls = false;
@@ -301,6 +377,7 @@ function deleteObjects() {
         canvas.remove(activeObjects[i]);
 
     }
+    
 }
 
 
@@ -319,7 +396,8 @@ function getDrawing() {
         return active_strokes;
     }
     else {
-        window.alert("Please draw something.");
+        
+        customAlert.alert("Please draw something.");
         return "small_strokes";
     }
 }
@@ -381,7 +459,6 @@ function clearCanvas() {
 
     }
 }
-
 
 const TIME_LIMIT_PER_WORD = 180; // in seconds
 const TOTAL_GAME_TIME = TIME_LIMIT_PER_WORD * sceneDescriptions.length;

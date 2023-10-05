@@ -22,9 +22,11 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-storage.js"></script>
 
-    <div class="row">
+    <div class="row" style="display: flex;
+    align-items: center;
+    justify-content: center;">
 
-      <div class="column-left"></div>
+      
       
       <div class="column-middle">
         <h1
@@ -44,10 +46,10 @@
         <div>
             <label style="font-size: 14pt;">1) Labelled object strokes become RED.</label>
             <br>
-            <label for="yes1">
+            <label class= "bln" for="yes1">
             <input type="radio" name="question1" id="yes1" value="Yes">True
           </label>
-          <label for="no1">
+          <label class= "bln" for="no1">
             <input type="radio" name="question1" id="no1" value="No">False
           </label>
         </div>
@@ -57,10 +59,10 @@
         <div>
             <label style="font-size: 14pt;">2) You have to label every stroke in the scene.</label>
             <br>
-          <label for="yes2">
+          <label class= "bln" for="yes2">
             <input type="radio" name="question2" id="yes2" value="Yes">True
           </label>
-          <label for="no2">
+          <label class= "bln" for="no2">
             <input type="radio" name="question2" id="no2" value="No">False
           </label>
         </div>
@@ -70,10 +72,10 @@
         <div>
             <label style="font-size: 14pt;">3) You should start labeling the object you draw first.</label>
             <br>
-          <label for="yes3">
+          <label class= "bln" for="yes3">
             <input type="radio" name="question3" id="yes3" value="Yes">True
           </label>
-          <label for="no3">
+          <label class= "bln" for="no3">
             <input type="radio" name="question3" id="no3" value="No">False
           </label>
         </div>
@@ -83,22 +85,21 @@
         <div>
             <label style="font-size: 14pt;">4) You should label each stroke of an object separately.</label>
             <br>
-          <label for="yes4">
+          <label class= "bln" for="yes4">
             <input type="radio" name="question4" id="yes4" value="Yes">True
           </label>
-          <label for="no4">
+          <label class= "bln" for="no4">
             <input type="radio" name="question4" id="no4" value="No">False
           </label>
         </div>
-
-        <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
-          <button href="#" type="button" class = "btn" id="submitBtn" 
+<br>
+        <div style="justify-content: center; display: flex; margin-left: auto; margin-right: 0;">
+          <button  class = "btn" id="submitBtn" 
                style="width: 150px; height: 30px; font-size: 15px;">START</button>
          </div>
 
       </div>
 
-      <div class="column-right"></div>
     </div>
 
     <script>

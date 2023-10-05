@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Data Collection Web Application" />
+    <meta name="author" content="Aleyna Kutuk" />
+    <title>Scene Sketch Data Collector</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+  
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-storage.js"></script>
+  </body>
+
+<div id="element-container" style="justify-content: center;">
+  
+  <div style="text-align: center;  font-size: 14pt;justify-content: center; margin-top: 30px;">
+    <h1> LAST STEP!</h1>
+    <div class = "desc" style="display: block;"> We need your e-mail adress to save your drawings to our database.</div>   
+    <br>
+    <br>
+    <label for="email" style="display: block; text-align: center; margin-right: 10px; align-self: auto; ;" ><strong>E-mail address: </strong></label>
+       <input type="email" name="email" id="email" style="width: auto; height: 30px; font-family: 'QuickDraw'; border: 2px solid #000; margin-top: 5px;" placeholder="Write your email" />
+    </div>
+    <br>
+    <div style="justify-content: center; display: flex; align-items: center;">
+        <button href="#" type="button" class = "btn" id="submitBtn" 
+             style="width: 150px; height: 30px; font-size: 15px; justify-content: center;">FINISH</button>
+       </div>
+</div>
+
+<script>
+
+    document
+      .getElementById("submitBtn")
+      .addEventListener("click", function () {
+        
+        email = email.value;
+
+        localStorage.setItem("email", email);
+
+        window.location.href = "./end.html";
+      });
+    
+  </script>

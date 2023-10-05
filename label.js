@@ -45,6 +45,71 @@ let sceneDescriptions = JSON.parse(localStorage.getItem("scene_descriptions"));
 let scene = localStorage.getItem(currentObjIndex.toString());
 let canvas_data = JSON.parse(scene);
 
+function CustomAlert() {
+  this.alert = function (message, title) {
+    // Clear any existing pop-up elements
+    clearExistingDialog();
+
+    let dialogoverlay = document.createElement('div');
+    dialogoverlay.id = 'dialogoverlay';
+    document.body.appendChild(dialogoverlay);
+
+    let dialogbox = document.createElement('div');
+    dialogbox.id = 'dialogbox';
+    dialogbox.className = 'slit-in-vertical';
+    document.body.appendChild(dialogbox);
+
+    let dialogboxhead = document.createElement('div');
+    dialogboxhead.id = 'dialogboxhead';
+    dialogbox.appendChild(dialogboxhead);
+
+    let dialogboxbody = document.createElement('div');
+    dialogboxbody.id = 'dialogboxbody';
+    dialogbox.appendChild(dialogboxbody);
+
+    let dialogboxfoot = document.createElement('div');
+    dialogboxfoot.id = 'dialogboxfoot';
+    dialogbox.appendChild(dialogboxfoot);
+
+    let winH = window.innerHeight;
+    dialogoverlay.style.height = winH + "px";
+
+    dialogbox.style.top = "100px";
+
+    dialogoverlay.style.display = "block";
+    dialogbox.style.display = "block";
+
+    dialogboxhead.style.display = 'block';
+
+    if (typeof title === 'undefined') {
+      dialogboxhead.style.display = 'none';
+    } else {
+      dialogboxhead.innerHTML = '<i class="fa fa-exclamation-circle" aria-hidden="true"></i> ' + title;
+    }
+    dialogboxbody.innerHTML = message;
+    dialogboxfoot.innerHTML = '<button class="pure-material-button-contained active" onclick="customAlert.ok()">OK</button>';
+  }
+
+  this.ok = function () {
+    clearExistingDialog();
+  }
+
+  function clearExistingDialog() {
+    let dialogoverlay = document.getElementById('dialogoverlay');
+    let dialogbox = document.getElementById('dialogbox');
+    if (dialogoverlay) {
+      dialogoverlay.parentNode.removeChild(dialogoverlay);
+    }
+    if (dialogbox) {
+      dialogbox.parentNode.removeChild(dialogbox);
+    }
+  }
+}
+
+let customAlert = new CustomAlert();
+
+
+
 function getRandomArbitrary(min, max) {
   return Math.random() * (max - min) + min;
 }
@@ -203,7 +268,7 @@ function getSelectedStrokes(stroke_color) {
       return active_strokes;
   }
   else {
-      window.alert("Please draw something.");
+      customAlert.alert("Please draw something.");
       return "small_strokes";
   }
 }
@@ -232,19 +297,19 @@ function nextSketch(){
          labelled += 1;
       }
   }
-  console.log("labeld", labelled);
   if (labelled != objs.length){
-      window.alert("Please label every object that appear in the given scene.");
+      customAlert.alert("Please label every object that appear in the given scene.");
   }
   else{
 
       let currentScene = sceneDescriptions[currentSceneIndex];
+    // todo: 
       let submit_content = { "user_email": email, "agreement": agreement, "scene_info": user_data, "scene_description": currentScene};
       user_data = [];
   
       usersRefInDatabase.push(submit_content, (error) => {
        if (error) {
-         window.alert("Error while pushing data to the firebase.");
+        customAlert.alert("Error while pushing data to the firebase.");
        } else {
          console.log("Data sent successfully!");
        }
@@ -255,7 +320,7 @@ function nextSketch(){
       currentSceneIndex++;
 
       if (currentObjIndex > numScenes) {
-        window.location.href = "./end.html";
+        window.location.href = "./get_mail.html";
       }
       else{
 
