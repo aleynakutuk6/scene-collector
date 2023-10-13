@@ -44,7 +44,7 @@
         <br>
 
         <div>
-            <label style="font-size: 14pt;">1) Labelled object strokes become RED.</label>
+            <label style="font-size: 14pt;">1) Once you have labelled an object, it will change color.</label>
             <br>
             <label class= "bln" for="yes1">
             <input type="radio" name="question1" id="yes1" value="Yes">True
@@ -57,7 +57,9 @@
         <br>
 
         <div>
-            <label style="font-size: 14pt;">2) You have to label every stroke in the scene.</label>
+            <label style="font-size: 14pt;">2) It is necessary to provide a label for each object separately. <br>
+              (you cannot label all tree/book/cloud objects at once.)
+            </label>
             <br>
           <label class= "bln" for="yes2">
             <input type="radio" name="question2" id="yes2" value="Yes">True
@@ -70,7 +72,7 @@
         <br>
 
         <div>
-            <label style="font-size: 14pt;">3) You should start labeling the object you draw first.</label>
+            <label style="font-size: 14pt;">3) You must start the labeling process with the object you have drawn first.</label>
             <br>
           <label class= "bln" for="yes3">
             <input type="radio" name="question3" id="yes3" value="Yes">True
@@ -83,7 +85,7 @@
         <br>
 
         <div>
-            <label style="font-size: 14pt;">4) You should label each stroke of an object separately.</label>
+            <label style="font-size: 14pt;">4) You may leave an object without labeling if you cannot find its category on the given list.</label>
             <br>
           <label class= "bln" for="yes4">
             <input type="radio" name="question4" id="yes4" value="Yes">True
@@ -108,12 +110,12 @@
         .getElementById("submitBtn")
         .addEventListener("click", function () {
           
-          no1 = no1.checked;
+          yes1 = yes1.checked;
           yes2 = yes2.checked;
           no3 = no3.checked;
           no4 = no4.checked;
 
-          if (no1 && yes2 && no3 && no4){
+          if (yes1 && yes2 && no3 && no4){
             console.log("passed");
             window.location.href = "./label.html";
           }

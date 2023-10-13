@@ -1,11 +1,12 @@
+
 const firebaseConfig = {
-    apiKey: "AIzaSyCAZOblzgyVbrGCRbGO_mskKSQAV1-PUhs",
-    authDomain: "scene-dataset.firebaseapp.com",
-    databaseURL: "https://scene-dataset-default-rtdb.firebaseio.com",
-    projectId: "scene-dataset",
-    storageBucket: "scene-dataset.appspot.com",
-    messagingSenderId: "613884392238",
-    appId: "1:613884392238:web:60996e315f709dbc0e80bf"
+  apiKey: "AIzaSyAqiFPYSpf0LbOCOqgtAbiYo34hPa7MzPg",
+  authDomain: "scenedata-725a7.firebaseapp.com",
+  projectId: "scenedata-725a7",
+  storageBucket: "scenedata-725a7.appspot.com",
+  messagingSenderId: "586766327573",
+  appId: "1:586766327573:web:452989856b9fd8356bd31c",
+  measurementId: "G-5K181C85RW"
 };
 
 // Initialize Firebase
@@ -13,10 +14,12 @@ firebase.initializeApp(firebaseConfig);
 
 // get firebase database
 let database = firebase.database();
-let usersRefInDatabase = database.ref("sceneData/");
+let usersRefInDatabase = database.ref("sceneData");
 
 let email = localStorage.getItem("email");
 let agreement = localStorage.getItem("agreement");
+
+// DATABASE BURAYA BAK
 
 var canvas = this.__canvas = new fabric.Canvas('canvas', {isDrawingMode: false });
 var mouse = false;
@@ -273,7 +276,7 @@ function getSelectedStrokes(stroke_color) {
   }
 }
 
-function saveCategory(){
+/**function saveCategory(){
 
   let categoryname = $('categoryname');
   let active_strokes = getSelectedStrokes(color_palette[categoryname.value]);
@@ -285,7 +288,30 @@ function saveCategory(){
   
   user_data.push(new_data);
 
+} */
+function saveCategory() {
+  let categoryname = $('categoryname');
+  let active_strokes = getSelectedStrokes(color_palette[categoryname.value]);
+
+  // Remove any previous labels for the same strokes
+  user_data = user_data.filter(function (data) {
+    return !active_strokes.some(function (stroke) {
+      return data.drawing.some(function (existingStroke) {
+        // Compare strokes by some unique property, for example, vectorRepresentation
+        return existingStroke.vectorRepresentation === stroke.vectorRepresentation;
+      });
+    });
+  });
+
+  // Add the new label to user_data
+  const new_data = {
+    "labels": categoryname.value,
+    "drawing": active_strokes
+  };
+
+  user_data.push(new_data);
 }
+
   
 function nextSketch(){
   
@@ -320,7 +346,7 @@ function nextSketch(){
       currentSceneIndex++;
 
       if (currentObjIndex > numScenes) {
-        window.location.href = "./get_mail.html";
+        window.location.href = "./end.html";
       }
       else{
 

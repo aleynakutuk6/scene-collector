@@ -11,8 +11,8 @@
 }]
 
 const sceneDescriptions = [
-    "In a living room, a person sits comfortably on a chair, while a table nearby holds a collection of items. A cute teddy bear rests on the bed, surrounded by a couple of colorful pillows.",
-    "A person wearing a shirt, tie and skirt and is standing and holding a bag in his hand. There is a table and bench on the background. There are a lot of buildings and they have many windows and door. Sun is shining and trees are huge."
+    "In a living room, you can see a door, and there is a clock on the wall. One person is standing up.",
+    "On a sunny day in a forest, people are playing football, and you can see the goals."
 ];
 
 localStorage.setItem("scene_descriptions", JSON.stringify(sceneDescriptions));
@@ -25,10 +25,6 @@ var canvas = this.__canvas = new fabric.Canvas('canvas', {
     isDrawingMode: true,
 
 });
-
-
-
-
 
 function CustomAlert() {
     this.alert = function (message, title) {
