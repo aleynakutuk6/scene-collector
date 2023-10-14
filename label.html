@@ -439,10 +439,18 @@
         obj_classes
         )
 
+        document.addEventListener("keydown", function(event) {
+         if (event.key == "ArrowLeft"){
+            moveSceneBackward();
+         } else if (event.key == "ArrowRight"){
+            moveSceneForward();
+         }
+      });
+
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
-    <script src="label.js"></script>
+    <script src="label_keyboard_version.js"></script>
 
   </body>
 </html>

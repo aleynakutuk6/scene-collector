@@ -15,16 +15,73 @@ const sceneDescriptions = [
     "On a sunny day in a forest, people are playing football, and you can see the goals."
 ];
 
+//Element retrieval
+let $ = function (id) { return document.getElementById(id) };
+let drawingModeEl = $('modeButton');
+
 localStorage.setItem("scene_descriptions", JSON.stringify(sceneDescriptions));
-const objectNameElement = document.getElementById("objectName");
+const objectNameElement = $("objectName");
 let currentObjectIndex = 0;
 let currentObjectClass = sceneDescriptions[currentObjectIndex];
 objectNameElement.textContent = currentObjectClass;
+
+let customAlert = new CustomAlert();
 
 var canvas = this.__canvas = new fabric.Canvas('canvas', {
     isDrawingMode: true,
 
 });
+
+var ctx = canvas.getContext("2d", { willReadFrequently: true });
+let brush = canvas.freeDrawingBrush;
+var shadow = new fabric.Shadow({ color: "red", blur: 8});
+let canvasDiv = $("canvas-wrapper");
+canvas.setWidth(canvasDiv.offsetWidth);
+canvas.setHeight(canvasDiv.offsetHeight);
+
+// Set brush features
+brush.color = rgbToHex(0, 0, 0);
+brush.width = 4;
+
+// Set the timer
+const TIME_LIMIT_PER_WORD = 120; // in seconds
+const TOTAL_GAME_TIME = TIME_LIMIT_PER_WORD * sceneDescriptions.length;
+let timeLeft = TIME_LIMIT_PER_WORD // in seconds
+let startDate, currDate, endDate;
+let timerID;
+
+let elapsedMilliseconds=0;
+startDate = Date.now();
+timer();
+
+//disable user to move strokes on canvas
+fabric.Group.prototype.hasControls = false;
+fabric.Group.prototype.lockMovementX = true;
+fabric.Group.prototype.lockMovementY = true;
+fabric.Group.prototype.lockScalingX = true;
+fabric.Group.prototype.lockScalingY = true;
+fabric.Group.prototype.hasBorders = false;
+
+canvas.selectionColor = 'rgba(0,255,0,0.3)';
+canvas.selectionBorderColor = 'rgba(230, 126, 34, 1)';
+canvas.selectionLineWidth = 1;
+canvas.selectionShadow = shadow;
+
+var mouse = false;
+let mDown;
+let pDown;
+ctx.lineJoin = "round";
+ctx.lineCap = "round";
+var positionX, positionY;
+
+var drawing = [];
+var stroke = []; //should contain 3 array in it
+var xCords = [];
+var yCords = [];
+let times = [];
+
+window.addEventListener("mousemove", getPointerHandler);
+window.addEventListener("DOMContentLoaded", startup);
 
 function CustomAlert() {
     this.alert = function (message, title) {
@@ -76,8 +133,8 @@ function CustomAlert() {
     }
   
     function clearExistingDialog() {
-      let dialogoverlay = document.getElementById('dialogoverlay');
-      let dialogbox = document.getElementById('dialogbox');
+      let dialogoverlay = $('dialogoverlay');
+      let dialogbox = $('dialogbox');
       if (dialogoverlay) {
         dialogoverlay.parentNode.removeChild(dialogoverlay);
       }
@@ -85,64 +142,24 @@ function CustomAlert() {
         dialogbox.parentNode.removeChild(dialogbox);
       }
     }
-  }
+}
   
-  let customAlert = new CustomAlert();
-  
-  
-  
-
-var ctx = canvas.getContext("2d", { willReadFrequently: true });
-let brush = canvas.freeDrawingBrush;
-
-var shadow = new fabric.Shadow({ color: "red", blur: 8});
+function componentToHex(c) {
+    var hex = c.toString(16);
+    return hex.length == 1 ? "0" + hex : hex;
+}
 
 
-let canvasDiv = document.getElementById("canvas-wrapper");
-canvas.setWidth(canvasDiv.offsetWidth);
-canvas.setHeight(canvasDiv.offsetHeight);
+function rgbToHex(r, g, b) {
+    return "#" + componentToHex(r) + componentToHex(g) + componentToHex(b);
+}
 
-//disable user to move strokes on canvas
-fabric.Group.prototype.hasControls = false;
-fabric.Group.prototype.lockMovementX = true;
-fabric.Group.prototype.lockMovementY = true;
-fabric.Group.prototype.lockScalingX = true;
-fabric.Group.prototype.lockScalingY = true;
-fabric.Group.prototype.hasBorders = false;
-
-// add shadow to active strokes
-
-canvas.selectionColor = 'rgba(0,255,0,0.3)';
-canvas.selectionBorderColor = 'rgba(230, 126, 34, 1)';
-canvas.selectionLineWidth = 1;
-canvas.selectionShadow = shadow;
-
-var mouse = false;
-let mDown;
-let pDown;
-ctx.lineJoin = "round";
-ctx.lineCap = "round";
-var positionX, positionY;
-
-var drawing = [];
-var stroke = []; //should contain 3 array in it
-var xCords = [];
-var yCords = [];
-let times = [];
-
-//Element retrieval
-let $ = function (id) { return document.getElementById(id) };
-let drawingModeEl = $('modeButton');
-
-brush.color = 'black';
-brush.width = 4;
 
 drawingModeEl.onclick = function () {
     //canvas.getActiveObjects()[canvas.getActiveObjects]
     canvas.isDrawingMode = !canvas.isDrawingMode;
 
     if (canvas.isDrawingMode) {
-
         drawingModeEl.innerHTML = '<img src= "eraser.png">';
 
     }
@@ -156,52 +173,26 @@ drawingModeEl.onclick = function () {
             o.lockScalingY = true;
             o.lockUniScaling = true;
             o.perPixelTargetFind = true;
-
         });
 
         drawingModeEl.innerHTML ='<img src= "pencil.png">';
-
     }
 };
 
 canvas.on('mouse:down', function (options) {
     mDown = true;
     if (!canvas.isDrawingMode) {
-    deleteObjects();
+       deleteObjects();
     }
 });
+
 canvas.on('mouse:up', function (options) {
     mDown = false;
     if (!canvas.isDrawingMode) {
         deleteObjects();
-        }
+    }
 });
 
-/*
-// Mouse move and coordinates when it is down(drawing)
-canvas.on('mouse:down', function (options) {
-    mDown = true;
-    canvas.getObjects().forEach(function (o) {
-        o.shadow = null;
-    });
-    if (canvas.getActiveObjects()) {
-        canvas.getActiveObjects().forEach(function (o) {
-            o.shadow = shadow;
-        });
-    }
-});
-canvas.on('mouse:up', function (options) {
-    mDown = false;
-    canvas.getObjects().forEach(function (o) {
-        o.shadow = null;
-    });
-    if (canvas.getActiveObjects()) {
-        canvas.getActiveObjects().forEach(function (o) {
-            o.shadow = shadow;
-        });
-    }
-});
-*/
 function getPointerHandler(evt) {
     var point = null;
     if (mDown & canvas.isDrawingMode) {
@@ -217,7 +208,6 @@ function getPointerHandler(evt) {
         stroke[1] = yCords;
         stroke[2] = times;
 
-
     }
     if (!mDown & canvas.isDrawingMode & stroke.length != 0) { // if not drawing and in drawing mode (at least this is what I wait :)
 
@@ -230,30 +220,21 @@ function getPointerHandler(evt) {
         xCords = [];
         yCords = [];
         times = [];
-
     }
-
-    // point = canvas.getPointer(); works with IE11, Chrome, but not Firefox
 };
-window.addEventListener("mousemove", getPointerHandler);
 
 function hideCanvas() {
     document.getElementsByClassName("column-middle").style.display = "none";
-    //document.getElementById("button-container").style.display = "none";
-
 }
-
 
 function startup() {
 
-    const el = document.getElementById('canvas-wrapper');
+    const el = $('canvas-wrapper');
     el.addEventListener('touchstart', handleStart);
     el.addEventListener('touchmove', handleMove);
     el.addEventListener('touchend', handleEnd);
     el.addEventListener('touchcancel', handleCancel);
 }
-window.addEventListener("DOMContentLoaded", startup);
-
 
 
 function handleStart(evt) {
@@ -306,11 +287,7 @@ function handleMove(evt) {
 
 function handleEnd(evt) {
     evt.preventDefault();
-
-    // console.log("touchend");
     pDown = false;
-
-    // console.log(canvas.renderAll());
 
     canvas.getObjects().forEach(function (o) {
         o.shadow = null;
@@ -346,14 +323,12 @@ function handleEnd(evt) {
 
 function handleCancel(evt) {
     evt.preventDefault();
-    // console.log('touchcancel.');
 
 }
 
 // this function is called from HTML file it trigers when the button is cliked. 
 function deleteObjects() {
 
-    //Make each object nonresizable on canvas
     canvas.forEachObject(function (o) { // make not selectable all the objects other than image we provide.
         o.hasControls = false;
         o.lockMovementX = true;
@@ -368,10 +343,8 @@ function deleteObjects() {
     drawingModeEl.innerHTML = '<img src= "pencil.png">';
 
     let activeObjects = canvas.getActiveObjects();
-    // console.log("ACTIVE OBJECT COUNT IS ", canvas.getActiveObjects().length);
     for (let i = 0; i < activeObjects.length; i++) {
         canvas.remove(activeObjects[i]);
-
     }
     
 }
@@ -441,7 +414,6 @@ function nextSketch() {
         clearCanvas();
     }
 
-
 }
 
 function clearCanvas() {
@@ -456,14 +428,6 @@ function clearCanvas() {
     }
 }
 
-const TIME_LIMIT_PER_WORD = 180; // in seconds
-const TOTAL_GAME_TIME = TIME_LIMIT_PER_WORD * sceneDescriptions.length;
-let timeLeft = TIME_LIMIT_PER_WORD // in seconds
-let startDate, currDate, endDate;
-let timerID;
-
-let elapsedMilliseconds=0;
-startDate = Date.now();
 
 function timer() {
 
@@ -476,29 +440,27 @@ function timer() {
 
         if (minutes < 1) {
             if (seconds < 10) {
-                document.getElementById("seconds").innerHTML = "00:" + "0" + seconds;
+                $("seconds").innerHTML = "00:" + "0" + seconds;
             }
             else{
-                document.getElementById("seconds").innerHTML = "00:" + seconds;
+                $("seconds").innerHTML = "00:" + seconds;
             }
         }
         else{
             if (seconds < 10) {
-                document.getElementById("seconds").innerHTML = "0" + minutes + ":0" + seconds;
+                $("seconds").innerHTML = "0" + minutes + ":0" + seconds;
             }
             else{
-                document.getElementById("seconds").innerHTML = "0" + minutes + ":" + seconds;
+                $("seconds").innerHTML = "0" + minutes + ":" + seconds;
             }
         }
         
         if (timeLeft === 0) {
 
-            document.getElementById("seconds").innerHTML = "EXPIRED";
+            $("seconds").innerHTML = "EXPIRED";
             nextSketch();
             timeLeft = TIME_LIMIT_PER_WORD;
         }
    
     }, 1000);
 }
-
-timer();
