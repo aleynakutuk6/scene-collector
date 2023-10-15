@@ -29,8 +29,9 @@ let customAlert = new CustomAlert();
 
 var canvas = this.__canvas = new fabric.Canvas('canvas', {
     isDrawingMode: true,
-
+    freeDrawingCursor: 'url("ic_p.png") 0 30, auto',
 });
+
 
 var ctx = canvas.getContext("2d", { willReadFrequently: true });
 let brush = canvas.freeDrawingBrush;
@@ -158,12 +159,12 @@ function rgbToHex(r, g, b) {
 drawingModeEl.onclick = function () {
     //canvas.getActiveObjects()[canvas.getActiveObjects]
     canvas.isDrawingMode = !canvas.isDrawingMode;
-
     if (canvas.isDrawingMode) {
         drawingModeEl.innerHTML = '<img src= "eraser.png">';
 
     }
     else {
+        canvas.hoverCursor = 'url(ic-e.png) 0 32, auto';
         //Make each object nonresizable on canvas
         canvas.forEachObject(function (o) { // make not selectable all the objects.
             o.hasControls = false;
@@ -178,7 +179,6 @@ drawingModeEl.onclick = function () {
         drawingModeEl.innerHTML ='<img src= "pencil.png">';
     }
 };
-
 canvas.on('mouse:down', function (options) {
     mDown = true;
     if (!canvas.isDrawingMode) {
@@ -339,14 +339,14 @@ function deleteObjects() {
         o.perPixelTargetFind = true;
 
     });
-
+    
     drawingModeEl.innerHTML = '<img src= "pencil.png">';
 
     let activeObjects = canvas.getActiveObjects();
     for (let i = 0; i < activeObjects.length; i++) {
         canvas.remove(activeObjects[i]);
     }
-    
+
 }
 
 

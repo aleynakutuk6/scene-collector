@@ -15,36 +15,22 @@
       rel="stylesheet"
     />
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-storage.js"></script>
 
-    <div class="row" style="display: flex;
-    align-items: center;
-    justify-content: center;">
-
-      
-      
+    <div class="row" style="display: flex; align-items: center; justify-content: center;">  
       <div class="column-middle">
-        <h1
-          class="heading" style="font-size: 20pt;"
-        >
-          Did you understand the instructions?
-        </h1>
-        <h2
-          class="subheading" style="font-size: 16pt;"
-        >
-          If not, you will be redirected to the instructions again!
-        </h2>
+        <h1 class="heading" style="font-size: 20pt;">Did you understand the instructions? </h1>
+        <h2 class="subheading" style="font-size: 16pt; color: rgb(226, 43, 43);"> If not, you will be redirected to the instructions again! </h2>
 
         <br>
         <br>
 
         <div>
-            <label style="font-size: 14pt;">1) Once you have labelled an object, it will change color.</label>
+            <label style="font-size: 14pt;">1) Once you have labelled an object, it will be black.</label>
             <br>
             <label class= "bln" for="yes1">
             <input type="radio" name="question1" id="yes1" value="Yes">True
@@ -72,7 +58,7 @@
         <br>
 
         <div>
-            <label style="font-size: 14pt;">3) You must start the labeling process with the object you have drawn first.</label>
+            <label style="font-size: 14pt;">3) To select a stroke you can use the left arrow key.</label>
             <br>
           <label class= "bln" for="yes3">
             <input type="radio" name="question3" id="yes3" value="Yes">True
@@ -116,7 +102,6 @@
           no4 = no4.checked;
 
           if (yes1 && yes2 && no3 && no4){
-            console.log("passed");
             window.location.href = "./label.html";
           }
           else{

@@ -41,7 +41,8 @@ let sceneDescriptions = JSON.parse(localStorage.getItem("scene_descriptions"));
 let customAlert = new CustomAlert();
 let currentObjIndex = 1;
 let active_strokes = [];
-let stroke_num = 0;
+let labelled_obj_indices = [];
+let stroke_num = -1;
 getSceneData(currentObjIndex);
 
 window.addEventListener("DOMContentLoaded", startup);
@@ -228,9 +229,18 @@ function handleCancel(evt) {
 }      
 
 function moveSceneBackward() {
-  if (stroke_num < 0){
-    customAlert.alert("You should go forward!!");
-    stroke_num += 1;
+  const includesIdx = labelled_obj_indices.includes(stroke_num);
+  if (stroke_num < -1){
+    customAlert.alert("You should click to RIGHT ARROW!!");
+    stroke_num = -1;
+  }
+  else if(stroke_num == -1)
+  {
+    customAlert.alert("You should click to RIGHT ARROW!!");
+  }
+  else if(includesIdx){
+    customAlert.alert("You cannot label an object twice!!");
+    stroke_num -= 1;
   }
   else{
     changeStrokeColor("grey");
@@ -240,14 +250,14 @@ function moveSceneBackward() {
 
 
 function moveSceneForward() {
+    stroke_num += 1;
     let allObjects = canvas.getObjects();
     if (stroke_num >= allObjects.length){
-      customAlert.alert("You should go backward!!");
+      customAlert.alert("You should click to LEFT ARROW!!");
       stroke_num -= 1;
     }
     else{
       changeStrokeColor("black");
-      stroke_num += 1;
     }
 }
 
@@ -255,7 +265,7 @@ function changeStrokeColor(stroke_color) {
   let allObjects = canvas.getObjects();
   
   if (allObjects.length > 0) {
-    console.log(stroke_num);
+
     if (stroke_color == "grey"){
       let stroke_color = rgbToHex(211, 211, 211);
       allObjects[stroke_num].set("stroke", stroke_color);
@@ -264,38 +274,64 @@ function changeStrokeColor(stroke_color) {
       let stroke_color = rgbToHex(0, 0, 0);
       allObjects[stroke_num].set("stroke", stroke_color);
     }
-     
-      var vec = allObjects[stroke_num].get('vectorRepresentation');
-      active_strokes.push(vec);
-      canvas.renderAll();
+    canvas.renderAll();
   }
+}
+
+function findLabelledObject(){
+    let objs = canvas.getObjects();
+    for (let i = 0; i < objs.length; i++) {
+      let rgb_color = hex2rgb(objs[i].get("stroke"));
+      if (rgb_color[0] == 0 && rgb_color[1] == 0 && rgb_color[2] == 0){
+         
+        const includesIdx = labelled_obj_indices.includes(i);
+
+         if(includesIdx == false){
+            var vec = objs[i].get('vectorRepresentation');
+            active_strokes.push(vec);
+            labelled_obj_indices.push(i);
+         }
+      }   
+    }
+  
 }
 
 function saveCategory(){
 
   let categoryname = $('categoryname');
+  findLabelledObject();
 
   const new_data = {
       "labels": categoryname.value,
       "drawing": active_strokes
   };
-  
+
+  categoryname.value = ""
   user_data.push(new_data);
   active_strokes = [];
 
 } 
+
+function saveOther() {
+
+  let categoryname = $("labelname");
+  findLabelledObject();
+
+  const new_data = {
+    "labels": categoryname.value,
+    "drawing": active_strokes
+  };
+
+  categoryname.value = ""
+  user_data.push(new_data);
+  active_strokes = [];
+}
   
 function nextSketch(){
   
   let objs = canvas.getObjects();
-  let labelled = 0;
-  for (let i = 0; i < objs.length; i++) {
-      let rgb_color = hex2rgb(objs[i].get("stroke"));
-      if (rgb_color[0] == 0 && rgb_color[1] == 0 && rgb_color[2] == 0){
-         labelled += 1;
-      }
-  }
-  if (labelled != objs.length){
+
+  if (labelled_obj_indices.length != objs.length){
       customAlert.alert("Please label every object that appear in the given scene.");
   }
   else{
@@ -320,7 +356,7 @@ function nextSketch(){
         window.location.href = "./end.html";
       }
       else{
-          stroke_num = 0;
+          stroke_num = -1;
           getSceneData(currentObjIndex);
       }
   }

@@ -15,7 +15,6 @@
       rel="stylesheet"
     />
 
-    <!-- The core Firebase JS SDK is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.6/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-analytics.js"></script>
@@ -24,16 +23,8 @@
 
     <div class="row" style="display: flex; align-items: center; justify-content: center;">
       <div class="column-middle">
-        <h1
-          class="heading" style="font-size: 20pt;"
-        >
-          Did you understand the instructions?
-        </h1>
-        <h2
-          class="subheading" style="font-size: 16pt; color: rgb(226, 43, 43);"
-        >
-          If not, you will be redirected to the instructions again!
-        </h2>
+        <h1 class="heading" style="font-size: 20pt;">Did you understand the instructions? </h1>
+        <h2 class="subheading" style="font-size: 16pt; color: rgb(226, 43, 43);"> If not, you will be redirected to the instructions again! </h2>
         
         <br>
         <br>
@@ -106,7 +97,6 @@
           no2 = no2.checked;
 
           if (yes1 && yes4 && yes4 && no2){
-            console.log("passed");
             window.location.href = "./get_mail.html";
           }
           else{

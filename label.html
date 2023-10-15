@@ -34,7 +34,7 @@
 
       </div>
 
-      <div class="column-middle" style="margin-right: 140px;">
+      <div class="column-middle" ">
         <div class="flexcontainer" style="height: 50px; text-align: center; justify-content: center; display: flex; align-items: center; font-size: 20px;">Please label every object in the scene!</div>
         <div id="canvas-wrapper" style="width: device-width; height: 575px; position: relative; user-select: none; background-color: white;" style="display:block">
           <canvas id="canvas"
@@ -50,8 +50,27 @@
         </div>
       </div>
 
-
+      <div class="column-right">
+        <p style="margin-top: 300px;"> If you cannot find an appropriate label, add a new label!</p>
+        <input style= "font-family: 'QuickDraw';   max-width: 100px;
+        margin-bottom: 0px; 
+        background-color: #ffffff;
+        font-size: 12px;
+        position: relative;
+        width: auto;
+        color: rgb(0, 0, 0);
+        text-decoration: none;
+        border-radius: 5px;
+        border: solid 1px #a091ff;
+        text-align: center;
+        padding: 8px 8px 7px;
+        margin: 12px;
+        text-transform: uppercase;
+        font-weight: bold; " type="text" id="labelname" placeholder="NEW LABEL">
+        <button id="labelBtn" class = "btn" style="width: 110px; height: 30px; font-size: 15px; margin-top: 4px; justify-content: center;" onclick="saveOther() ">LABEL</button> 
+      </div>
     </div>
+    
     </script>
     <script>
 
@@ -404,32 +423,30 @@
         ];
 
         function filterDropDown(dropdown, input, dropdown_wrapper, items) {
-        //create dropdown items from list of items
-        for (let i=0; i<items.length; i++) {
-          let dropdown_item = document.createElement('a');
-          dropdown_item.setAttribute('href', '#'+items[i]);
-          dropdown_item.setAttribute('class', 'dropdown-item');
-          dropdown_item.innerHTML = items[i];
-          dropdown_item.addEventListener('click', function () {
-            input.value = dropdown_item.innerHTML;
-          });
-          dropdown.appendChild(dropdown_item);
-        }
+            //create dropdown items from list of items
+            for (let i=0; i<items.length; i++) {
+            let dropdown_item = document.createElement('a');
+            dropdown_item.setAttribute('href', '#'+items[i]);
+            dropdown_item.setAttribute('class', 'dropdown-item');
+            dropdown_item.innerHTML = items[i];
+            dropdown_item.addEventListener('click', function () {
+              input.value = dropdown_item.innerHTML;
+            });
+            dropdown.appendChild(dropdown_item);
+          }
 
-        input.addEventListener('input', function () {
-          let dropdown_items = dropdown.querySelectorAll('.dropdown-item');
+          input.addEventListener('input', function () {
+            let dropdown_items = dropdown.querySelectorAll('.dropdown-item');
 
-          if (!dropdown_items)
-              return false;
-          for (let i=0; i<dropdown_items.length; i++) {
+            if (!dropdown_items){ return false; } 
+
+            for (let i=0; i<dropdown_items.length; i++) {
               if (dropdown_items[i].innerHTML.toUpperCase().includes(input.value.toUpperCase()))
                   dropdown_items[i].style.display = 'block';
               else
                   dropdown_items[i].style.display = 'none';
-          }
-        });
-
-
+            }
+          });
         }
 
         filterDropDown(
@@ -445,8 +462,7 @@
          } else if (event.key == "ArrowRight"){
             moveSceneForward();
          }
-      });
-
+        });
 
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>
