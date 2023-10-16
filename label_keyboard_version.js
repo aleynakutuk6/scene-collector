@@ -293,23 +293,37 @@ function findLabelledObject(){
          }
       }   
     }
-  
+}
+
+function checkEmptyDrawing(){
+
+  if (active_strokes.length <= 0) return false;
+  else return true;
+
 }
 
 function saveCategory(){
 
   let categoryname = $('categoryname');
   findLabelledObject();
+  
+  const emptyFlag = checkEmptyDrawing();
 
-  const new_data = {
+  if (emptyFlag){
+    const new_data = {
       "labels": categoryname.value,
       "drawing": active_strokes
-  };
+     };
 
-  categoryname.value = ""
-  user_data.push(new_data);
-  active_strokes = [];
+     categoryname.value = ""
+     user_data.push(new_data);
+     active_strokes = [];
 
+  }
+  else{
+    customAlert.alert("You cannot label an object twice!!");
+  }
+  
 } 
 
 function saveOther() {
@@ -317,14 +331,22 @@ function saveOther() {
   let categoryname = $("labelname");
   findLabelledObject();
 
-  const new_data = {
-    "labels": categoryname.value,
-    "drawing": active_strokes
-  };
+  const emptyFlag = checkEmptyDrawing();
 
-  categoryname.value = ""
-  user_data.push(new_data);
-  active_strokes = [];
+  if (emptyFlag){
+    const new_data = {
+      "labels": categoryname.value,
+      "drawing": active_strokes
+     };
+
+     categoryname.value = ""
+     user_data.push(new_data);
+     active_strokes = [];
+
+  }
+  else{
+    customAlert.alert("You labelled that object already !!");
+  }
 }
   
 function nextSketch(){
@@ -339,6 +361,7 @@ function nextSketch(){
       let currentScene = sceneDescriptions[currentSceneIndex];
       let submit_content = { "user_email": email, "agreement": agreement, "scene_info": user_data, "scene_description": currentScene};
       user_data = [];
+      labelled_obj_indices = [];
   
       usersRefInDatabase.push(submit_content, (error) => {
        if (error) {
