@@ -21,14 +21,14 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-database.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-storage.js"></script>
 
-    <div class="row" style="display: flex; align-items: center; justify-content: center; ">
-
+    <div class="row">
+      <div class="column-left"></div>
       <div class="column-middle">
-        <h1 class="heading" style="font-size: 18pt; text-align: center;"> Welcome to the Scene Sketch Dataset Collection Application</h1>
-        <h2 style="font-size: 14pt; color: rgb(226, 43, 43);">Please carefully read each set of instructions. You'll be given a series of questions that you must answer correctly to continue with the next page. Failure to answer all questions correctly will result in redirection to the information page.</h2>
-        <h1 class="heading" style="font-size: 14pt;">Instructions:</h1>
+        <h1 class="heading"> Welcome to the Scene Sketch Dataset Collection Application</h1>
+        <h2 class="subheading">Please carefully read each set of instructions. You'll be given a series of questions that you must answer correctly to continue with the next page. Failure to answer all questions correctly will result in redirection to the information page.</h2>
+        <h1 class="heading">Instructions</h1>
         
-        <ul style="font-size: 14pt; justify-content: center;">
+        <ul style="font-size: 13pt; justify-content: center; text-align: left;">
           <li>On the upcoming pages, you will receive a scene description and a drawing canvas.</li>
           <br>
           <li>You are asked to draw a scene by referring to the description.</li>
@@ -55,11 +55,12 @@
         </div>
         <br>
 
-        <div style="justify-content: center; display: flex; margin-left: auto; margin-right: 0;">
+        <div id="start-container">
           <button href="#" type="button" class = "btn" id="submitBtn" 
                style="width: 150px; height: 30px; font-size: 15px;">START</button>
          </div>
       </div>
+      <div class = "column-right"></div>
     </div>
 
     <script>

@@ -12,13 +12,14 @@
   </head>
 
   <body>
-    <div class="row" style="display: flex; align-items: center; justify-content: center;">
+    <div class="row">
+      <div class="column-left"></div>
       <div class="column-middle" style="font-family: 'QuickDraw'">
-          <h1 class="heading" style="font-size: 18pt; text-align: center;"> Welcome to the Labeling Part</h1>
-          
-          <h2 style="font-size: 14pt; color: rgb(226, 43, 43);"> Please carefully read each set of instructions. You'll be given a series of questions that you must answer correctly to continue with the next page. Failure to answer all questions correctly will result in redirection to the information page. </h2>
-          <h1 class="heading" style="font-size: 14pt;">Instructions:</h1>
-          <ul style="font-size: 14pt; justify-content: center;">
+          <h1 class="heading"> Welcome to the Labeling Part</h1>
+          <h2 class="subheading">Please carefully read each set of instructions. You'll be given a series of questions that you must answer correctly to continue with the next page. Failure to answer all questions correctly will result in redirection to the information page. </h2>
+          <h1 class="heading">Instructions</h1>
+
+          <ul style="font-size: 13pt; justify-content: center; text-align: left;">
             <li>You are asked to assign a label to each object that appears in the provided scene.</li>
             <br>
             <li>You will find the correct object category from a given list.</li>
@@ -31,16 +32,18 @@
             <br>
             <li>When you find the correct category name, click the SUBMIT button.</li>
             <br>
-            <li>If the correct object category does not appear in the list, you should write the external category name and click to LABEL button.</li>
+            <li>If the correct object category does not appear in the list, you should write the external category name and click to SUBMIT button.</li>
             <br>
             <li>Once you have labelled an object instance, the object will be black.</li>
             <br>
             <li>When the scene becomes all black, you can continue with the next scene.</li>
           </ul>
-          <div class="button-container" style="display: flex; justify-content:center">
-            <button id="submitBtn" class="btn" style="width: 80px; height: 30px; font-size: 15px; font-family: 'QuickDraw'; justify-content: center; align-items: center; display: flex;" onclick="showScene()">Next</button>
+          <div id="start-container">
+            <button href="#" type="button" class = "btn" id="submitBtn" 
+            style="width: 150px; height: 30px; font-size: 15px;" onclick="showScene()">Next</button>
           </div>
       </div>
+      <div class="column-right"></div>
     </div>
 
     <script>

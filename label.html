@@ -21,53 +21,36 @@
  
     <div class="row">
       <div class="column-left">
-        <div style="height: 30px;"></div>
-
-        <div style="justify-content: center; display: block; ">
-          <div id="dropdown_wrapper" style="display: block; justify-content: center;">
-            <input style= "font-family: 'QuickDraw';" type="text" id="categoryname" placeholder="Search...">
-            <div id="dropdown" style="justify-content: center; align-items: center; "></div>
-            <button id="submitBtn" class = "btn" style="width: 110px; height: 30px; font-size: 15px; margin-top: 4px; justify-content: center;" onclick="saveCategory()">Submit</button>
+          <div id="dropdown_wrapper">
+            <input type="text" id="categoryname" placeholder="Search...">
+            <div id="dropdown"></div>
+            <button id="submitBtn" class = "btn" onclick="saveCategory()">Submit</button>
+            <p > Create your new category name!</p>
+            <input type="text" id="labelname" placeholder="NEW CATEGORY">
+            <button id="labelBtn" class = "btn" onclick="saveOther() ">SUBMIT</button> 
           </div>
-        </div>
-
-
       </div>
 
-      <div class="column-middle" ">
-        <div class="flexcontainer" style="height: 50px; text-align: center; justify-content: center; display: flex; align-items: center; font-size: 20px;">Please label every object in the scene!</div>
-        <div id="canvas-wrapper" style="width: device-width; height: 575px; position: relative; user-select: none; background-color: white;" style="display:block">
-          <canvas id="canvas"
-            >Your browser does not support canvas. Please upgrade it!</canvas>
-        </div>
-        
-
+      <div class="column-middle">
+        <div class="flexcontainer">
+          <button class= "btn" onclick="showInstructions()"> Instructions</button>
+          <button id="submitBtn" class = "btn" onclick="nextSketch()">Next</button></div>
+          <div id="canvas-wrapper">
+            <canvas id="canvas"
+              >Your browser does not support canvas. Please upgrade it!</canvas>
+          </div>
         <div id="element-container" style="width: device-width; height: 450px;">
             <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
-            <button href="#" type="button" class="btn" id="conclusionButton"
-                style="width: 110px; height: 30px; font-size: 15px;font-family: 'QuickDraw';" onclick="nextSketch()">Next</button>
+
             </div>
         </div>
       </div>
 
       <div class="column-right">
-        <p style="margin-top: 300px;"> If you cannot find an appropriate label, add a new label!</p>
-        <input style= "font-family: 'QuickDraw';   max-width: 100px;
-        margin-bottom: 0px; 
-        background-color: #ffffff;
-        font-size: 12px;
-        position: relative;
-        width: auto;
-        color: rgb(0, 0, 0);
-        text-decoration: none;
-        border-radius: 5px;
-        border: solid 1px #a091ff;
-        text-align: center;
-        padding: 8px 8px 7px;
-        margin: 12px;
-        text-transform: uppercase;
-        font-weight: bold; " type="text" id="labelname" placeholder="NEW LABEL">
-        <button id="labelBtn" class = "btn" style="width: 110px; height: 30px; font-size: 15px; margin-top: 4px; justify-content: center;" onclick="saveOther() ">LABEL</button> 
+        <p style="margin-top: 300px;">Last labelled object:</p>
+        <div id="output"></div>
+
+
       </div>
     </div>
     

@@ -20,47 +20,28 @@
     <div class="row">
 
       <div class="column-left"></div>
-
-      <div class="column-middle" style="margin-right: 140px;">
-
-        <div class="flexcontainer" style="height: 150px;">
-          <div id="element-container" style="width: device-width px; height: 70px;">
-            <div style="justify-content: right; display: flex; margin-right: 0; ">
-              <button href="#" type="button" class = "btn" id="modeButton" style="width: 70px; height: 70px; font-size: 15px;"><img src="eraser.png" alt="Image"></button>
+      <div class="column-middle">
+        <div class="flexcontainer">
+          <div style="justify-content: right; display: flex; margin-right: 0; ">
+            <button id="modeButton" class="btn"><img src="eraser.png"></button>
+            <h2 id="sceneDescription"></h2>
+            <div id="timer">
+              <div id="seconds"></div>
             </div>
-        </div>
-          <div id="ShowDescription" style="font-size: 18px; display: flex; width: 90%;">
-            <h2 id="objectName" style="font-size: 18px;  display: flex; width: 90%;"></h2>
+            <button id="submitBtn" class = "btn" onclick="nextSketch()">Next</button>
           </div>
-        
-        <div id="timer" style=" height: 40px; color:#a091ff; font-size: 30px; text-align: center; display: flex; background-color: white; margin-top: 30px; border: 3px solid #000000;
-        border-radius: 3px; ;  ">
-          <p id="seconds" style="margin-top: 0px;"></p>
-        </div>
-        <button id="submitBtn" class = "btn" style="width: 70px; height: 70px; font-size: 15px;font-family: 'QuickDraw';" onclick="nextSketch()">Next</button>
-      </div>
-        
-        <div id="canvas-wrapper" style="width: device-width; height: 450px; position: relative; user-select: none; background-color: white;" style="display:block">
+          </div>
+
+        <div id="canvas-wrapper">
           <canvas id="canvas"
             >Your browser does not support canvas. Please upgrade it!</canvas>
         </div>
 
       </div>
+      <div class = "column-right"></div>
     </div>
     <!--https://cdnjs.com/libraries/fabric.js-->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.2.4/fabric.min.js"></script>    
-
-    <script>
-      function showDescription() {
-        var x = document.getElementById("ShowDescription");
-        if (x.style.display === "none") {
-          x.style.display = "block";
-        } else {
-          x.style.display = "none";
-        }
-      }
-
-    </script>
     <script src="drawing.js"></script>
 
   </body>

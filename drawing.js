@@ -20,10 +20,10 @@ let $ = function (id) { return document.getElementById(id) };
 let drawingModeEl = $('modeButton');
 
 localStorage.setItem("scene_descriptions", JSON.stringify(sceneDescriptions));
-const objectNameElement = $("objectName");
+const sceneDescriptionElement = $("sceneDescription");
 let currentObjectIndex = 0;
 let currentObjectClass = sceneDescriptions[currentObjectIndex];
-objectNameElement.textContent = currentObjectClass;
+sceneDescriptionElement.textContent = currentObjectClass;
 
 let customAlert = new CustomAlert();
 
@@ -45,7 +45,7 @@ brush.color = rgbToHex(0, 0, 0);
 brush.width = 4;
 
 // Set the timer
-const TIME_LIMIT_PER_WORD = 120; // in seconds
+const TIME_LIMIT_PER_WORD = 45; // in seconds
 const TOTAL_GAME_TIME = TIME_LIMIT_PER_WORD * sceneDescriptions.length;
 let timeLeft = TIME_LIMIT_PER_WORD // in seconds
 let startDate, currDate, endDate;
@@ -398,7 +398,7 @@ function nextSketch() {
         } 
         else {
             currentObjectClass = sceneDescriptions[currentObjectIndex];
-            objectNameElement.textContent = currentObjectClass;
+            sceneDescriptionElement.textContent = currentObjectClass;
             const customKeys = ['vectorRepresentation'];
             var json = canvas.toJSON(customKeys);
             localStorage.setItem(currentObjectIndex.toString(), JSON.stringify(json));
@@ -426,6 +426,16 @@ function clearCanvas() {
 
 
     }
+}
+
+function showDescription() {
+    var x = document.getElementById("ShowDescription");
+    if (x.style.display === "none") {
+      x.style.display = "block";
+    } else {
+      x.style.display = "none";
+    }
+
 }
 
 
