@@ -17,13 +17,10 @@ var canvas = this.__canvas = new fabric.Canvas('canvas', {isDrawingMode: false }
 var mouse = false;
 var shadow = new fabric.Shadow({ color: "red", blur: 4});
 
-let canvasDiv = document.getElementById("canvas-wrapper");
-canvas.setWidth(canvasDiv.offsetWidth);
-canvas.setHeight(canvasDiv.offsetHeight);
+let canvasDiv = document.getElementById("canvas");
 
 let $ = function (id) { return document.getElementById(id) };
 
-// add shadow to active strokes
 canvas.selectionColor = 'rgba(0,255,0,0.3)';
 canvas.selectionBorderColor = 'rgba(230, 126, 34, 1)';
 canvas.selectionLineWidth = 1;
@@ -37,6 +34,7 @@ let full_data = JSON.parse(localStorage.getItem("full_data"));
 let user_data = [];
 let color_palette = {}; 
 let currentSceneIndex = 0;
+let instructions = JSON.parse(localStorage.getItem("instructions"));
 let sceneDescriptions = JSON.parse(localStorage.getItem("scene_descriptions"));
 let customAlert = new CustomAlert();
 let currentObjIndex = 1;
@@ -127,7 +125,7 @@ function CustomAlert() {
     clearExistingDialog();
   }
 
-  function clearExistingDialog() {
+function clearExistingDialog() {
     let dialogoverlay = $('dialogoverlay');
     let dialogbox = $('dialogbox');
     if (dialogoverlay) {
@@ -172,7 +170,7 @@ for (let i = 0; i < obj_classes.length; i++) {
 
 function startup() {
 
-  const el = $('canvas-wrapper');
+  const el = $('canvas');
   el.addEventListener('touchstart', handleStart);
   el.addEventListener('touchmove', handleMove);
   el.addEventListener('touchend', handleEnd);
@@ -209,7 +207,6 @@ function handleMove(evt) {
   }
 }
 
-
 function handleEnd(evt) {
   evt.preventDefault();
   pDown = false;
@@ -227,6 +224,17 @@ function handleEnd(evt) {
 function handleCancel(evt) {
   evt.preventDefault();
 }      
+
+function showInstructions() {
+  
+  let message = "";
+  for (let i = 0; i < instructions.length; i++) {
+    message += instructions[i] + "\n";
+  }
+  customAlert.alert(message);
+
+}
+
 
 function moveSceneBackward() {
   const includesIdx = labelled_obj_indices.includes(stroke_num);
@@ -288,7 +296,6 @@ function findLabelledObject(){
          if(includesIdx == false){
             var vec = objs[i].get('vectorRepresentation');
             active_strokes.push(vec);
-            console.log("ggj",labelled_obj_indices);
             labelled_obj_indices.push(i);
          }
       }   
@@ -302,8 +309,25 @@ function checkEmptyDrawing(){
 
 }
 
-function saveCategory(){
 
+function addLabelledObj(dropdown, categoryname, emptyFlag) {
+  //create dropdown items from list of items
+  let dropdown_item = document.createElement('a');
+  dropdown_item.setAttribute('href', '#'+ categoryname);
+  dropdown_item.setAttribute('class', 'dropdown-labelledobjs-item');
+  dropdown_item.innerHTML = categoryname;
+  dropdown.appendChild(dropdown_item);
+  
+  if (emptyFlag){
+    let dropdown_items = dropdown.querySelectorAll('.dropdown-labelledobjs-item');
+    if (!dropdown_items){ return false; } 
+    for (let i=0; i<dropdown_items.length; i++) {
+        dropdown_items[i].style.display = 'none';
+     }
+   }
+}
+
+function saveCategory(){
 
   let categoryname = $("categoryname");
 
@@ -311,8 +335,7 @@ function saveCategory(){
     customAlert.alert("You must select a category!")
   }
   else{
-    console.log(categoryname.value);
-document.getElementById("output").innerHTML = categoryname.value;
+    
     findLabelledObject();
 
     const emptyFlag = checkEmptyDrawing();
@@ -322,47 +345,42 @@ document.getElementById("output").innerHTML = categoryname.value;
         "labels": categoryname.value,
         "drawing": active_strokes
        };
-  
-       console.log(categoryname.value);
-       console.log(labelled_obj_indices);
+
+       addLabelledObj($('dropdown-labelledobjs'), categoryname.value, false);
+
        user_data.push(new_data);
        active_strokes = [];
-       categoryname.value = ""
+       categoryname.value = "";
   
     }
     else{
       customAlert.alert("You labelled that object already !!");
     }
-
-  }
-  
+  } 
 } 
 
 function saveOther() {
 
   let categoryname = $("labelname");
 
-
   if(categoryname.value == "") {
-    customAlert.alert("You must write a new category!")
+    customAlert.alert("You must write a new category !!")
   }
   else{
-    console.log(objs);
-document.getElementById("output").innerHTML = objs;
+    
     findLabelledObject();
 
     const emptyFlag = checkEmptyDrawing();
   
     if (emptyFlag){
 
-
       const new_data = {
         "labels": categoryname.value,
         "drawing": active_strokes
        };
   
-       console.log(categoryname.value);
-       console.log(labelled_obj_indices);
+       addLabelledObj($('dropdown-labelledobjs'), categoryname.value, false);
+
        user_data.push(new_data);
        active_strokes = [];
        categoryname.value = ""
@@ -375,7 +393,6 @@ document.getElementById("output").innerHTML = objs;
   }
 
 }
-
   
 function nextSketch(){
   
@@ -385,8 +402,6 @@ function nextSketch(){
       customAlert.alert("Please label every object that appear in the given scene.");
   }
   else{
-    document.getElementById("output").innerHTML = "";
-
       let currentScene = sceneDescriptions[currentSceneIndex];
       let submit_content = { "user_email": email, "agreement": agreement, "scene_info": user_data, "scene_description": currentScene};
       user_data = [];
@@ -400,7 +415,7 @@ function nextSketch(){
        }
       
       });
-
+      addLabelledObj($('dropdown-labelledobjs'), categoryname.value, true);
       currentObjIndex++;
       currentSceneIndex++;
 

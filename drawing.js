@@ -29,20 +29,18 @@ let customAlert = new CustomAlert();
 
 var canvas = this.__canvas = new fabric.Canvas('canvas', {
     isDrawingMode: true,
-    freeDrawingCursor: 'url("ic_p.png") 0 30, auto',
+    freeDrawingCursor: 'url("images/ic_p.png") 0 30, auto',
 });
 
 
 var ctx = canvas.getContext("2d", { willReadFrequently: true });
 let brush = canvas.freeDrawingBrush;
 var shadow = new fabric.Shadow({ color: "red", blur: 8});
-let canvasDiv = $("canvas-wrapper");
-canvas.setWidth(canvasDiv.offsetWidth);
-canvas.setHeight(canvasDiv.offsetHeight);
+let canvasDiv = $("canvas");
 
 // Set brush features
 brush.color = rgbToHex(0, 0, 0);
-brush.width = 4;
+brush.width = 3;
 
 // Set the timer
 const TIME_LIMIT_PER_WORD = 45; // in seconds
@@ -160,11 +158,11 @@ drawingModeEl.onclick = function () {
     //canvas.getActiveObjects()[canvas.getActiveObjects]
     canvas.isDrawingMode = !canvas.isDrawingMode;
     if (canvas.isDrawingMode) {
-        drawingModeEl.innerHTML = '<img src= "eraser.png">';
+        drawingModeEl.innerHTML = '<img src= "images/eraser.png">';
 
     }
     else {
-        canvas.hoverCursor = 'url(ic-e.png) 0 32, auto';
+        canvas.hoverCursor = 'url(images/ic-e.png) 0 32, auto';
         //Make each object nonresizable on canvas
         canvas.forEachObject(function (o) { // make not selectable all the objects.
             o.hasControls = false;
@@ -176,7 +174,7 @@ drawingModeEl.onclick = function () {
             o.perPixelTargetFind = true;
         });
 
-        drawingModeEl.innerHTML ='<img src= "pencil.png">';
+        drawingModeEl.innerHTML ='<img src= "images/pencil.png">';
     }
 };
 canvas.on('mouse:down', function (options) {
@@ -340,7 +338,7 @@ function deleteObjects() {
 
     });
     
-    drawingModeEl.innerHTML = '<img src= "pencil.png">';
+    drawingModeEl.innerHTML = '<img src= "images/pencil.png">';
 
     let activeObjects = canvas.getActiveObjects();
     for (let i = 0; i < activeObjects.length; i++) {

@@ -18,24 +18,29 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-storage.js"></script>
   </body>
 
-<div id="element-container" style="justify-content: center;">
-  
-  <div style="text-align: center;  font-size: 14pt;justify-content: center; margin-top: 30px;">
-    <h1 style="margin-top: 100px;"> LAST STEP BEFORE THE START!</h1>
-    <div class = "desc" style="display: block;"> We need your e-mail adress to save your drawings to our database.</div>   
-    <br>
-    <br>
-    <label for="email" style="display: block; text-align: center; margin-right: 10px; align-self: auto; ;" ><strong>E-mail address: </strong></label>
-       <input type="email" name="email" id="email" style="width: auto; height: 30px; font-family: 'QuickDraw'; border: 2px solid #000; margin-top: 5px;" placeholder="Write your email" />
+  <div class="row">
+    <div class="column-left"></div>
+    <div class="column-middle">
+      <div class="center_wrapper">
+        <div class="center_wrapper-topalign"></div>
+        <div class="center_wrapper-centeralign"> 
+          <h1 class="heading">LAST STEP BEFORE THE START!</h1>
+          <p>We require your email address to store your drawings in our database.</p>
+          <label class="email" for="email">E-mail address: </label>
+          <input class="email" type="text" id="email" name="email" placeholder="Write your email">
+          <br>
+          <br>
+          <div id="start-container">
+           <button href="#" type="button" class = "btn" id="submitBtn">FINISH</button>
+         </div>
+         </div>
+        <div class="center_wrapper-bottomalign"></div>
+      </div>
     </div>
-    <br>
-    <div style="justify-content: center; display: flex; align-items: center;">
-        <button href="#" type="button" class = "btn" id="submitBtn" 
-             style="width: 150px; height: 30px; font-size: 15px; justify-content: center;">FINISH</button>
-       </div>
-</div>
+    <div class = "column-right"></div>
+  </div>
 
-<script>
+  <script>
 
     document
       .getElementById("submitBtn")

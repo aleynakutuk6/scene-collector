@@ -15,43 +15,54 @@
     <div class="row">
       <div class="column-left"></div>
       <div class="column-middle" style="font-family: 'QuickDraw'">
-          <h1 class="heading"> Welcome to the Labeling Part</h1>
-          <h2 class="subheading">Please carefully read each set of instructions. You'll be given a series of questions that you must answer correctly to continue with the next page. Failure to answer all questions correctly will result in redirection to the information page. </h2>
+          <h1 class="heading">Welcome to the Labeling Section</h1>
+          <h2 class="subheading">Please thoroughly review each set of instructions. You will encounter a sequence of questions that require correct answers to proceed to the next page. Any incorrect responses will lead to redirection to the information page.</h2>
           <h1 class="heading">Instructions</h1>
 
           <ul style="font-size: 13pt; justify-content: center; text-align: left;">
-            <li>You are asked to assign a label to each object that appears in the provided scene.</li>
+            <li>Your task is to assign a label to every object present in the provided scene.</li>
             <br>
-            <li>You will find the correct object category from a given list.</li>
+            <li>You'll have a list of predefined object categories, and you need to select the appropriate category for each object.</li>
             <br>
-            <li>You must use arrow keys to select a stroke. The RIGHT arrow will make you select a stroke. To undo you can use LEFT arrow.</li>
+            <li>To make a selection, use the arrow keys. The RIGHT arrow allows you to choose a category, and you can undo your selection by using the LEFT arrow.</li>
             <br>
-            <li>You have to first select a stroke then label it. You can continue with the next stroke when you SUBMIT the label for it.</li>
+            <li>You should first pick a category and then label the object. Move on to the next object by submitting its label.</li>
             <br>
-            <li>You may write the category name to the given search area to filter the given categories.</li>
+            <li>If you want to filter the categories, you can type the category name in the search area provided.</li>
             <br>
-            <li>When you find the correct category name, click the SUBMIT button.</li>
+            <li>When you locate the correct category, click the SUBMIT button.</li>
             <br>
-            <li>If the correct object category does not appear in the list, you should write the external category name and click to SUBMIT button.</li>
+            <li>In case the correct object category is not listed, enter the external category name and then click SUBMIT.</li>
             <br>
-            <li>Once you have labelled an object instance, the object will be black.</li>
+            <li>Once you've labeled an object, it will be marked as black.</li>
             <br>
-            <li>When the scene becomes all black, you can continue with the next scene.</li>
+            <li>You can proceed to the next scene when all the objects in the current scene are labeled and blackened.</li>
           </ul>
           <div id="start-container">
-            <button href="#" type="button" class = "btn" id="submitBtn" 
-            style="width: 150px; height: 30px; font-size: 15px;" onclick="showScene()">Next</button>
+            <button href="#" type="button" class = "btn" id="submitBtn" onclick="showScene()">START</button>
           </div>
       </div>
       <div class="column-right"></div>
     </div>
 
     <script>
+        
+        const instructions = ["Your task is to assign a label to every object present in the provided scene.",
+                              "You will have a list of predefined object categories, and you need to select the appropriate category for each object.",
+                             "To make a selection, use the arrow keys. The RIGHT arrow allows you to choose a category, and you can undo your selection by using the LEFT arrow.",
+                             "You should first pick a category and then label the object. Move on to the next object by submitting its label.",
+                             "If you want to filter the categories, you can type the category name in the search area provided.",
+                             "When you locate the correct category, click the SUBMIT button.",
+                             "In case the correct object category is not listed, enter the external category name and then click SUBMIT.",
+                             "Once you have labeled an object, it will be marked as black.",
+                             "You can proceed to the next scene when all the objects in the current scene are labeled and blackened."];
+        localStorage.setItem("instructions", JSON.stringify(instructions));
+
         document
           .getElementById("submitBtn")
           .addEventListener("click", function () {
             window.location.href = "check_label.html";
           });
-      </script>
+    </script>
   </body>
 </html>

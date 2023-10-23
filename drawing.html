@@ -22,20 +22,18 @@
       <div class="column-left"></div>
       <div class="column-middle">
         <div class="flexcontainer">
-          <div style="justify-content: right; display: flex; margin-right: 0; ">
-            <button id="modeButton" class="btn"><img src="eraser.png"></button>
+          <div class="flexcontainer-leftalign">
+            <button id="modeButton" class="eraserbtn" style="width: 45px; height: 45px;"><img src="images/eraser.png"></button>
             <h2 id="sceneDescription"></h2>
-            <div id="timer">
-              <div id="seconds"></div>
-            </div>
-            <button id="submitBtn" class = "btn" onclick="nextSketch()">Next</button>
           </div>
+          <div class="flexcontainer-rightalign"> 
+              <div id="timer">
+                  <div id="seconds"></div>
+              </div>
+              <button id="submitBtn" class = "btn" onclick="nextSketch()">Next</button>
           </div>
-
-        <div id="canvas-wrapper">
-          <canvas id="canvas"
-            >Your browser does not support canvas. Please upgrade it!</canvas>
         </div>
+        <canvas id="canvas" width="1050px" height="600px">Your browser does not support canvas. Please upgrade it!</canvas>
 
       </div>
       <div class = "column-right"></div>

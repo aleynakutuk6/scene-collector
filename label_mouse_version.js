@@ -17,9 +17,7 @@ var canvas = this.__canvas = new fabric.Canvas('canvas', {isDrawingMode: false }
 var mouse = false;
 var shadow = new fabric.Shadow({ color: "red", blur: 4});
 
-let canvasDiv = document.getElementById("canvas-wrapper");
-canvas.setWidth(canvasDiv.offsetWidth);
-canvas.setHeight(canvasDiv.offsetHeight);
+let canvasDiv = document.getElementById("canvas");
 
 let $ = function (id) { return document.getElementById(id) };
 

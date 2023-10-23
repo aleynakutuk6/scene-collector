@@ -21,39 +21,44 @@
  
     <div class="row">
       <div class="column-left">
-          <div id="dropdown_wrapper">
+        <div class="dropdown_wrapper">
+          <div class="dropdown_wrapper-topalign"></div>
+          <div class="dropdown_wrapper-centeralign"> 
             <input type="text" id="categoryname" placeholder="Search...">
             <div id="dropdown"></div>
-            <button id="submitBtn" class = "btn" onclick="saveCategory()">Submit</button>
-            <p > Create your new category name!</p>
+            <button id="submitBtn" class = "btn" onclick="saveCategory()">SUBMIT</button>
+            <p> Create your new category name!</p>
             <input type="text" id="labelname" placeholder="NEW CATEGORY">
-            <button id="labelBtn" class = "btn" onclick="saveOther() ">SUBMIT</button> 
+            <button id="labelBtn" class = "btn" onclick="saveOther() ">SUBMIT</button>
           </div>
+          <div class="dropdown_wrapper-bottomalign"></div>
+        </div>
       </div>
 
       <div class="column-middle">
         <div class="flexcontainer">
-          <button class= "btn" onclick="showInstructions()"> Instructions</button>
-          <button id="submitBtn" class = "btn" onclick="nextSketch()">Next</button></div>
-          <div id="canvas-wrapper">
-            <canvas id="canvas"
-              >Your browser does not support canvas. Please upgrade it!</canvas>
+          <div class="flexcontainer-leftalign">
+            <button class= "bln" style="margin-left: 0px;" onclick="showInstructions()"> Instructions</button>
           </div>
-        <div id="element-container" style="width: device-width; height: 450px;">
-            <div style="justify-content: right; display: flex; margin-left: auto; margin-right: 0;">
-
-            </div>
+          <div class="flexcontainer-rightalign"> 
+            <button id="submitBtn" class = "btn" onclick="nextSketch()">Next</button>
+          </div>
         </div>
+        <canvas id="canvas" width="1050px" height="600px">Your browser does not support canvas. Please upgrade it!</canvas>
       </div>
 
       <div class="column-right">
-        <p style="margin-top: 300px;">Last labelled object:</p>
-        <div id="output"></div>
-
-
+        <div class="dropdown_wrapper">
+          <div class="dropdown_wrapper-topalign"></div>
+          <div class="dropdown_wrapper-centeralign"> 
+              <p> LABELLED OBJECT LIST:</p>
+              <div id="dropdown-labelledobjs"></div>
+          </div>
+          <div class="dropdown_wrapper-bottomalign"></div>
+        </div>
       </div>
     </div>
-    
+
     </script>
     <script>
 
@@ -405,7 +410,7 @@
           "zigzag"
         ];
 
-        function filterDropDown(dropdown, input, dropdown_wrapper, items) {
+        function filterDropDown(dropdown, input, items) {
             //create dropdown items from list of items
             for (let i=0; i<items.length; i++) {
             let dropdown_item = document.createElement('a');
@@ -435,7 +440,6 @@
         filterDropDown(
         document.getElementById('dropdown'),
         document.getElementById('categoryname'),
-        document.getElementById('dropdown_wrapper'),
         obj_classes
         )
 

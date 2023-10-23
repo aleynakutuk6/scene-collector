@@ -30,59 +30,58 @@
         <br>
         <br>
 
-        <label style="font-size: 14pt;">1) Are you required to both DRAW and DESCRIBE what you draw on a canvas simultaneously?</label>
+        <label style="font-size: 12pt;">1) Is it necessary to both CREATE a drawing on the canvas and PROVIDE a verbal description simultaneously?</label>
         <br>
         <div class="row-radios">
-            <label class= "bln" for="yes1">
-              <input type="radio" name="question1" id="yes1" value="Yes">Yes
+            <label class= "bln" for="yes_verbal">
+              <input type="radio" name="question1" id="yes_verbal" value="Yes">Yes
             </label>
-            <label class= "bln" for="no1">
-              <input type="radio" name="question1" id="no1" value="No">No
+            <label class= "bln" for="no_verbal">
+              <input type="radio" name="question1" id="no_verbal" value="No">No
             </label>
         </div> 
         <br>
 
-        <label style="font-size: 14pt;">2) Is it mandatory to EXCLUSIVELY draw objects that are mentioned in the scene description?</label>
+        <label style="font-size: 12pt;">2) Do you have to EXCLUSIVELY depict objects mentioned in the scene description?</label>
         <br>
         <div class="row-radios">
-           <label class= "bln" for="yes2">
-             <input type="radio" name="question2" id="yes2" value="Yes">Yes
+           <label class= "bln" for="yes_objects">
+             <input type="radio" name="question2" id="yes_objects" value="Yes">Yes
            </label>
-           <label class= "bln" for="no2">
-             <input type="radio" name="question2" id="no2" value="No">No
+           <label class= "bln" for="no_objects">
+             <input type="radio" name="question2" id="no_objects" value="No">No
            </label>
         </div>
         <br>
 
         
-        <label style="font-size: 14pt;">3) Do you have any time restriction while you are drawing?</label>
+        <label style="font-size: 12pt;">3) Is there a time limit when you are in the process of drawing?</label>
         <br>
         <div class="row-radios">
-            <label class= "bln" for="yes3">
-              <input type="radio" name="question3" id="yes3" value="Yes">Yes
+            <label class= "bln" for="yes_timelimit">
+              <input type="radio" name="question3" id="yes_timelimit" value="Yes">Yes
             </label>
-            <label class= "bln" for="no3">
-              <input type="radio" name="question3" id="no3" value="No">No
+            <label class= "bln" for="no_timelimit">
+              <input type="radio" name="question3" id="no_timelimit" value="No">No
             </label>
         </div> 
         <br>
 
-        <label style="font-size: 14pt;">4) To delete any drawn object from the scene, you must click to the eraser button and then click to the line that you want to remove.</label>
+        <label style="font-size: 12pt;">4) To remove any drawn object from the scene, you should click on the eraser button and then click on the line you wish to delete.</label>
         <br>
         <div class="row-radios">
-            <label class= "bln" for="yes4">
-              <input type="radio" name="question4" id="yes4" value="Yes">Yes
+            <label class= "bln" for="yes_eraser">
+              <input type="radio" name="question4" id="yes_eraser" value="Yes">Yes
             </label>
-            <label class= "bln" for="no4">
-              <input type="radio" name="question4" id="no4" value="No">No
+            <label class= "bln" for="no_eraser">
+              <input type="radio" name="question4" id="no_eraser" value="No">No
             </label>
         </div> 
         <br>
         <br>
 
         <div id="start-container">
-          <button href="#" type="button" class = "btn" id="submitBtn" 
-               style="width: 150px; height: 30px; font-size: 15px;">START</button>
+          <button href="#" type="button" class = "btn" id="submitBtn">START</button>
          </div>
          
       </div>
@@ -94,12 +93,12 @@
         .getElementById("submitBtn")
         .addEventListener("click", function () {
           
-          yes1 = yes1.checked;
-          no2 = no2.checked;
-          yes3 = yes3.checked;
-          yes4 = yes4.checked;
+          yes_verbal = yes_verbal.checked;
+          no_objects = no_objects.checked;
+          yes_timelimit = yes_timelimit.checked;
+          yes_eraser = yes_eraser.checked;
 
-          if (yes1 && no2 && yes3 && yes4){
+          if (yes_verbal && no_objects && yes_timelimit && yes_eraser){
             window.location.href = "./get_mail.html";
           }
           else{
