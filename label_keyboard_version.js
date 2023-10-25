@@ -39,7 +39,7 @@ let customAlert = new CustomAlert();
 let currentObjIndex = 1;
 let active_strokes = [];
 let labelled_obj_indices = [];
-let prev_indices = [];
+let obj_divisions = [-1];  // keep last stroke indices
 let stroke_num = -1;
 getSceneData(currentObjIndex);
 
@@ -244,7 +244,7 @@ function showInstructions() {
 }
 
 // this function removes all selected strokes and turn them all grey color.
-function removeAllSelections() {
+function clearAllSelections() {
   let allObjects = canvas.getObjects();
   
   if (allObjects.length > 0) {
@@ -256,25 +256,36 @@ function removeAllSelections() {
     user_data = [];
     active_strokes = [];
     labelled_obj_indices = [];
-    addLabelledObj($('dropdown-labelledobjs'), categoryname.value, true);
+    obj_divisions = [-1];
+    modifyLabelledObjectList($('dropdown-labelledobjs'), 2);
     canvas.renderAll();
   }
 }
 
 // this function go back to the last state, only the last object strokes turns into grey color.
-function removeLastSelection() {
+function undoLastSelection() {
   let allObjects = canvas.getObjects();
+  
+  if(labelled_obj_indices.length > 0){
+    let stroke_color = rgbToHex(211, 211, 211);
+    var last_stroke_id = obj_divisions.pop();
+    var prev_stroke_id = obj_divisions.at(-1);
+    stroke_num = prev_stroke_id; // update stroke_num
+    let stroke_cnt = last_stroke_id - prev_stroke_id;
 
-  let stroke_color = rgbToHex(211, 211, 211);
-  for (let i=labelled_obj_indices.length-1; i > prev_indices.length-1; i--) {
-      allObjects[i].set("stroke", stroke_color);
+    for (let i=allObjects.length-1; i > prev_stroke_id; i--) {
+        allObjects[i].set("stroke", stroke_color);
+    }
+    
+    for (let i=0; i < stroke_cnt; i++) {
+      labelled_obj_indices.pop();
+    }
+    active_strokes.pop();
+    user_data.pop();
+    modifyLabelledObjectList($('dropdown-labelledobjs'), 3);
+    canvas.renderAll();
+
   }
-  active_strokes.pop();
-  user_data.pop();
-  stroke_num = prev_indices.length - 1;
-  labelled_obj_indices = JSON.parse(JSON.stringify(prev_indices));
-  addLabelledObj($('dropdown-labelledobjs'), categoryname.value, false, removelast=true);
-  canvas.renderAll();
 }
 
 // this function triggers when you click LEFT ARROW key.
@@ -289,7 +300,7 @@ function moveSceneBackward() {
     customAlert.alert("You should click to RIGHT ARROW!!");
   }
   else if(includesIdx){
-    customAlert.alert("You cannot label an object twice, if you made a labeling mistake use CLEAR and UNDO buttons !!");
+    customAlert.alert("You cannot label an object twice, if you made a labeling mistake, please use CLEAR ALL or UNDO buttons !!");
   }
   else{
     changeStrokeColor("grey");
@@ -331,9 +342,6 @@ function changeStrokeColor(stroke_color) {
 // this function searches for the labelled object stroke indices.
 function findLabelledObject(){
     let objs = canvas.getObjects();
-    prev_indices = JSON.parse(JSON.stringify(labelled_obj_indices));
-    
-
     for (let i = 0; i < objs.length; i++) {
       let rgb_color = hex2rgb(objs[i].get("stroke"));
       if (rgb_color[0] == 0 && rgb_color[1] == 0 && rgb_color[2] == 0){
@@ -347,6 +355,10 @@ function findLabelledObject(){
          }
       }   
     }
+    var last_labelled_id = labelled_obj_indices.at(-1);
+    if (!(obj_divisions.includes(last_labelled_id))){
+      obj_divisions.push(last_labelled_id);
+    }    
 }
 
 function checkEmptyDrawing(){
@@ -356,27 +368,26 @@ function checkEmptyDrawing(){
 
 }
 
-
-function addLabelledObj(dropdown, categoryname, emptyFlag, removelast=false) {
-  //create dropdown items from list of items
-  let dropdown_item = document.createElement('a');
-  dropdown_item.setAttribute('href', '#'+ categoryname);
-  dropdown_item.setAttribute('class', 'dropdown-labelledobjs-item');
-  dropdown_item.innerHTML = categoryname;
-  dropdown.appendChild(dropdown_item);
+function modifyLabelledObjectList(dropdown, state, categoryname="") {
   
-  if (emptyFlag){
+  //create dropdown items for each pushed object category
+  if (state == 1){
+    let dropdown_item = document.createElement('a');
+    dropdown_item.setAttribute('href', '#'+ categoryname);
+    dropdown_item.setAttribute('class', 'dropdown-labelledobjs-item');
+    dropdown_item.innerHTML = categoryname;
+    dropdown.appendChild(dropdown_item);
+
+  }
+  //empty the list
+  else if (state == 2){
+    document.querySelectorAll('.dropdown-labelledobjs-item').forEach(el => el.remove());
+  }
+  //remove the last item from the list
+  else if (state == 3){
     let dropdown_items = dropdown.querySelectorAll('.dropdown-labelledobjs-item');
-    if (!dropdown_items){ return false; } 
-    for (let i=0; i<dropdown_items.length; i++) {
-        dropdown_items[i].style.display = 'none';
-     }
-   }
-   
-  if (removelast){
-    let dropdown_items = dropdown.querySelectorAll('.dropdown-labelledobjs-item');
-    dropdown_items[dropdown_items.length-1].style.display = 'none';
-    dropdown_items[dropdown_items.length-2].style.display = 'none';
+    let dropdown_item = dropdown_items[dropdown_items.length-1];
+    dropdown.removeChild(dropdown_item);
   }
 
 }
@@ -398,16 +409,15 @@ function saveCategory(){
         "labels": categoryname.value,
         "drawing": active_strokes
        };
-
-       addLabelledObj($('dropdown-labelledobjs'), categoryname.value, false);
+       
+       modifyLabelledObjectList($('dropdown-labelledobjs'), 1, categoryname.value);
 
        user_data.push(new_data);
        active_strokes = [];
        categoryname.value = "";
-      console.log("USER DATA", user_data);
     }
     else{
-      customAlert.alert("You should click UNDO LAST SELECTION or CLEAR ALL SELECTIONS to undo your wrong labeling !!");
+      customAlert.alert("You cannot label an object twice, if you made a labeling mistake, please use CLEAR or UNDO buttons !!");
     }
   } 
 } 
@@ -432,8 +442,8 @@ function saveOther() {
         "labels": categoryname.value,
         "drawing": active_strokes
        };
-  
-       addLabelledObj($('dropdown-labelledobjs'), categoryname.value, false);
+       
+       modifyLabelledObjectList($('dropdown-labelledobjs'), 1, categoryname.value);
 
        user_data.push(new_data);
        active_strokes = [];
@@ -441,7 +451,7 @@ function saveOther() {
   
     }
     else{
-      customAlert.alert("You should click UNDO LAST SELECTION or CLEAR ALL SELECTIONS to undo your wrong labeling !!");
+      customAlert.alert("Use CLEAR ALL or UNDO buttons to correct your labeling mistake !!");
     }
 
   }
@@ -453,7 +463,7 @@ function nextSketch(){
   let objs = canvas.getObjects();
 
   if (labelled_obj_indices.length != objs.length){
-      customAlert.alert("Please label every object that appear in the given scene.");
+      customAlert.alert("Please label every objects !!");
   }
   else{
       let currentScene = sceneDescriptions[currentSceneIndex];
@@ -467,7 +477,8 @@ function nextSketch(){
        }
       
       });
-      addLabelledObj($('dropdown-labelledobjs'), categoryname.value, true);
+
+      modifyLabelledObjectList($('dropdown-labelledobjs'), 2);
       currentObjIndex++;
       currentSceneIndex++;
       
