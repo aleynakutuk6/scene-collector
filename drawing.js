@@ -11,16 +11,7 @@
 }]
 
 const sceneDescriptions = [
-    "In a living room, you can see a door, and there is a clock on the wall. One person is standing up.",
-    "On a sunny day in a forest, people are playing football.",
-    "In a kitchen, there is a table, and there is a plate with a whole orange inside.",
-    "On a street, you can see some people getting on a bus, and there are benches on the street.",
-    "You are outside a house, and you can see a ladder.",
-    "In a music store, you can see a person playing the violin.",
-    "In a kitchen, there is a microwave oven, and there is a pizza on the table.",
-    "On a river, there is a bridge and trees.",
-    "On the sea, there is a sailboat and people are talking in it ",
-    "In a rainy day, people are waiting in a bus stop with their umbrellas."
+    "In a living room, you can see a door, and there is a clock on the wall. One person is standing up."
 
 ];
 
