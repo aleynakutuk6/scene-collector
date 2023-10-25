@@ -23,7 +23,8 @@
       <div class="column-middle">
         <div class="flexcontainer">
           <div class="flexcontainer-leftalign">
-            <button id="modeButton" class="eraserbtn" style="width: 45px; height: 45px;"><img src="images/eraser.png"></button>
+            <button class= "instructionsbtn" onclick="showInstructions()"> Instructions</button>
+            <button id="modeButton" class="eraserbtn" style="width: 65px; margin-left: 10px ;"><img src="images/eraser.png" style="width: 65px; "></button>
             <h2 id="sceneDescription"></h2>
           </div>
           <div class="flexcontainer-rightalign"> 
@@ -33,7 +34,9 @@
               <button id="submitBtn" class = "btn" onclick="nextSketch()">Next</button>
           </div>
         </div>
-        <canvas id="canvas" width="1050px" height="600px">Your browser does not support canvas. Please upgrade it!</canvas>
+        <div id="canvas-wrapper" style="width: 1100px;">
+        <canvas id="canvas" width="1100" height="770" >Your browser does not support canvas. Please upgrade it!</canvas>
+      </div>
 
       </div>
       <div class = "column-right"></div>

@@ -34,7 +34,7 @@
             <br>
             <li>In case the correct object category is not listed, enter the external category name and then click SUBMIT.</li>
             <br>
-            <li>Once you've labeled an object, it will be marked as black.</li>
+            <li>Once you've labeled an object, its color stay as black.</li>
             <br>
             <li>You can proceed to the next scene when all the objects in the current scene are labeled and blackened.</li>
           </ul>
@@ -46,17 +46,6 @@
     </div>
 
     <script>
-        
-        const instructions = ["Your task is to assign a label to every object present in the provided scene.",
-                              "You will have a list of predefined object categories, and you need to select the appropriate category for each object.",
-                             "To make a selection, use the arrow keys. The RIGHT arrow allows you to choose a category, and you can undo your selection by using the LEFT arrow.",
-                             "You should first pick a category and then label the object. Move on to the next object by submitting its label.",
-                             "If you want to filter the categories, you can type the category name in the search area provided.",
-                             "When you locate the correct category, click the SUBMIT button.",
-                             "In case the correct object category is not listed, enter the external category name and then click SUBMIT.",
-                             "Once you have labeled an object, it will be marked as black.",
-                             "You can proceed to the next scene when all the objects in the current scene are labeled and blackened."];
-        localStorage.setItem("instructions", JSON.stringify(instructions));
 
         document
           .getElementById("submitBtn")

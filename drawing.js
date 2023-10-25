@@ -9,10 +9,24 @@
     ],
     "maxAgeSeconds": 3600
 }]
-
-const sceneDescriptions = [
+/**
+ const sceneDescriptions = [
     "In a living room, you can see a door, and there is a clock on the wall. One person is standing up.",
-    "On a sunny day in a forest, people are playing football, and you can see the goals."
+    "On a sunny day in a forest, people are playing football.",
+    "In a kitchen, there is a table, and there is a plate with a whole orange inside.",
+    "On a street, you can see some people getting on a bus, and there are benches on the street.",
+    "You are outside a house, and you can see a ladder.",
+    "In a music store, you can see a person playing the violin.",
+    "In a kitchen, there is a microwave oven, and there is a pizza on the table.",
+    "On a river, there is a bridge and trees.",
+    "On the sea, there is a sailboat and people are talking in it ",
+    "In a rainy day, people are waiting in a bus stop with their umbrellas."
+
+];
+ **/
+const sceneDescriptions = [
+    "In a living room, you can see a door, and there is a clock on the wall. One person is standing up."
+
 ];
 
 //Element retrieval
@@ -43,7 +57,7 @@ brush.color = rgbToHex(0, 0, 0);
 brush.width = 3;
 
 // Set the timer
-const TIME_LIMIT_PER_WORD = 45; // in seconds
+const TIME_LIMIT_PER_WORD = 60; // in seconds
 const TOTAL_GAME_TIME = TIME_LIMIT_PER_WORD * sceneDescriptions.length;
 let timeLeft = TIME_LIMIT_PER_WORD // in seconds
 let startDate, currDate, endDate;
@@ -472,3 +486,16 @@ function timer() {
    
     }, 1000);
 }
+
+function showInstructions() {
+    let instructions = ["To use the eraser, click the eraser button.",
+                        "To use the pencil again, click the same button again.",
+                        "Describe what you draw verbally",
+                        "Then, click the NEXT button."];
+    let message = "";
+    for (let i = 0; i < instructions.length; i++) {
+      message += "‣"+ instructions[i] + "<br><br>" ;
+    }
+    customAlert.alert(message);
+  
+  }

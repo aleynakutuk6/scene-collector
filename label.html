@@ -38,13 +38,15 @@
       <div class="column-middle">
         <div class="flexcontainer">
           <div class="flexcontainer-leftalign">
-            <button class= "bln" style="margin-left: 0px;" onclick="showInstructions()"> Instructions</button>
+            <button class= "instructionsbtn" onclick="showInstructions()"> Instructions</button>
+            <button class= "instructionsbtn" onclick="removeAllSelections()"> Clear All Selections</button>
+            <button class= "instructionsbtn" onclick="removeLastSelection()"> Undo Last Selection</button>
           </div>
           <div class="flexcontainer-rightalign"> 
             <button id="submitBtn" class = "btn" onclick="nextSketch()">Next</button>
           </div>
         </div>
-        <canvas id="canvas" width="1050px" height="600px">Your browser does not support canvas. Please upgrade it!</canvas>
+        <canvas id="canvas" width="1100px" height="770px">Your browser does not support canvas. Please upgrade it!</canvas>
       </div>
 
       <div class="column-right">

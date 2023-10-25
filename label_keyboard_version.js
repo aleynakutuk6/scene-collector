@@ -1,11 +1,11 @@
 const firebaseConfig = {
-  apiKey: "AIzaSyCAZOblzgyVbrGCRbGO_mskKSQAV1-PUhs",
-  authDomain: "scene-dataset.firebaseapp.com",
-  databaseURL: "https://scene-dataset-default-rtdb.firebaseio.com",
-  projectId: "scene-dataset",
-  storageBucket: "scene-dataset.appspot.com",
-  messagingSenderId: "613884392238",
-  appId: "1:613884392238:web:60996e315f709dbc0e80bf"
+  apiKey: "AIzaSyAqiFPYSpf0LbOCOqgtAbiYo34hPa7MzPg",
+  authDomain: "scenedata-725a7.firebaseapp.com",
+  projectId: "scenedata-725a7",
+  storageBucket: "scenedata-725a7.appspot.com",
+  messagingSenderId: "586766327573",
+  appId: "1:586766327573:web:452989856b9fd8356bd31c",
+  measurementId: "G-5K181C85RW"
 };
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
@@ -34,12 +34,12 @@ let full_data = JSON.parse(localStorage.getItem("full_data"));
 let user_data = [];
 let color_palette = {}; 
 let currentSceneIndex = 0;
-let instructions = JSON.parse(localStorage.getItem("instructions"));
 let sceneDescriptions = JSON.parse(localStorage.getItem("scene_descriptions"));
 let customAlert = new CustomAlert();
 let currentObjIndex = 1;
 let active_strokes = [];
 let labelled_obj_indices = [];
+let prev_indices = [];
 let stroke_num = -1;
 getSceneData(currentObjIndex);
 
@@ -227,15 +227,57 @@ function handleCancel(evt) {
 
 function showInstructions() {
   
+  let instructions = ["First select the strokes of an object.",
+                      "To select strokes, use RIGHT ARROW.",
+                      "To unselect strokes, use LEFT ARROW.",
+                      "If a stroke is selected, it will appear black.",
+                      "After selecting the whole object, label it with the appropriate category name.",
+                      "You can choose from the list or create a new category name.",
+                      "Then, click the SUBMIT button.",
+                      "You can see your labelled object list on the right of the canvas."];
   let message = "";
   for (let i = 0; i < instructions.length; i++) {
-    message += instructions[i] + "\n";
+    message += "‣"+ instructions[i] + "<br><br>" ;
   }
   customAlert.alert(message);
 
 }
 
+// this function removes all selected strokes and turn them all grey color.
+function removeAllSelections() {
+  let allObjects = canvas.getObjects();
+  
+  if (allObjects.length > 0) {
+    let stroke_color = rgbToHex(211, 211, 211);
+    for (let i=0; i < allObjects.length; i++) {
+        allObjects[i].set("stroke", stroke_color);
+    }
+    stroke_num = -1;
+    user_data = [];
+    active_strokes = [];
+    labelled_obj_indices = [];
+    addLabelledObj($('dropdown-labelledobjs'), categoryname.value, true);
+    canvas.renderAll();
+  }
+}
 
+// this function go back to the last state, only the last object strokes turns into grey color.
+function removeLastSelection() {
+  let allObjects = canvas.getObjects();
+
+  let stroke_color = rgbToHex(211, 211, 211);
+  for (let i=labelled_obj_indices.length-1; i > prev_indices.length-1; i--) {
+      allObjects[i].set("stroke", stroke_color);
+  }
+  active_strokes.pop();
+  user_data.pop();
+  stroke_num = prev_indices.length - 1;
+  labelled_obj_indices = JSON.parse(JSON.stringify(prev_indices));
+  addLabelledObj($('dropdown-labelledobjs'), categoryname.value, false, removelast=true);
+  canvas.renderAll();
+}
+
+// this function triggers when you click LEFT ARROW key.
 function moveSceneBackward() {
   const includesIdx = labelled_obj_indices.includes(stroke_num);
   if (stroke_num < -1){
@@ -247,7 +289,7 @@ function moveSceneBackward() {
     customAlert.alert("You should click to RIGHT ARROW!!");
   }
   else if(includesIdx){
-    customAlert.alert("You cannot label an object twice!!");
+    customAlert.alert("You cannot label an object twice, if you made a labeling mistake use CLEAR and UNDO buttons !!");
   }
   else{
     changeStrokeColor("grey");
@@ -255,12 +297,12 @@ function moveSceneBackward() {
   }
 }
 
-
+// this function triggers when you click RIGHT ARROW key.
 function moveSceneForward() {
     stroke_num += 1;
     let allObjects = canvas.getObjects();
     if (stroke_num >= allObjects.length){
-      customAlert.alert("You should click to LEFT ARROW!!");
+      customAlert.alert("No grey stroke left !!");
       stroke_num -= 1;
     }
     else{
@@ -268,6 +310,7 @@ function moveSceneForward() {
     }
 }
 
+// this function changes color of the strokes: GREY or BLACK.
 function changeStrokeColor(stroke_color) {
   let allObjects = canvas.getObjects();
   
@@ -285,8 +328,12 @@ function changeStrokeColor(stroke_color) {
   }
 }
 
+// this function searches for the labelled object stroke indices.
 function findLabelledObject(){
     let objs = canvas.getObjects();
+    prev_indices = JSON.parse(JSON.stringify(labelled_obj_indices));
+    
+
     for (let i = 0; i < objs.length; i++) {
       let rgb_color = hex2rgb(objs[i].get("stroke"));
       if (rgb_color[0] == 0 && rgb_color[1] == 0 && rgb_color[2] == 0){
@@ -310,7 +357,7 @@ function checkEmptyDrawing(){
 }
 
 
-function addLabelledObj(dropdown, categoryname, emptyFlag) {
+function addLabelledObj(dropdown, categoryname, emptyFlag, removelast=false) {
   //create dropdown items from list of items
   let dropdown_item = document.createElement('a');
   dropdown_item.setAttribute('href', '#'+ categoryname);
@@ -325,8 +372,16 @@ function addLabelledObj(dropdown, categoryname, emptyFlag) {
         dropdown_items[i].style.display = 'none';
      }
    }
+   
+  if (removelast){
+    let dropdown_items = dropdown.querySelectorAll('.dropdown-labelledobjs-item');
+    dropdown_items[dropdown_items.length-1].style.display = 'none';
+    dropdown_items[dropdown_items.length-2].style.display = 'none';
+  }
+
 }
 
+// this function triggers when you submit a category name from a given list.
 function saveCategory(){
 
   let categoryname = $("categoryname");
@@ -335,9 +390,7 @@ function saveCategory(){
     customAlert.alert("You must select a category!")
   }
   else{
-    
     findLabelledObject();
-
     const emptyFlag = checkEmptyDrawing();
   
     if (emptyFlag){
@@ -351,14 +404,15 @@ function saveCategory(){
        user_data.push(new_data);
        active_strokes = [];
        categoryname.value = "";
-  
+      console.log("USER DATA", user_data);
     }
     else{
-      customAlert.alert("You labelled that object already !!");
+      customAlert.alert("You should click UNDO LAST SELECTION or CLEAR ALL SELECTIONS to undo your wrong labeling !!");
     }
   } 
 } 
 
+// this function triggers when you submit an external category name.
 function saveOther() {
 
   let categoryname = $("labelname");
@@ -387,13 +441,13 @@ function saveOther() {
   
     }
     else{
-      customAlert.alert("You labelled that object already !!");
+      customAlert.alert("You should click UNDO LAST SELECTION or CLEAR ALL SELECTIONS to undo your wrong labeling !!");
     }
 
   }
-
 }
-  
+
+// this function triggers when you switch to the NEXT SCENE, saves the data to the firebase.
 function nextSketch(){
   
   let objs = canvas.getObjects();
@@ -404,8 +458,6 @@ function nextSketch(){
   else{
       let currentScene = sceneDescriptions[currentSceneIndex];
       let submit_content = { "user_email": email, "agreement": agreement, "scene_info": user_data, "scene_description": currentScene};
-      user_data = [];
-      labelled_obj_indices = [];
   
       usersRefInDatabase.push(submit_content, (error) => {
        if (error) {
@@ -418,6 +470,9 @@ function nextSketch(){
       addLabelledObj($('dropdown-labelledobjs'), categoryname.value, true);
       currentObjIndex++;
       currentSceneIndex++;
+      
+      user_data = [];
+      labelled_obj_indices = [];
 
       if (currentObjIndex > numScenes) {
         window.location.href = "./end.html";

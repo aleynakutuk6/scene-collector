@@ -78,6 +78,16 @@
             </label>
         </div> 
         <br>
+        <label style="font-size: 12pt;">5) Can you start drawing a new object without finishing the previous one?</label>
+        <br>
+        <div class="row-radios">
+            <label class= "bln" for="yes_stroke">
+              <input type="radio" name="question5" id="yes_stroke" value="Yes">Yes
+            </label>
+            <label class= "bln" for="no_stroke">
+              <input type="radio" name="question5" id="no_stroke" value="No">No
+            </label>
+        </div> 
         <br>
 
         <div id="start-container">
@@ -97,15 +107,17 @@
           no_objects = no_objects.checked;
           yes_timelimit = yes_timelimit.checked;
           yes_eraser = yes_eraser.checked;
+          no_stroke = no_stroke.checked;
 
-          if (yes_verbal && no_objects && yes_timelimit && yes_eraser){
+          if (yes_verbal && no_objects && yes_timelimit && yes_eraser && no_stroke){
             window.location.href = "./get_mail.html";
           }
           else{
             window.location.href = "./index.html";
           }
         });
-      
+
+
     </script>
   </body>
 </html>
