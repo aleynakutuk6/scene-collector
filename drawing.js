@@ -482,6 +482,7 @@ function timer() {
         if (timeLeft === 0) {
 
             $("seconds").innerHTML = "EXPIRED";
+            customAlert.alert("Time is up !! You will be directed to the NEXT SCENE !!");
             nextSketch();
             timeLeft = TIME_LIMIT_PER_WORD;
         }

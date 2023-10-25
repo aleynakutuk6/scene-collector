@@ -87,14 +87,13 @@ body {
 }
 
 .column-middle {
-  width: 80%;
+  width: 75%;
   height: 100%;
 }
 
 .column-right {
-  width: 10%;
+  width: 15%;
   height: 100%;
-  margin-right: 30px;
 }
 
 .flexcontainer-rightalign {
