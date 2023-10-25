@@ -9,8 +9,8 @@
     ],
     "maxAgeSeconds": 3600
 }]
-/**
- const sceneDescriptions = [
+
+const sceneDescriptions = [
     "In a living room, you can see a door, and there is a clock on the wall. One person is standing up.",
     "On a sunny day in a forest, people are playing football.",
     "In a kitchen, there is a table, and there is a plate with a whole orange inside.",
@@ -23,11 +23,13 @@
     "In a rainy day, people are waiting in a bus stop with their umbrellas."
 
 ];
- **/
+
+/**
 const sceneDescriptions = [
     "In a living room, you can see a door, and there is a clock on the wall. One person is standing up."
 
 ];
+ **/
 
 //Element retrieval
 let $ = function (id) { return document.getElementById(id) };

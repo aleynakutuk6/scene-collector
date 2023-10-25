@@ -317,7 +317,6 @@ img {
 }
 
 #canvas {
-  
   position: relative; 
   user-select: none; 
   background-color: white;
@@ -326,13 +325,6 @@ img {
   width: 10px;
   height: 10px;
 
-}
-
-#canvas-wrapper {
-  width: device-width;
-  height: 780px;
-   position: relative; user-select: none; background-color: white;
-   display:block;
 }
 
 #dropdown {
