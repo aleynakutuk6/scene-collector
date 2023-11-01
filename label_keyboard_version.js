@@ -1,3 +1,21 @@
+// Aleyna Kutuk's Firebase Connection
+const firebaseConfig = {
+  apiKey: "AIzaSyCAZOblzgyVbrGCRbGO_mskKSQAV1-PUhs",
+  authDomain: "scene-dataset.firebaseapp.com",
+  databaseURL: "https://scene-dataset-default-rtdb.firebaseio.com",
+  projectId: "scene-dataset",
+  storageBucket: "scene-dataset.appspot.com",
+  messagingSenderId: "613884392238",
+  appId: "1:613884392238:web:60996e315f709dbc0e80bf"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+// get firebase database
+let database = firebase.database();
+let usersRefInDatabase = database.ref("sceneData/");
+
+/* 
+// Zeynep Yorulmaz's Firebase Connection
 const firebaseConfig = {
   apiKey: "AIzaSyAqiFPYSpf0LbOCOqgtAbiYo34hPa7MzPg",
   authDomain: "scenedata-725a7.firebaseapp.com",
@@ -12,6 +30,8 @@ firebase.initializeApp(firebaseConfig);
 // get firebase database
 let database = firebase.database();
 let usersRefInDatabase = database.ref("sceneData/");
+
+*/
 
 var canvas = this.__canvas = new fabric.Canvas('canvas', {isDrawingMode: false });
 var mouse = false;
