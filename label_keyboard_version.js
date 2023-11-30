@@ -75,7 +75,6 @@ function getSceneData(currentObjIndex) {
     let allObjects = canvas.getObjects();
     if (allObjects.length > 0) {
       for (let i = 0; i < allObjects.length; i++) {
-
         allObjects[i].set("stroke", greycolor);
         allObjects[i].set("strokeWidth", 4);
       }
@@ -299,8 +298,8 @@ function undoLastSelection() {
     
     for (let i=0; i < stroke_cnt; i++) {
       labelled_obj_indices.pop();
+      active_strokes.pop();
     }
-    active_strokes.pop();
     user_data.pop();
     modifyLabelledObjectList($('dropdown-labelledobjs'), 3);
     canvas.renderAll();
@@ -370,7 +369,9 @@ function findLabelledObject(){
 
          if(includesIdx == false){
             var vec = objs[i].get('vectorRepresentation');
-            active_strokes.push(vec);
+            if(typeof vec !== "undefined"){
+               active_strokes.push(vec);
+            }
             labelled_obj_indices.push(i);
             console.log("labelled_obj_indices:", labelled_obj_indices);
          }
@@ -493,7 +494,7 @@ function nextSketch(){
   else{
       let currentScene = sceneDescriptions[currentSceneIndex];
       let submit_content = { "user_email": email, "agreement": agreement, "scene_info": user_data, "scene_description": currentScene};
-  
+      console.log(user_data);
       usersRefInDatabase.push(submit_content, (error) => {
        if (error) {
         customAlert.alert("Error while pushing data to the firebase.");
@@ -509,6 +510,7 @@ function nextSketch(){
       currentSceneIndex++;
       
       user_data = [];
+      active_strokes = [];
       labelled_obj_indices = [];
       obj_divisions = [-1];
 
