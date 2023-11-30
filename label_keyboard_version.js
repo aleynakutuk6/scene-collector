@@ -372,13 +372,18 @@ function findLabelledObject(){
             var vec = objs[i].get('vectorRepresentation');
             active_strokes.push(vec);
             labelled_obj_indices.push(i);
+            console.log("labelled_obj_indices:", labelled_obj_indices);
          }
       }   
     }
     var last_labelled_id = labelled_obj_indices.at(-1);
-    if (!(obj_divisions.includes(last_labelled_id))){
-      obj_divisions.push(last_labelled_id);
-    }    
+    if(typeof last_labelled_id !== "undefined"){
+        if (!(obj_divisions.includes(last_labelled_id))){
+             obj_divisions.push(last_labelled_id);
+             console.log("obj_divisions:", obj_divisions);
+       }    
+    }
+    
 }
 
 function checkEmptyDrawing(){
@@ -493,6 +498,7 @@ function nextSketch(){
        if (error) {
         customAlert.alert("Error while pushing data to the firebase.");
        } else {
+         console.log(submit_content);
          console.log("Data sent successfully!");
        }
       
@@ -504,6 +510,7 @@ function nextSketch(){
       
       user_data = [];
       labelled_obj_indices = [];
+      obj_divisions = [-1];
 
       if (currentObjIndex > numScenes) {
         window.location.href = "./end.html";
