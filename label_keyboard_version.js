@@ -483,6 +483,26 @@ function saveOther() {
   }
 }
 
+// this function saves incomplete objects
+function saveIncomplete(){
+    findLabelledObject();
+    const emptyFlag = checkEmptyDrawing();
+  
+    if (emptyFlag){
+      const new_data = {
+        "labels": "incomplete",
+        "drawing": active_strokes}
+
+       modifyLabelledObjectList($('dropdown-labelledobjs'), 1, "incomplete");
+
+       user_data.push(new_data);
+       active_strokes = [];
+    }
+    else{
+      customAlert.alert("You cannot label an object twice, if you made a labeling mistake, please use CLEAR or UNDO buttons !!");
+    }
+  } 
+
 // this function triggers when you switch to the NEXT SCENE, saves the data to the firebase.
 function nextSketch(){
   
