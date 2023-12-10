@@ -17,7 +17,7 @@ const sceneDescriptions = [
 "In the kitchen, inside the sink, there are dirty spoons, forks, and plates.",
 "In the park, sun is shining from above, the sky has clouds, there are several trees and flowers.",
 "In a party, there are cakes, cookies and lollipops on the table.",
-"A racket is takes of from the earth in the night, where the moon and the stars are in the sky.",
+"A rocket is takes of from the earth in the night, where the moon and the stars are in the sky.",
 "In the bathroom, there is a toilet, a bathtub, and a hair dryer.",
 "Two teams are playing foot in the soccer field.",
 "A person is sitting on a chair and playing a guitar."
