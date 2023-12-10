@@ -47,6 +47,7 @@ function getSceneData(currentObjIndex) {
   let scene = localStorage.getItem(currentObjIndex.toString());
   let canvas_data = JSON.parse(scene);
 
+
   canvas.loadFromJSON(canvas_data, function() {
     canvas.renderAll();
   });

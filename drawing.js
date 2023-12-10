@@ -59,7 +59,7 @@ brush.color = rgbToHex(0, 0, 0);
 brush.width = 3;
 
 // Set the timer
-const TIME_LIMIT_PER_WORD = 60; // in seconds
+const TIME_LIMIT_PER_WORD =90; // in seconds
 const TOTAL_GAME_TIME = TIME_LIMIT_PER_WORD * sceneDescriptions.length;
 let timeLeft = TIME_LIMIT_PER_WORD // in seconds
 let startDate, currDate, endDate;
