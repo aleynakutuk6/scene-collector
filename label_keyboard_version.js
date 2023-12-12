@@ -384,7 +384,7 @@ function findLabelledObject(){
         if (!(obj_divisions.includes(last_labelled_id))){
              obj_divisions.push(last_labelled_id);
              console.log("obj_divisions:", obj_divisions);
-       }    
+       }
     }
     
 }
@@ -488,20 +488,22 @@ function saveOther() {
 // this function saves incomplete objects
 function saveIncomplete(){
     findLabelledObject();
-  
+
+    const emptyFlag = checkEmptyDrawing();
     modifyLabelledObjectList($('dropdown-labelledobjs'), 1, "incomplete");
 
-    const new_data = {
-      "labels": categoryname.value,
-      "drawing": []
-     };
-     
-    modifyLabelledObjectList($('dropdown-labelledobjs'), 1, categoryname.value);
+    if (emptyFlag){
 
-    user_data.push(new_data);
+      const new_data = {
+        "labels": "incomplete",
+        "drawing": active_strokes
+       };
+       
+       user_data.push(new_data);
+    }
     active_strokes = [];
-
   } 
+
 
 // this function triggers when you switch to the NEXT SCENE, saves the data to the firebase.
 function nextSketch(){
