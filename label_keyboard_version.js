@@ -307,6 +307,7 @@ function undoLastSelection() {
   }
 }
 
+
 // this function triggers when you click LEFT ARROW key.
 function moveSceneBackward() {
   const includesIdx = labelled_obj_indices.includes(stroke_num);
@@ -513,6 +514,7 @@ function nextSketch(){
   }
   else{
       let currentScene = sceneDescriptions[currentSceneIndex];
+      document.getElementById("sceneDesc").innerHTML = sceneDescriptions[currentSceneIndex + 1];
       let submit_content = { "user_email": email, "agreement": agreement, "scene_info": user_data, "scene_description": currentScene};
       console.log(user_data);
       usersRefInDatabase.push(submit_content, (error) => {

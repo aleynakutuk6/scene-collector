@@ -30,7 +30,7 @@
         <br>
         <br>
 
-        <label style="font-size: 12pt;">1) Is it necessary to both CREATE a drawing on the canvas and PROVIDE a verbal description simultaneously?</label>
+        <label style="font-size: 12pt;">1) Is it necessary to both DRAW on the canvas and PROVIDE a verbal description of the scene simultaneously?</label>
         <br>
         <div class="row-radios">
             <label class= "bln" for="yes_verbal">
@@ -42,7 +42,7 @@
         </div> 
         <br>
 
-        <label style="font-size: 12pt;">2) Do you have to EXCLUSIVELY depict objects mentioned in the scene description?</label>
+        <label style="font-size: 12pt;">2) Are you allowed to draw objects that are not mentioned in the scene description?</label>
         <br>
         <div class="row-radios">
            <label class= "bln" for="yes_objects">
@@ -55,7 +55,7 @@
         <br>
 
         
-        <label style="font-size: 12pt;">3) Is there a time limit when you are in the process of drawing?</label>
+        <label style="font-size: 12pt;">3) Is there a time limit while you are drawing?</label>
         <br>
         <div class="row-radios">
             <label class= "bln" for="yes_timelimit">
@@ -66,26 +66,14 @@
             </label>
         </div> 
         <br>
-
-        <label style="font-size: 12pt;">4) To remove any drawn object from the scene, you should click on the eraser button and then click on the line you wish to delete.</label>
-        <br>
-        <div class="row-radios">
-            <label class= "bln" for="yes_eraser">
-              <input type="radio" name="question4" id="yes_eraser" value="Yes">Yes
-            </label>
-            <label class= "bln" for="no_eraser">
-              <input type="radio" name="question4" id="no_eraser" value="No">No
-            </label>
-        </div> 
-        <br>
-        <label style="font-size: 12pt;">5) Can you start drawing a new object without finishing the previous one?</label>
+        <label style="font-size: 12pt;">4) Is it okay to begin drawing the next object before completing the current one?</label>
         <br>
         <div class="row-radios">
             <label class= "bln" for="yes_stroke">
-              <input type="radio" name="question5" id="yes_stroke" value="Yes">Yes
+              <input type="radio" name="question4" id="yes_stroke" value="Yes">Yes
             </label>
             <label class= "bln" for="no_stroke">
-              <input type="radio" name="question5" id="no_stroke" value="No">No
+              <input type="radio" name="question4" id="no_stroke" value="No">No
             </label>
         </div> 
         <br>
@@ -104,12 +92,11 @@
         .addEventListener("click", function () {
           
           yes_verbal = yes_verbal.checked;
-          no_objects = no_objects.checked;
+          yes_objects = yes_objects.checked;
           yes_timelimit = yes_timelimit.checked;
-          yes_eraser = yes_eraser.checked;
           no_stroke = no_stroke.checked;
 
-          if (yes_verbal && no_objects && yes_timelimit && yes_eraser && no_stroke){
+          if (yes_verbal && yes_objects && yes_timelimit && no_stroke){
             window.location.href = "./get_mail.html";
           }
           else{

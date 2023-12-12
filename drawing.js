@@ -11,17 +11,16 @@
 }]
 
 const sceneDescriptions = [
-    "In a living room, you can see a door, and there is a clock on the wall. One person is standing up.",
-    "On a sunny day in a forest, people are playing football.",
-    "In the kitchen, there is a table, and there is a plate with a whole orange inside.",
-    "On the street, you can see some people getting on a bus, and there are benches on the street.",
-    "There is a ladder outside of the house. A dog is playing with a ball next to the ladder.",
-    "In a music store, a person is playing the violin.",
-    "In the kitchen, there is an oven, and a person is preparing a pizza.",
-    "On a river, there is a bridge and trees.",
-    "On the sea, there is a sailboat and people are talking in it.",
-    "On a rainy day, people wait at a bus stop with umbrellas."
-
+    "The students take notes to their books in the classroom.",
+    "In the living room, you can see some candles and a person reading a book on the couch.",
+    "In a forest, a bird on a tree is tweeting and a snake is passing next to the tree.",
+    "In a library, shelves are with full of books and there is a computer and mouse on the tables.",
+    "There is a river flowing between 2 mountains, a bridge connects the two sides of the river, a sailboat is also on the river.",
+    "In a computer laboratory, there are computers, mouse, and keyboards.",
+    "A small vase with a flower and there is a teddy-bear next to it.",
+    "A car and is waiting the traffic light and there are several street lights on there road.",
+    "A teddy bear sits next to a child's car toy lying on a pillow.",
+    "Above the table there is a microwave, under the table there is a dishwasher, and next to the table, the there is a stove."
 ];
 
 /**
@@ -59,7 +58,7 @@ brush.color = rgbToHex(0, 0, 0);
 brush.width = 3;
 
 // Set the timer
-const TIME_LIMIT_PER_WORD = 60; // in seconds
+const TIME_LIMIT_PER_WORD =90; // in seconds
 const TOTAL_GAME_TIME = TIME_LIMIT_PER_WORD * sceneDescriptions.length;
 let timeLeft = TIME_LIMIT_PER_WORD // in seconds
 let startDate, currDate, endDate;
