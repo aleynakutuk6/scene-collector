@@ -372,12 +372,15 @@ function findLabelledObject(){
             var vec = objs[i].get('vectorRepresentation');
             if(typeof vec !== "undefined"){
                active_strokes.push(vec);
-               labelled_obj_indices.push(i);
-               console.log(active_strokes);
-               console.log("labelled_obj_indices:", labelled_obj_indices);
             }
+            else{
+               active_strokes.push(vec);
+            }
+            labelled_obj_indices.push(i);
+            console.log(active_strokes);
+            console.log("labelled_obj_indices:", labelled_obj_indices);
          }
-      }   
+      }
     }
     var last_labelled_id = labelled_obj_indices.at(-1);
     if(typeof last_labelled_id !== "undefined"){
@@ -431,7 +434,7 @@ function saveCategory(){
   else{
     findLabelledObject();
     const emptyFlag = checkEmptyDrawing();
-  
+    console.log("emptyFlag", emptyFlag);
     if (emptyFlag){
       const new_data = {
         "labels": categoryname.value,
@@ -488,21 +491,19 @@ function saveOther() {
 // this function saves incomplete objects
 function saveIncomplete(){
     findLabelledObject();
-    const emptyFlag = checkEmptyDrawing();
   
-    if (emptyFlag){
-      const new_data = {
-        "labels": "incomplete",
-        "drawing": active_strokes}
+    modifyLabelledObjectList($('dropdown-labelledobjs'), 1, "incomplete");
 
-       modifyLabelledObjectList($('dropdown-labelledobjs'), 1, "incomplete");
+    const new_data = {
+      "labels": categoryname.value,
+      "drawing": []
+     };
+     
+    modifyLabelledObjectList($('dropdown-labelledobjs'), 1, categoryname.value);
 
-       user_data.push(new_data);
-       active_strokes = [];
-    }
-    else{
-      customAlert.alert("You cannot label an object twice, if you made a labeling mistake, please use CLEAR or UNDO buttons !!");
-    }
+    user_data.push(new_data);
+    active_strokes = [];
+
   } 
 
 // this function triggers when you switch to the NEXT SCENE, saves the data to the firebase.
