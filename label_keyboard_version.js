@@ -372,9 +372,13 @@ function findLabelledObject(){
             var vec = objs[i].get('vectorRepresentation');
             if(typeof vec !== "undefined"){
                active_strokes.push(vec);
+               labelled_obj_indices.push(i);
+               console.log("labelled_obj_indices:", labelled_obj_indices);
             }
-            labelled_obj_indices.push(i);
-            console.log("labelled_obj_indices:", labelled_obj_indices);
+            else{
+
+            }
+            
          }
       }   
     }
