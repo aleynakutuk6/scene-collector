@@ -30,7 +30,7 @@
         <br>
         <br>
 
-        <label style="font-size: 12pt;">1) Once you have labelled an object, it will be black.</label>
+        <label style="font-size: 12pt;">1) When you choose an object with the RIGHT ARROW key, it will change to black.</label>
         <br>
         <div class="row-radios">
             <label class= "bln" for="yes1">
@@ -42,8 +42,7 @@
         </div> 
         <br>
 
-        <label style="font-size: 12pt;">2) It is necessary to provide a label for each object separately. <br>
-          (you cannot label all tree/book/cloud objects at once.)</label>
+        <label style="font-size: 12pt;">2) Each object must have its own label. You cannot label all instances of tree, book, or people at the same time.</label>
         <br>
         <div class="row-radios">
            <label class= "bln" for="yes2">
@@ -56,7 +55,7 @@
         <br>
 
         
-        <label style="font-size: 12pt;">3) To select a stroke you can use the left arrow key.</label>
+        <label style="font-size: 12pt;">3) To UNDO your selection, you can use the LEFT ARROW key.</label>
         <br>
         <div class="row-radios">
             <label class= "bln" for="yes3">
@@ -79,6 +78,18 @@
             </label>
         </div> 
         <br>
+
+        <label style="font-size: 12pt;">5) If you think your drawing of an object is not accurate, you should label it as INCOMPLETE.</label>
+        <br>
+        <div class="row-radios">
+            <label class= "bln" for="yes5">
+              <input type="radio" name="question5" id="yes5" value="Yes">Yes
+            </label>
+            <label class= "bln" for="no5">
+              <input type="radio" name="question5" id="no5" value="No">No
+            </label>
+        </div> 
+        <br>
         <br>
 
         <div id="start-container">
@@ -98,10 +109,11 @@
           
           yes1 = yes1.checked;
           yes2 = yes2.checked;
-          no3 = no3.checked;
+          yes3 = yes3.checked;
           no4 = no4.checked;
+          yes5 = yes5.checked;
 
-          if (yes1 && yes2 && no3 && no4){
+          if (yes1 && yes2 && yes3 && no4 && yes5){
             window.location.href = "./label.html";
           }
           else{

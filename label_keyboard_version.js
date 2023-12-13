@@ -374,16 +374,17 @@ function findLabelledObject(){
                active_strokes.push(vec);
             }
             labelled_obj_indices.push(i);
+            console.log(active_strokes);
             console.log("labelled_obj_indices:", labelled_obj_indices);
          }
-      }   
+      }
     }
     var last_labelled_id = labelled_obj_indices.at(-1);
     if(typeof last_labelled_id !== "undefined"){
         if (!(obj_divisions.includes(last_labelled_id))){
              obj_divisions.push(last_labelled_id);
              console.log("obj_divisions:", obj_divisions);
-       }    
+       }
     }
     
 }
@@ -430,7 +431,7 @@ function saveCategory(){
   else{
     findLabelledObject();
     const emptyFlag = checkEmptyDrawing();
-  
+    console.log("emptyFlag", emptyFlag);
     if (emptyFlag){
       const new_data = {
         "labels": categoryname.value,
@@ -487,22 +488,22 @@ function saveOther() {
 // this function saves incomplete objects
 function saveIncomplete(){
     findLabelledObject();
+
     const emptyFlag = checkEmptyDrawing();
-  
+    modifyLabelledObjectList($('dropdown-labelledobjs'), 1, "incomplete");
+
     if (emptyFlag){
+
       const new_data = {
         "labels": "incomplete",
-        "drawing": active_strokes}
-
-       modifyLabelledObjectList($('dropdown-labelledobjs'), 1, "incomplete");
-
+        "drawing": active_strokes
+       };
+       
        user_data.push(new_data);
-       active_strokes = [];
     }
-    else{
-      customAlert.alert("You cannot label an object twice, if you made a labeling mistake, please use CLEAR or UNDO buttons !!");
-    }
+    active_strokes = [];
   } 
+
 
 // this function triggers when you switch to the NEXT SCENE, saves the data to the firebase.
 function nextSketch(){

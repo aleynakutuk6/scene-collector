@@ -11,17 +11,16 @@
 }]
 
 const sceneDescriptions = [
-    "In the living room, there is a clock on the wall. A cat is sitting on a couch.",
-"On the street, you can see some people getting on a bus, and there are benches on the street.",
-"The kitchen has a table with a plate of cookies and a cup.",
-"In the kitchen, inside the sink, there are dirty spoons, forks, and plates.",
-"In the park, sun is shining from above, the sky has clouds, there are several trees and flowers.",
-"In a party, there are cakes, cookies and lollipops on the table.",
-"A rocket is takes of from the earth in the night, where the moon and the stars are in the sky.",
-"In the bathroom, there is a toilet, a bathtub, and a hair dryer.",
-"Two teams are playing foot in the soccer field.",
-"A person is sitting on a chair and playing a guitar."
-
+    "The students take notes to their books in the classroom.",
+    "In the living room, you can see some candles and a person reading a book on the couch.",
+    "In a forest, a bird on a tree is tweeting and a snake is passing next to the tree.",
+    "In a library, shelves are with full of books and there is a computer and mouse on the tables.",
+    "There is a river flowing between 2 mountains, a bridge connects the two sides of the river, a sailboat is also on the river.",
+    "In a computer laboratory, there are computers, mouse, and keyboards.",
+    "A small vase with a flower and there is a teddy-bear next to it.",
+    "A car and is waiting the traffic light and there are several street lights on there road.",
+    "A teddy bear sits next to a child's car toy lying on a pillow.",
+    "Above the table there is a microwave, under the table there is a dishwasher, and next to the table, the there is a stove."
 ];
 
 /**
