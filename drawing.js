@@ -11,16 +11,16 @@
 }]
 
 const sceneDescriptions = [
-    "The students take notes to their books in the classroom.",
-    "In the living room, you can see some candles and a person reading a book on the couch.",
-    "In a forest, a bird on a tree is tweeting and a snake is passing next to the tree.",
-    "In a library, shelves are with full of books and there is a computer and mouse on the tables.",
-    "There is a river flowing between 2 mountains, a bridge connects the two sides of the river, a sailboat is also on the river.",
-    "In a computer laboratory, there are computers, mouse, and keyboards.",
-    "A small vase with a flower and there is a teddy-bear next to it.",
-    "A car and is waiting the traffic light and there are several street lights on there road.",
-    "A teddy bear sits next to a child's car toy lying on a pillow.",
-    "Above the table there is a microwave, under the table there is a dishwasher, and next to the table, the there is a stove."
+    "A fire hydrant is in the grass with a building and traffic cones in the background.",
+    "A computer workstation with a printer, computer, mouse and keyboards.",
+    "A propeller plane with a broken wing on display at a museum.",
+    "People are eating pizza in a restaurant.",
+    "In a gas station, a person holding a gas pump next to a car.",
+    "On the sea, there is a sailboat and people are talking in it.",
+    "There is a ladder outside of the house. A dog is playing with a toy next to the ladder.",
+    "One giraffe is walking through some bushes and trees.",
+    "An airplane in the sky over a river and houses.",
+    "A break room with tables, chairs, microwave and cups."
 ];
 
 /**
