@@ -1,4 +1,3 @@
-   
 // code for some security constrains of chrome 
 [{
     "origin": [
@@ -242,7 +241,7 @@ function hideCanvas() {
 
 function startup() {
 
-    const el = $('canvas-wrapper');
+    const el = $('canvas');
     el.addEventListener('touchstart', handleStart);
     el.addEventListener('touchmove', handleMove);
     el.addEventListener('touchend', handleEnd);
@@ -366,7 +365,7 @@ function deleteObjects() {
 function getDrawing() {
     let activeObjects = canvas.getObjects();
     let active_strokes = [];
-
+    
     if (activeObjects.length > 0) {
         for (let i = 0; i < activeObjects.length; i++) {
             active_strokes.push(activeObjects[i].vectorRepresentation);
