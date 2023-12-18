@@ -10,16 +10,16 @@
 }]
 
 const sceneDescriptions = [
-    "A fire hydrant is in the grass with a building and traffic cones in the background.",
-    "A computer workstation with a printer, computer, mouse and keyboards.",
-    "A propeller plane with a broken wing on display at a museum.",
-    "People are eating pizza in a restaurant.",
-    "In a gas station, a person holding a gas pump next to a car.",
-    "On the sea, there is a sailboat and people are talking in it.",
-    "There is a ladder outside of the house. A dog is playing with a toy next to the ladder.",
-    "One giraffe is walking through some bushes and trees.",
-    "An airplane in the sky over a river and houses.",
-    "A break room with tables, chairs, microwave and cups."
+    "In a jungle, a bear holding pear walks towards to camera.",
+    "A cat is sitting on a pillow on the couch and watching television.",
+    "A boquet of flowers placed in a vase of water is sitting on a table.",
+    "A kitchen with a microwave next to a stove.",
+    "A sea turtle is swimming toward a cruise ship, followed by dolphins.",
+    "A washing machine with socks and shoes placed on top.",
+    "A hairdresser is drying the hair of the customer.",
+    "A person sitting on a stone talking on a cell phone.",
+    "A cat laying on a bowl on a table in front of a fish tank.",
+    "A desk inside a library with a computer and several papers on it."
 ];
 
 /**
