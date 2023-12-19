@@ -10,16 +10,16 @@
 }]
 
 const sceneDescriptions = [
-    "Birds are sitting on top of a tree branch in the zoo.",
-    "A container filled with meat sandwich and pizzas.",
-    "A person is reading a book in a car with a small dog.",
-    "A cat is holding a person's hand as they use a mouse.",
-    "A park has many benches, trees and bushes.",
-    "A spider is seen hanging over a chair and looking at a computer.",
-    "A train traveling over a river on top of a bridge.",
-    "A bunch of toothbrushes in a cup on a bathroom sink.",
-    "A butterfly is standing on a flower and a dog is playing on the grass.",
-    "In a bathroom, there is a light bulb on the ceiling, a bathtub, and a sink."
+    "An airplane is making smoke as it flies through a sky.",
+    "A strainer is filled with apples and oranges.",
+    "A person is sitting under an umbrella next to a duck pond.",
+    "In a crowd of people, a person stands alongside a police car.",
+    "A person covered in lots of bandages is holding scissors and lying on shards of glass.",
+    "There is a compass on top of a tower and the sky is with full of clouds.",
+    "Inside a tent, there are sleeping bags, a flashlight, and a rake.",
+    "Three giraffes feed from a basket hanging off a tree.",
+    "A snake in bushes observing a swan in a pond.",
+    "There are bicycle and helmet on the beach with a lighthouse in the background."
 ];
 
 /**
