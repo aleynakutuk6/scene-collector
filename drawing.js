@@ -10,16 +10,16 @@
 }]
 
 const sceneDescriptions = [
-    "In a jungle, a bear holding pear walks towards to camera.",
-    "A cat is sitting on a pillow on the couch and watching television.",
-    "A boquet of flowers placed in a vase of water is sitting on a table.",
-    "A kitchen with a microwave next to a stove.",
-    "A sea turtle is swimming toward a cruise ship, followed by dolphins.",
-    "A washing machine with socks and shoes placed on top.",
-    "A hairdresser is drying the hair of the customer.",
-    "A person sitting on a stone talking on a cell phone.",
-    "A cat laying on a bowl on a table in front of a fish tank.",
-    "A desk inside a library with a computer and several papers on it."
+    "Birds are sitting on top of a tree branch in the zoo.",
+    "A container filled with meat sandwich and pizzas.",
+    "A person is reading a book in a car with a small dog.",
+    "A cat is holding a person's hand as they use a mouse.",
+    "A park has many benches, trees and bushes.",
+    "A spider is seen hanging over a chair and looking at a computer.",
+    "A train traveling over a river on top of a bridge.",
+    "A bunch of toothbrushes in a cup on a bathroom sink.",
+    "A butterfly is standing on a flower and a dog is playing on the grass.",
+    "In a bathroom, there is a light bulb on the ceiling, a bathtub, and a sink."
 ];
 
 /**
