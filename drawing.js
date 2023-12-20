@@ -10,16 +10,16 @@
 }]
 
 const sceneDescriptions = [
-    "An airplane is making smoke as it flies through a sky.",
-    "A strainer is filled with apples and oranges.",
-    "A person is sitting under an umbrella next to a duck pond.",
-    "In a crowd of people, a person stands alongside a police car.",
-    "A person covered in lots of bandages is holding scissors and lying on shards of glass.",
-    "There is a compass on top of a tower and the sky is with full of clouds.",
-    "Inside a tent, there are sleeping bags, a flashlight, and a rake.",
-    "Three giraffes feed from a basket hanging off a tree.",
-    "A snake in bushes observing a swan in a pond.",
-    "There are bicycle and helmet on the beach with a lighthouse in the background."
+    "An old road sign hangs in front of a building.",
+    "A cave with a couch, television, tape player and a table.",
+    "A person lying in bed has a dog and a bird next to him.",
+    "A person on a sailboat with a fishing net.",
+    "A cat wearing a bowtie and looking into the camera.",
+    "Two donuts, banana, cup and a book on the table.",
+    "A living area with a couch, television, chandelier and floor lamp.",
+    "A squirrel and a panda are sitting on a bench between a group of trees.",
+    "An elephant, giraffes and a lion in the zoo.",
+    "There is a backpack and hat under a see saw."
 ];
 
 /**
