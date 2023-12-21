@@ -10,16 +10,16 @@
 }]
 
 const sceneDescriptions = [
-    "An old road sign hangs in front of a building.",
-    "A cave with a couch, television, tape player and a table.",
-    "A person lying in bed has a dog and a bird next to him.",
-    "A person on a sailboat with a fishing net.",
-    "A cat wearing a bowtie and looking into the camera.",
-    "Two donuts, banana, cup and a book on the table.",
-    "A living area with a couch, television, chandelier and floor lamp.",
-    "A squirrel and a panda are sitting on a bench between a group of trees.",
-    "An elephant, giraffes and a lion in the zoo.",
-    "There is a backpack and hat under a see saw."
+    "A stone is next to a wall with two stools.",
+    "An elephant knocks over a scarecrow and steps on a peach.",
+    "A person holding a dagger and walking towards a castle.",
+    "Two people stand on a field, one holding a frisbee.",
+    "A person is standing on top of a sailboat and holding a binoculars.",
+    "A camera mounted on a helmet of a bicycle rider.",
+    "A skateboarder with a hat is riding his skateboard to walk his dog.",
+    "There is a pencil, eraser and paper clip on the desk.",
+    "A bridge over water in front of a castle with a clock.",
+    "A purse, keys and cell phone are sitting on the dresser."
 ];
 
 /**
