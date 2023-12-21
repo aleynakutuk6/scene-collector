@@ -10,16 +10,17 @@
 }]
 
 const sceneDescriptions = [
-    "A stone is next to a wall with two stools.",
-    "An elephant knocks over a scarecrow and steps on a peach.",
-    "A person holding a dagger and walking towards a castle.",
-    "Two people stand on a field, one holding a frisbee.",
-    "A person is standing on top of a sailboat and holding a binoculars.",
-    "A camera mounted on a helmet of a bicycle rider.",
-    "A skateboarder with a hat is riding his skateboard to walk his dog.",
-    "There is a pencil, eraser and paper clip on the desk.",
-    "A bridge over water in front of a castle with a clock.",
-    "A purse, keys and cell phone are sitting on the dresser."
+    "A panda stands among toys and holding walnuts.",
+    "There is a pathway with many tombs and stones along it.",
+    "A crown is holding a drums and a hot dog wearing funny clothes.",
+    "In a music store, a saxophone, harp and guitar are on sale side by side.",
+    "Inside a farm, there is a rabbit and a horse next to a tractor.",
+    "In the hospital, there are surgical gloves and a table with a box full of needles.",
+    "A piece of pizza is placed on a plate between a fork and a knife.",
+    "A child eats ice cream and his eyeglasses fall on the carpet.",
+    "Two people are making a snowman in front of a house.",
+    "A doctor is holding a syringe and test tube next to a bed."
+
 ];
 
 /**
