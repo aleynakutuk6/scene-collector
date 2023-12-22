@@ -12,7 +12,7 @@
 const sceneDescriptions = [
     "A panda stands among toys and holding walnuts.",
     "There is a pathway with many tombs and stones along it.",
-    "A crown is holding a drums and a hot dog wearing funny clothes.",
+    "A birthday girl who is wearing a crown on her head is holding a hot dog.",
     "In a music store, a saxophone, harp and guitar are on sale side by side.",
     "Inside a farm, there is a rabbit and a horse next to a tractor.",
     "In the hospital, there are surgical gloves and a table with a box full of needles.",
