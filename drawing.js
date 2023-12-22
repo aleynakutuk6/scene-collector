@@ -10,16 +10,17 @@
 }]
 
 const sceneDescriptions = [
-    "A panda stands among toys and holding walnuts.",
-    "There is a pathway with many tombs and stones along it.",
-    "A birthday girl who is wearing a crown on her head is holding a hot dog.",
-    "In a music store, a saxophone, harp and guitar are on sale side by side.",
-    "Inside a farm, there is a rabbit and a horse next to a tractor.",
-    "In the hospital, there are surgical gloves and a table with a box full of needles.",
-    "A piece of pizza is placed on a plate between a fork and a knife.",
-    "A child eats ice cream and his eyeglasses fall on the carpet.",
-    "Two people are making a snowman in front of a house.",
-    "A doctor is holding a syringe and test tube next to a bed."
+    "A boy speeds between cars and a bus on his skateboard on the street in a city.",
+    "A person reaches to hit a tennis ball during a tennis match while others watch.",
+    "A woman eating ice cream while sitting on the counter and talking on the phone.",
+    "A man is on a baseball field with a ball in one hand and baseball glove in the other.",
+    "A man sitting in a chair playing a cello in front of a microphone.",
+    "Children are playing next to a swing set and a waterslide.",
+    "A police man is holding a pair of handcuffs and a weapon.",
+    "At the bottom of the ocean, a snorkel sits, and there's an octopus and a fish swimming around.",
+    "There are penguins and ice blocks in the ocean.",
+    "A kitchen counter has a microwave, sink, and dishwasher."
+
 
 ];
 
