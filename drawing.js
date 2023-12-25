@@ -10,17 +10,16 @@
 }]
 
 const sceneDescriptions = [
-    "A boy speeds between cars and a bus on his skateboard on the street in a city.",
-    "A person reaches to hit a tennis ball during a tennis match while others watch.",
-    "A woman eating ice cream while sitting on the counter and talking on the phone.",
-    "A man is on a baseball field with a ball in one hand and baseball glove in the other.",
-    "A man sitting in a chair playing a cello in front of a microphone.",
-    "Children are playing next to a swing set and a waterslide.",
-    "A police man is holding a pair of handcuffs and a weapon.",
-    "At the bottom of the ocean, a snorkel sits, and there's an octopus and a fish swimming around.",
-    "There are penguins and ice blocks in the ocean.",
-    "A kitchen counter has a microwave, sink, and dishwasher."
-
+    "There is a knife on the counter and carrots, potato, and onion are in the basket.",
+    "A screwdriver and hammer are on the floor, and there's a light bulb that needs fixing on the ceiling.",
+    "In the pool near the trees and bushes, there are sea turtles, a flamingo, and ducks.",
+    "A dog laying on a bed next to a computer.",
+    "A kitchen with a stove a microwave and a ceiling fan.",
+    "A school bus and a car waiting at a railroad crossing for a train to go past.",
+    "A person is lying on a bed, and there is an alarm clock, a purse, and a floor lamp in the room.",
+    "There is a rainbow outside and a child is holding a lollipop and teddy-bear.",
+    "Sandwich and a lollipop in a serving tray sitting on a table.",
+    "Gun, umbrella and toy guitar on top of box on stairs."
 
 ];
 
