@@ -10,16 +10,17 @@
 }]
 
 const sceneDescriptions = [
-    "Plates, forks with a wine glass and candles on a table.",
-    "There is a piece of chocolate cake on a plate with a cookie, a spoon, and grapes.",
-    "A woman is holding dumbbell and there is a backpack, bottle and cell phone on the floor.",
-    "A girl sits on a bench with a fan, enjoying the sunshine and mountains in the background.",
-    "In the camp, an ant is walking on a stone near the tent, and a butterfly is flying around.",
-    "An ambulance and a police car are driving down the road surrounded by trees and flowers.",
-    "Next to the fence, there's a broom and a bucket, and horses are eating grass nearby.",
-    "At the zoo, there are rhinoceros, zebras and bears in their areas.",
-    "On a stage, there is a trumpet and clarinet near speakers. People are waiting for the concert under stage lights.",
-    "People in a hot air balloon look down and see skyscrapers."
+    "At the museum entrance, there is a turnstile, and inside, you can see an exhibition with skulls, vases, and stones.",
+    "A field of sunflowers dominate the foreground while a train and windmills can be seen in the background.",
+    "People sit around a campfire near tents while lightning approaches.",
+    "Close to the lake, there is a bee nest, and a child is walking towards it with a camera.",
+    "A kid is building a sandcastle by the sea and there is a shovel and flip flops next to him.",
+    "There is a remote control on a couch, and a radio near the door.",
+    "On the kitchen counter, there is an asparagus, bread and peas next to a spoon.",
+    "On the beach, there are crabs and sea turtles next to the umbrellas.",
+    "On the wall, there are papers and a map of houses near a phone box with a telephone inside.",
+    "On the bed, near the dresser, there is a necklace, bracelet, and belt.",
+
 ];
 
 /**
