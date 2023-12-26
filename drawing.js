@@ -10,17 +10,16 @@
 }]
 
 const sceneDescriptions = [
-    "There is a knife on the counter and carrots, potato, and onion are in the basket.",
-    "A screwdriver and hammer are on the floor, and there's a light bulb that needs fixing on the ceiling.",
-    "In the pool near the trees and bushes, there are sea turtles, a flamingo, and ducks.",
-    "A dog laying on a bed next to a computer.",
-    "A kitchen with a stove a microwave and a ceiling fan.",
-    "A school bus and a car waiting at a railroad crossing for a train to go past.",
-    "A person is lying on a bed, and there is an alarm clock, a purse, and a floor lamp in the room.",
-    "There is a rainbow outside and a child is holding a lollipop and teddy-bear.",
-    "Sandwich and a lollipop in a serving tray sitting on a table.",
-    "Gun, umbrella and toy guitar on top of box on stairs."
-
+    "Plates, forks with a wine glass and candles on a table.",
+    "There is a piece of chocolate cake on a plate with a cookie, a spoon, and grapes.",
+    "A woman is holding dumbbell and there is a backpack, bottle and cell phone on the floor.",
+    "A girl sits on a bench with a fan, enjoying the sunshine and mountains in the background.",
+    "In the camp, an ant is walking on a stone near the tent, and a butterfly is flying around.",
+    "An ambulance and a police car are driving down the road surrounded by trees and flowers.",
+    "Next to the fence, there's a broom and a bucket, and horses are eating grass nearby.",
+    "At the zoo, there are rhinoceros, zebras and bears in their areas.",
+    "On a stage, there is a trumpet and clarinet near speakers. People are waiting for the concert under stage lights.",
+    "People in a hot air balloon look down and see skyscrapers."
 ];
 
 /**
