@@ -10,17 +10,17 @@
 }]
 
 const sceneDescriptions = [
-    "At the museum entrance, there is a turnstile, and inside, you can see an exhibition with skulls, vases, and stones.",
-    "A field of sunflowers dominate the foreground while a train and windmills can be seen in the background.",
-    "People sit around a campfire near tents while lightning approaches.",
-    "Close to the lake, there is a bee nest, and a child is walking towards it with a camera.",
-    "A kid is building a sandcastle by the sea and there is a shovel and flip flops next to him.",
-    "There is a remote control on a couch, and a radio near the door.",
-    "On the kitchen counter, there is an asparagus, bread and peas next to a spoon.",
-    "On the beach, there are crabs and sea turtles next to the umbrellas.",
-    "On the wall, there are papers and a map of houses near a phone box with a telephone inside.",
-    "On the bed, near the dresser, there is a necklace, bracelet, and belt.",
-
+    "A toilet, sink, bathtub with shower, mirror and cabinet.",
+    "A purse, key, toothbrush, sunglasses and headphones on the couch.",
+    "On the beach, a sea turtle drags coral with a hook attached to its back.",
+    "There is a plate full of carrots, mushrooms, onions and string beans.",
+    "In the ocean, you can find jellyfish and a shark near a submarine.",
+    "A child holds a crayon and draws on a paper. On her desk, there is a mug and an hourglass.",
+    "A person is lying next a cannon in the war, and there is a helmet and a gun next to him.",
+    "People are standing in a line at the airport, holding suitcases. There is a man with headphones.",
+    "A kid is holding a popsicle, and walking to the mailbox near the barn.",
+    "A woman is holding a lighter in front of a birthday cake with three candles, and there are cookies beside the cake."   
+    
 ];
 
 /**
