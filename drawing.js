@@ -10,17 +10,16 @@
 }]
 
 const sceneDescriptions = [
-    "A toilet, sink, bathtub with shower, mirror and cabinet.",
-    "A purse, key, toothbrush, sunglasses and headphones on the couch.",
-    "On the beach, a sea turtle drags coral with a hook attached to its back.",
-    "There is a plate full of carrots, mushrooms, onions and string beans.",
-    "In the ocean, you can find jellyfish and a shark near a submarine.",
-    "A child holds a crayon and draws on a paper. On her desk, there is a mug and an hourglass.",
-    "A person is lying next a cannon in the war, and there is a helmet and a gun next to him.",
-    "People are standing in a line at the airport, holding suitcases. There is a man with headphones.",
-    "A kid is holding a popsicle, and walking to the mailbox near the barn.",
-    "A woman is holding a lighter in front of a birthday cake with three candles, and there are cookies beside the cake."   
-    
+    "On the plate, there is a sunny-side-up egg, a sausage, and a slice of bread.",
+    "Between palm trees, there is a hammock, and a panda is holding a pear.",
+    "On the grass, there is a saw, a drill and wood, and a tractor is parked next to them.",
+    "Several motorbikes are parked at a red light in the road in a city with tall buildings.",
+    "A giraffe sticking its head in a feeding basket with trees in background.",
+    "There is a fire hydrant on the street, and someone left a sandwich and an umbrella beside it.",
+    "A bird is sitting on the rail next to the lake and a lighthouse.",
+    "In the room, there is a stereo and a cake on the table, and people are dancing under the chandelier.",
+    "Two people are playing boomerang on the grass near the bridge.",
+    "A man in a field throws a frisbee, and a cat walks around."    
 ];
 
 /**
