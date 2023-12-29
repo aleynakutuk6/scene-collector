@@ -10,16 +10,16 @@
 }]
 
 const sceneDescriptions = [
-    "On the plate, there is a sunny-side-up egg, a sausage, and a slice of bread.",
-    "Between palm trees, there is a hammock, and a panda is holding a pear.",
-    "On the grass, there is a saw, a drill and wood, and a tractor is parked next to them.",
-    "Several motorbikes are parked at a red light in the road in a city with tall buildings.",
-    "A giraffe sticking its head in a feeding basket with trees in background.",
-    "There is a fire hydrant on the street, and someone left a sandwich and an umbrella beside it.",
-    "A bird is sitting on the rail next to the lake and a lighthouse.",
-    "In the room, there is a stereo and a cake on the table, and people are dancing under the chandelier.",
-    "Two people are playing boomerang on the grass near the bridge.",
-    "A man in a field throws a frisbee, and a cat walks around."    
+    "A man in a wet suit stands on a surfboard and rows with a paddle.",
+    "A group of people stand on the beach and fly a kite.",
+    "A girl is standing next to a stop sign with an umbrella in her hand.",
+    "Four sheep are eating grass, and a child is approaching them.",
+    "Four people are playing a football in the field.",
+    "There is a wristwatch, belt and purse sitting on the couch in the living room.",
+    "There are two elephants in some bushes with a car on the road.",
+    "Two horses are standing behind a fence, and there is a barn in the background.",
+    "In the sky, there are several planes surrounded by clouds.",
+    "There are strawberry, watermelon and grapes in the bowl."
 ];
 
 /**
